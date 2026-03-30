@@ -1,0 +1,173 @@
+{
+  "projects": [
+    {
+      "title": "Knowledge Graph Multi-Agent Chat Assistant",
+      "icon": "code_blocks",
+      "category": "AI Systems",
+      "description": "Enterprise chat assistant integrating knowledge graphs, retrieval workflows, and multi-agent orchestration for domain-specific question answering and task execution.",
+      "homeDescription": "Multi-agent assistant architecture for enterprise knowledge access and intelligent task routing.",
+      "tags": [
+        "Multi-agent",
+        "Knowledge Graph"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": true
+    },
+    {
+      "title": "Streaming Voice Conversational AI",
+      "icon": "terminal",
+      "category": "Conversational AI",
+      "description": "Real-time voice AI system supporting low-latency streaming conversations, speech interaction pipelines, and production-grade conversational experiences.",
+      "homeDescription": "Low-latency streaming voice stack for real-time conversational AI applications.",
+      "tags": [
+        "Voice AI",
+        "LiveKit"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": true
+    },
+    {
+      "title": "Omnichannel Customer Service AI",
+      "icon": "code_blocks",
+      "category": "Enterprise AI",
+      "description": "Omnichannel AI solution for customer service systems, designed to unify interactions across channels and improve automation in enterprise support workflows.",
+      "homeDescription": "AI-driven omnichannel service layer for scalable customer support operations.",
+      "tags": [
+        "Omnichannel",
+        "Automation"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": true
+    },
+    {
+      "title": "Smart Video Processor & Highlight Extractor",
+      "icon": "terminal",
+      "category": "Multimodal AI",
+      "description": "Video intelligence pipeline for processing media assets and extracting highlights automatically for content workflows and production use cases.",
+      "homeDescription": "Multimodal video pipeline for automated highlight extraction and smart media processing.",
+      "tags": [
+        "Video AI",
+        "Multimodal"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": false
+    },
+    {
+      "title": "AI Faceswap for Film Production",
+      "icon": "palette",
+      "category": "Generative AI",
+      "description": "AI faceswap application built for media production, supporting character transformation workflows in commercial video projects.",
+      "homeDescription": "Production-focused faceswap workflow for media and entertainment projects.",
+      "tags": [
+        "Faceswap",
+        "Media AI"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": false
+    },
+    {
+      "title": "AI Kiosk Applications",
+      "icon": "code_blocks",
+      "category": "Applied AI",
+      "description": "Interactive AI applications for kiosk systems deployed in banking and event environments, focused on user interaction and service automation.",
+      "homeDescription": "Applied AI interfaces for kiosk systems in finance and event deployments.",
+      "tags": [
+        "Kiosk AI",
+        "Enterprise"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": false
+    },
+    {
+      "title": "LLM Privacy Policy Analysis",
+      "icon": "database",
+      "category": "LLM Applications",
+      "description": "LLM-based system for analyzing privacy policies and supporting compliance-oriented interpretation of personal data processing practices.",
+      "homeDescription": "LLM workflow for privacy policy analysis and compliance-oriented document understanding.",
+      "tags": [
+        "LLM",
+        "Privacy"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": true
+    },
+    {
+      "title": "Medical Image Captioning",
+      "icon": "terminal",
+      "category": "Healthcare AI",
+      "description": "Multimodal AI application for generating captions from medical images to support healthcare-oriented interpretation and downstream workflows.",
+      "homeDescription": "Medical image captioning pipeline for healthcare and multimodal AI use cases.",
+      "tags": [
+        "Medical AI",
+        "Captioning"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": false
+    },
+    {
+      "title": "Smart E-commerce Recommender System",
+      "icon": "database",
+      "category": "Machine Learning",
+      "description": "Recommendation system project for smart e-commerce scenarios, developed while leading a 17-member team during OJT at FPT Software Academy.",
+      "homeDescription": "Recommender system for smart e-commerce built with team leadership experience.",
+      "tags": [
+        "Recommender",
+        "ML"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": false
+    },
+    {
+      "title": "SmartGIS and Call Center Platforms",
+      "icon": "code_blocks",
+      "category": "Fullstack Systems",
+      "description": "Platform development spanning GIS features, map layers, area measurement, urban planning visualization, and WebRTC/VoIP call center systems.",
+      "homeDescription": "Fullstack platform work across GIS systems, mapping layers, and real-time communication.",
+      "tags": [
+        "GIS",
+        "WebRTC"
+      ],
+      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "featured": false
+    }
+  ],
+  "publications": [
+    {
+      "year": "2025",
+      "badge": "1st Author • A*",
+      "title": "SLM-Bench: A Comprehensive Benchmark of Small Language Models on Environmental Impacts",
+      "authors": "Pham Thanh Nghiem et al.",
+      "venue": "EMNLP 2025",
+      "doi": ""
+    },
+    {
+      "year": "2024",
+      "badge": "1st Author",
+      "title": "Evaluating the Impact of Generative AI in Mathematics Education: A Comparative Study in Vietnamese High Schools",
+      "authors": "Pham Thanh Nghiem et al.",
+      "venue": "HAIS 2024",
+      "doi": ""
+    },
+    {
+      "year": "2025",
+      "title": "SLIE: A Secure and Lightweight Cryptosystem for Data Sharing in IoT Healthcare Services",
+      "authors": "Pham Thanh Nghiem et al.",
+      "venue": "HB and ET 2025",
+      "doi": ""
+    },
+    {
+      "year": "2025",
+      "title": "Decoding the Privacy Policy Implications of Personal Data Processing: A Framework for GDPR Compliance in Business and Social Apps",
+      "authors": "Pham Thanh Nghiem et al.",
+      "venue": "ICSOC 2025",
+      "doi": ""
+    },
+    {
+      "year": "2024",
+      "title": "GenAI-Powered Analysis of GIS App Privacy Policies for GDPR Compliance",
+      "authors": "Pham Thanh Nghiem et al.",
+      "venue": "ICSOC 2024",
+      "doi": ""
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #17111d;
+  color: #ebdef1;
+  font-family: "Inter", sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  line-height: 1;
+}
+
+.luxury-gradient {
+  background: linear-gradient(135deg, #ddb7ff 0%, #7b41b3 100%);
+}
+
+.ambient-glow {
+  filter: blur(64px);
+  background: #ddb7ff;
+  opacity: 0.05;
+}
+
+.project-card-glow:hover {
+  box-shadow: 0 0 40px -10px rgba(221, 183, 255, 0.15);
+}
+
+.glass-nav {
+  background: rgba(18, 12, 24, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.publication-card:hover {
+  background-color: #393240;
+  transform: translateY(-2px);
+}
