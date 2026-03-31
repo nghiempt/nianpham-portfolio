@@ -39,7 +39,7 @@ export function TopNav() {
           })}
         </div>
         <a
-          href="mailto:hello@example.com"
+          href="mailto:nianpham.reed@gmail.com"
           className="scale-95 text-[#ddb7ff] transition-transform active:scale-90"
           aria-label="Email"
         >

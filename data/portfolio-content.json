@@ -10,7 +10,7 @@
         "Multi-agent",
         "Knowledge Graph"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": true
     },
     {
@@ -23,7 +23,7 @@
         "Voice AI",
         "LiveKit"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": true
     },
     {
@@ -36,7 +36,7 @@
         "Omnichannel",
         "Automation"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": true
     },
     {
@@ -49,7 +49,7 @@
         "Video AI",
         "Multimodal"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": false
     },
     {
@@ -62,7 +62,7 @@
         "Faceswap",
         "Media AI"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": false
     },
     {
@@ -75,7 +75,7 @@
         "Kiosk AI",
         "Enterprise"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": false
     },
     {
@@ -88,7 +88,7 @@
         "LLM",
         "Privacy"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": true
     },
     {
@@ -101,7 +101,7 @@
         "Medical AI",
         "Captioning"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": false
     },
     {
@@ -114,7 +114,7 @@
         "Recommender",
         "ML"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": false
     },
     {
@@ -127,46 +127,41 @@
         "GIS",
         "WebRTC"
       ],
-      "image": "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+      "image": "https://i.pinimg.com/originals/80/5c/67/805c670ba4b39d29d67e9d3599de37a0.gif",
       "featured": false
     }
   ],
   "publications": [
     {
       "year": "2025",
-      "badge": "1st Author • A*",
+      "badge": "1st Author",
       "title": "SLM-Bench: A Comprehensive Benchmark of Small Language Models on Environmental Impacts",
       "authors": "Pham Thanh Nghiem et al.",
-      "venue": "EMNLP 2025",
+      "venue": "A* - EMNLP 2025",
       "doi": ""
     },
     {
       "year": "2024",
-      "badge": "1st Author",
+      "badge": "Co-Author",
       "title": "Evaluating the Impact of Generative AI in Mathematics Education: A Comparative Study in Vietnamese High Schools",
       "authors": "Pham Thanh Nghiem et al.",
-      "venue": "HAIS 2024",
+      "venue": "Q1 - Human Behavior and Emerging Technologies 2025",
       "doi": ""
     },
     {
       "year": "2025",
+      "badge": "Co-Author",
       "title": "SLIE: A Secure and Lightweight Cryptosystem for Data Sharing in IoT Healthcare Services",
       "authors": "Pham Thanh Nghiem et al.",
-      "venue": "HB and ET 2025",
+      "venue": "A - ICSOC 2025",
       "doi": ""
     },
     {
       "year": "2025",
+      "badge": "Co-Author",
       "title": "Decoding the Privacy Policy Implications of Personal Data Processing: A Framework for GDPR Compliance in Business and Social Apps",
       "authors": "Pham Thanh Nghiem et al.",
-      "venue": "ICSOC 2025",
-      "doi": ""
-    },
-    {
-      "year": "2024",
-      "title": "GenAI-Powered Analysis of GIS App Privacy Policies for GDPR Compliance",
-      "authors": "Pham Thanh Nghiem et al.",
-      "venue": "ICSOC 2024",
+      "venue": "A - ICSOC 2025",
       "doi": ""
     }
   ]

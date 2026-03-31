@@ -3,18 +3,22 @@ import { Footer, TopNav } from "@/components/site-chrome";
 import portfolioContent from "@/data/portfolio-content.json";
 
 const socials = [
-  { icon: "code", label: "GitHub" },
-  { icon: "school", label: "Scholar" },
-  { icon: "share", label: "Social" }
+  { iconSrc: "/assets/github.svg", label: "GitHub", url: "https://github.com/nghiempt" },
+  { iconSrc: "/assets/scholar.svg", label: "Scholar", url: "https://scholar.google.com/citations?user=23NArXYAAAAJ" },
+  { iconSrc: "/assets/facebook.svg", label: "Facebook", url: "https://www.facebook.com/nianpham.me" },
+  { iconSrc: "/assets/linkedin.svg", label: "LinkedIn", url: "https://www.linkedin.com/in/nianpham" }
 ];
 
-const explorationCards = portfolioContent.projects.slice(0, 2);
+const explorationCards = portfolioContent.projects.slice(0, 4);
+const featuredPublications = [...portfolioContent.publications]
+  .sort((a, b) => Number(b.year) - Number(a.year))
+  .slice(0, 4);
 
 export default function HomePage() {
   return (
     <>
       <TopNav />
-      <main className="relative min-h-screen overflow-hidden pt-24">
+      <main className="relative min-h-screen overflow-hidden pt-10">
         <div className="ambient-glow absolute right-[-5%] top-[-10%] h-[500px] w-[500px] rounded-full" />
         <div className="ambient-glow absolute bottom-[10%] left-[-5%] h-[400px] w-[400px] rounded-full" />
 
@@ -47,18 +51,22 @@ export default function HomePage() {
                 Hi, I&apos;m <span className="italic text-primary">Nghiem</span>.
               </h1>
               <p className="max-w-lg font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
-               AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by ~4 years of experience and 20+ publications
+                AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by <strong className="text-primary">4 years of experience</strong> and <strong className="text-primary">20+ publications</strong>
               </p>
               <p className="max-w-lg font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
-               Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.
+                Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.
               </p>
             </div>
 
             <div className="flex items-center gap-6 pt-4">
               {socials.map((social) => (
-                <a key={social.label} className="group flex flex-col items-center gap-2" href="#">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant transition-all duration-300 group-hover:bg-surface-container-highest group-hover:text-primary">
-                    <span className="material-symbols-outlined text-2xl">{social.icon}</span>
+                <a key={social.url} className="group flex flex-col items-center gap-2" href={social.url} target="_blank">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-on-surface text-on-surface-variant transition-all duration-300 group-hover:bg-surface-container-highest group-hover:text-primary">
+                    <img
+                      alt={`${social.label} icon`}
+                      className="h-6 w-6 object-contain"
+                      src={social.iconSrc}
+                    />
                   </div>
                   <span className="font-label text-[10px] uppercase tracking-widest opacity-0 transition-opacity group-hover:opacity-100">
                     {social.label}
@@ -90,64 +98,84 @@ export default function HomePage() {
               <h2 className="font-headline text-3xl font-bold tracking-tight">Select Explorations</h2>
               <div className="mt-2 h-1 w-12 bg-primary" />
             </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {explorationCards.map((card) =>
-                card.featured ? (
-                  <div
-                    key={card.title}
-                    className="group relative overflow-hidden rounded-xl bg-surface-container-high p-1 transition-all duration-500 hover:bg-surface-container-highest md:col-span-2"
-                  >
-                    <div className="relative aspect-video overflow-hidden rounded-lg">
-                      <img
-                        alt={card.title}
-                        className="h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
-                        src={card.image}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent" />
-                      <div className="absolute bottom-8 left-8 right-8">
-                        <span className="mb-2 block font-label text-xs uppercase tracking-widest text-primary">
-                          {card.category}
-                        </span>
-                        <h3 className="mb-2 font-headline text-2xl font-bold">{card.title}</h3>
-                        <p className="max-w-md font-body text-sm text-on-surface-variant">
-                          {card.homeDescription || card.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    key={card.title}
-                    className="group relative flex min-h-[400px] flex-col justify-end overflow-hidden rounded-xl bg-surface-container-high p-8 transition-all duration-500 hover:bg-surface-container-highest"
-                  >
-                    <div className="absolute left-0 top-0 h-full w-full opacity-10 transition-opacity group-hover:opacity-20">
-                      <img
-                        alt={card.title}
-                        className="h-full w-full object-cover grayscale"
-                        src={card.image}
-                      />
-                    </div>
-                    <div className="relative z-10">
-                      <span className="mb-2 block font-label text-xs uppercase tracking-widest text-primary">
+                <div
+                  key={card.title}
+                  className="group relative overflow-hidden rounded-xl bg-surface-container-high p-1 transition-all duration-500 hover:bg-surface-container-highest md:col-span-2"
+                >
+                  <div className="relative aspect-video overflow-hidden rounded-lg">
+                    <img
+                      alt={card.title}
+                      className="h-full w-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-105"
+                      src={card.image}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent" />
+                    <div className="absolute bottom-8 left-8 right-8">
+                      <span className="mb-2 font-bold block font-label text-xs uppercase tracking-widest text-primary">
                         {card.category}
                       </span>
-                      <h3 className="mb-2 font-headline text-2xl font-bold">{card.title}</h3>
-                      <p className="font-body text-sm text-on-surface-variant">
+                      <h3 className="mb-2 font-headline md:text-2xl font-bold">{card.title}</h3>
+                      <p className="max-w-md font-body text-sm text-on-surface-variant">
                         {card.homeDescription || card.description}
                       </p>
-                      <Link
-                        href="/projects"
-                        className="group/link mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary"
-                      >
-                        Read Case Study
-                        <span className="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1">
-                          arrow_forward
-                        </span>
-                      </Link>
                     </div>
                   </div>
-                )
+                </div>
               )}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-8">
+            <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="font-headline text-3xl font-bold tracking-tight">Hot Publications</h2>
+                <div className="mt-2 h-1 w-12 bg-primary" />
+              </div>
+              <Link
+                href="/publications"
+                className="font-label text-xs uppercase tracking-[0.2em] text-primary transition-colors hover:text-on-surface"
+              >
+                View all publications
+              </Link>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {featuredPublications.map((publication) => (
+                <article
+                  key={`${publication.year}-${publication.title}`}
+                  className="flex h-full flex-col justify-between rounded-xl border border-outline-variant/10 bg-surface-container-low p-6 transition-all duration-300 hover:border-primary/30 hover:bg-surface-container-high"
+                >
+                  <div>
+                    <div className="mb-4 flex items-center justify-between gap-4">
+                      <span className="font-headline text-2xl font-bold text-primary/70">
+                        {publication.year}
+                      </span>
+                      {publication.badge ? (
+                        <span className="rounded bg-primary/10 px-2 py-1 font-label text-[10px] uppercase tracking-widest text-primary">
+                          {publication.badge}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <h3 className="line-clamp-4 font-headline text-xl font-bold leading-tight tracking-tight text-on-surface">
+                      {publication.title}
+                    </h3>
+
+                    <p className="mt-4 line-clamp-2 font-body text-sm text-on-surface-variant">
+                      {publication.authors}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 border-t border-outline-variant/10 pt-4">
+                    <p className="font-label text-xs uppercase tracking-[0.18em] text-outline">
+                      {publication.venue}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>

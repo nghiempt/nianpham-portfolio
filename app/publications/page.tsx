@@ -8,9 +8,9 @@ export default function PublicationsPage() {
   return (
     <>
       <TopNav />
-      <main className="mx-auto max-w-7xl px-6 pb-24 pt-32 md:px-12">
+      <main className="mx-auto max-w-7xl px-8 pb-24 pt-32">
         <header className="mb-16 flex flex-col justify-between gap-8 md:mb-24 md:flex-row md:items-end">
-          <div className="max-w-2xl">
+          <div className="max-w-4xl">
             <span className="mb-4 block font-label text-xs uppercase tracking-[0.2em] text-primary">
               Archive of Research
             </span>
@@ -18,18 +18,7 @@ export default function PublicationsPage() {
               Scientific Publications
             </h1>
           </div>
-          <div className="w-full md:w-auto">
-            <div className="group relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-outline">
-                <span className="material-symbols-outlined text-xl">search</span>
-              </span>
-              <input
-                className="w-full rounded-full border-none bg-surface-container-lowest py-4 pl-12 pr-6 font-body text-sm text-on-surface transition-all placeholder:text-outline focus:ring-2 focus:ring-primary/20 md:w-80"
-                placeholder="Search by topic or year..."
-                type="text"
-              />
-            </div>
-          </div>
+          
         </header>
 
         <div className="mb-12 flex flex-wrap items-center gap-4">
@@ -79,13 +68,13 @@ export default function PublicationsPage() {
                   {publication.venue}
                 </p>
                 <div className="flex items-center gap-6 pt-4">
-                  <a
+                  {/* <a
                     className="flex items-center gap-2 font-label text-sm uppercase tracking-wider text-primary transition-colors hover:text-on-surface"
                     href="#"
                   >
                     <span className="material-symbols-outlined text-lg">school</span>
                     Google Scholar
-                  </a>
+                  </a> */}
                   <a
                     className="flex items-center gap-2 font-label text-sm uppercase tracking-wider text-primary transition-colors hover:text-on-surface"
                     href="#"
@@ -122,7 +111,7 @@ export default function PublicationsPage() {
           </p>
           <a
             className="inline-flex items-center justify-center rounded-full bg-gradient-to-br from-primary to-inverse-primary px-10 py-4 font-headline text-sm font-bold uppercase tracking-widest text-on-primary-fixed transition-all hover:scale-105 active:scale-95"
-            href="mailto:hello@example.com"
+            href="mailto:nianpham.reed@gmail.com"
           >
             Request Full CV
           </a>

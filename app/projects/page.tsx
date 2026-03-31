@@ -41,9 +41,6 @@ export default function ProjectsPage() {
               <div className="p-8">
                 <div className="mb-4 flex items-start justify-between">
                   <h3 className="font-headline text-2xl font-bold text-on-surface">{project.title}</h3>
-                  <a className="text-on-surface-variant transition-colors hover:text-primary" href="#">
-                    <span className="material-symbols-outlined">{project.icon}</span>
-                  </a>
                 </div>
                 <p className="mb-8 text-sm leading-relaxed text-on-surface-variant">
                   {project.description}
@@ -59,13 +56,6 @@ export default function ProjectsPage() {
                       </span>
                     ))}
                   </div>
-                  <a
-                    className="inline-flex items-center gap-2 text-sm font-bold tracking-tight text-primary hover:underline"
-                    href="https://github.com"
-                  >
-                    View on GitHub
-                    <span className="material-symbols-outlined text-sm">arrow_outward</span>
-                  </a>
                 </div>
               </div>
             </div>
