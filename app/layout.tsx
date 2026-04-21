@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nianpham.my"),
+  metadataBase: new URL("https://nianpham.my/"),
   title: "Nian Pham",
   description:
-    "AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by ~4 years of experience and 20+ publications. Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.",
+    "AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by 4 years of experience and 20+ publications. Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.",
   openGraph: {
     title: "Nian Pham",
     description:
-      "AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by ~4 years of experience and 20+ publications. Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.",
+      "AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by 4 years of experience and 20+ publications. Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.",
     url: "https://nianpham.my/",
     siteName: "Nian Pham",
     images: [
