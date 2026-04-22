@@ -7,6 +7,7 @@ const socials = [
   { iconSrc: "/assets/github.svg", label: "GitHub", url: "https://github.com/nghiempt" },
   { iconSrc: "/assets/scholar.svg", label: "Scholar", url: "https://scholar.google.com/citations?user=23NArXYAAAAJ" },
   { iconSrc: "/assets/linkedin.svg", label: "LinkedIn", url: "https://www.linkedin.com/in/nianpham" },
+  { iconSrc: "/assets/facebook.svg", label: "Facebook", url: "https://www.facebook.com/nianpham.me" },
 ];
 
 export default function HomePage() {
@@ -66,7 +67,7 @@ export default function HomePage() {
           <p className="mb-10 text-center text-md md:text-lg font-semibold" style={{ color: sub }}>
             Senior AI Engineer &amp; Scientific Researcher
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-8">
             {socials.map((social) => (
               <a
                 key={social.url}
@@ -80,7 +81,7 @@ export default function HomePage() {
                   src={social.iconSrc}
                   alt={social.label}
                   className="h-7 w-7 object-contain"
-                  style={{ filter: iconFilter }}
+                  // style={{ filter: iconFilter }}
                 />
               </a>
             ))}
