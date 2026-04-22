@@ -56,7 +56,7 @@ export default function HomePage() {
             }}
           >
             <img
-              src="https://nghiempt.github.io/images/profile.jpg"
+              src="/assets/profile.jpg"
               alt="Nghiem Thanh Pham"
               className="h-full w-full object-cover"
             />
