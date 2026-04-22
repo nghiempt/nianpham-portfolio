@@ -48,9 +48,8 @@ export default function HomePage() {
       <main className="flex flex-1 flex-col items-center justify-center py-20">
         <div className="flex w-full max-w-2xl flex-col items-center">
           <div
-            className="mb-8 overflow-hidden rounded-full"
+            className="mb-8 overflow-hidden rounded-full w-[160px] md:w-[200px] lg:w-[200px]"
             style={{
-              width: 200,
               background: "#edeae6",
               border: "none",
             }}
@@ -61,10 +60,10 @@ export default function HomePage() {
               className="h-full w-full object-cover"
             />
           </div>
-          <h1 className="mb-4 text-3xl font-bold" style={{ color: fg }}>
+          <h1 className="mb-4 text-2xl md:text-3xl font-bold" style={{ color: fg }}>
             Nghiem Thanh Pham
           </h1>
-          <p className="mb-10 text-lg font-semibold" style={{ color: sub }}>
+          <p className="mb-10 text-center text-md md:text-lg font-semibold" style={{ color: sub }}>
             Senior AI Engineer &amp; Scientific Researcher
           </p>
           <div className="flex items-center gap-6">
@@ -88,7 +87,7 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-      <footer className="py-6 text-center text-md" style={{ color: footerColor }}>
+      <footer className="py-6 text-center text-sm" style={{ color: footerColor }}>
         © 2026 Nghiem Thanh Pham
       </footer>
     </div>
