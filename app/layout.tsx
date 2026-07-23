@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.nianpham.my/"),
   title: "Nian Pham Portfolio",
   description:
-    "Bridging frontier AI research with production-scale systems, transforming complex ideas into products trusted by enterprises and millions of users.",
+    "The distance between impossible and production is where I work.",
   openGraph: {
     title: "Nian Pham Portfolio",
     description:
-      "Bridging frontier AI research with production-scale systems, transforming complex ideas into products trusted by enterprises and millions of users.",
+      "The distance between impossible and production is where I work.",
     url: "https://www.nianpham.my/",
     siteName: "Nian Pham Portfolio",
     images: [
@@ -35,20 +35,16 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@200;400;700;800&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background font-body text-on-surface selection:bg-primary/30">
+      <body className="font-body selection:bg-blue-600/20">
         {children}
       </body>
     </html>

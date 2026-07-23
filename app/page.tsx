@@ -1,118 +1,232 @@
 "use client";
 
-import Link from "next/link";
-import { useRef, useState } from "react";
-import type { MouseEvent } from "react";
+import { useLayoutEffect, useRef } from "react";
 
-const socials = [
-  { iconSrc: "/assets/github.svg", label: "GitHub", url: "https://github.com/nghiempt" },
-  { iconSrc: "/assets/scholar.svg", label: "Scholar", url: "https://scholar.google.com/citations?user=23NArXYAAAAJ" },
-  { iconSrc: "/assets/linkedin.svg", label: "LinkedIn", url: "https://www.linkedin.com/in/nianpham" },
-  { iconSrc: "/assets/facebook.svg", label: "Facebook", url: "https://www.facebook.com/nianpham.me" },
-];
+const LINKS = {
+  github: "https://github.com/nghiempt",
+  scholar: "https://scholar.google.com/citations?user=23NArXYAAAAJ",
+  linkedin: "https://www.linkedin.com/in/nianpham",
+  facebook: "https://www.facebook.com/nianpham.me",
+  email: "mailto:nianpham.reed@gmail.com",
+};
+
+function BrokenIcon({ className = "broken-icon" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2.5" />
+      <circle cx="9" cy="9" r="1.6" />
+      <path d="M21 15.5l-4.5-4.5L9.5 18" />
+      <path d="M3.5 20.5l17-17" />
+    </svg>
+  );
+}
 
 export default function HomePage() {
-  const [dark, setDark] = useState(true);
-  const sceneRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const el = sceneRef.current;
+  // Scale the whole layout down so the full page always fits the
+  // viewport height on desktop — no vertical scrolling.
+  useLayoutEffect(() => {
+    const el = pageRef.current;
     if (!el) return;
-    el.style.setProperty("--mx", `${e.clientX}px`);
-    el.style.setProperty("--my", `${e.clientY}px`);
-  };
+    const fit = () => {
+      if (window.innerWidth < 1024) {
+        el.style.removeProperty("zoom");
+        el.style.removeProperty("height");
+        el.style.removeProperty("min-height");
+        return;
+      }
+      // Measure the natural content height, without the 100vh stretch.
+      el.style.zoom = "1";
+      el.style.minHeight = "0";
+      el.style.height = "auto";
+      const full = el.scrollHeight;
+      // Scale up or down so the content exactly fills the viewport height.
+      const scale = window.innerHeight / full;
+      el.style.zoom = scale.toFixed(4);
+      el.style.height = `${Math.round(window.innerHeight / scale)}px`;
+    };
+    fit();
+    // Re-measure once webfonts finish loading — text metrics change the page height.
+    document.fonts?.ready.then(fit);
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
+  }, []);
 
   return (
-    <div
-      ref={sceneRef}
-      onMouseMove={handleMouseMove}
-      className={`scene ${dark ? "theme-dark" : "theme-light"}`}
-    >
-      <div className="aurora" aria-hidden="true">
-        <span className="blob blob-1" />
-        <span className="blob blob-2" />
-        <span className="blob blob-3" />
-      </div>
-      <div className="grid-overlay" aria-hidden="true" />
-      <div className="noise" aria-hidden="true" />
-      <div className="spotlight" aria-hidden="true" />
+    <div className="page" ref={pageRef}>
+      {/* <section className="hero">
+        <h1 className="headline">
+          Stop Searching for Me on
+          <br />
+          <span className="accent">
+            &ldquo;Every&rdquo;
+            <svg className="swoosh" viewBox="0 0 130 14" aria-hidden="true">
+              <path d="M4 10 C 40 3, 85 2, 126 7" />
+              <path d="M14 13 C 48 7, 82 6, 110 9" />
+            </svg>
+          </span>{" "}
+          Social Network
+        </h1>
+        <p className="lede">
+          I&rsquo;m <strong>Nghiem Thanh Pham (Nian Pham)</strong>{" "}&mdash; Senior AI Engineer &amp;
+          Scientific Researcher. No boring link lists here: every preview card below is a{" "}
+          <strong>&ldquo;real profile&rdquo;</strong> of mine — click one and say hello.
+        </p>
+      </section> */}
 
-      <div className="relative z-10 flex min-h-screen flex-col">
-        <nav className="flex justify-center px-4 pt-6">
-          <div className="glass-pill rise flex w-full max-w-2xl items-center justify-between py-2.5 pl-6 pr-2.5">
-            <Link href="/" className="logo-text">
-              Nianverse Space
-            </Link>
-            <button
-              onClick={() => setDark(!dark)}
-              aria-label="Toggle dark mode"
-              className="theme-btn"
-            >
-              {dark ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
-              )}
-            </button>
+      <section className="collage" aria-label="My social profiles">
+        {/* ---- Ghost cards (decor) ---- */}
+        <div className="ghost g1" aria-hidden="true">
+          <span className="g-label">Read latest article</span>
+          <div className="g-line w80" />
+          <div className="g-line w60" />
+        </div>
+        <div className="ghost g2" aria-hidden="true">
+          <span className="g-title">Untitled</span>
+          <div className="g-line w80" />
+          <div className="g-thumb">
+            <BrokenIcon />
           </div>
-        </nav>
+        </div>
+        <div className="ghost g3" aria-hidden="true">
+          <div className="g-thumb">
+            <BrokenIcon />
+          </div>
+        </div>
+        <div className="ghost g4" aria-hidden="true">
+          <span className="g-title">Welcome to our newsletter</span>
+          <div className="g-line w60" />
+          <div className="g-thumb">
+            <BrokenIcon />
+          </div>
+        </div>
+        <div className="ghost g5" aria-hidden="true">
+          <div className="g-thumb" style={{ height: 110 }}>
+            <BrokenIcon />
+          </div>
+          <div className="g-bar">John Smith · ghost.org</div>
+        </div>
+        <div className="ghost g6" aria-hidden="true">
+          <span className="g-title">Senior AI Researcher — Remote, Full-Time</span>
+          <div className="g-line w40" />
+          <div className="g-line w80" />
+        </div>
 
-        <main className="flex flex-1 items-center justify-center px-4 py-14">
-          <section className="glass-card rise flex w-full max-w-2xl flex-col items-center px-6 py-14 text-center md:px-12 md:py-16" style={{ animationDelay: "0.12s" }}>
-            <div className="rise mb-9" style={{ animationDelay: "0.22s" }}>
-              <div className="avatar-wrap">
-                <div className="avatar-ring">
-                  <div className="aspect-square w-[150px] overflow-hidden rounded-full md:w-[190px]">
-                    <img
-                      src="/assets/profile.jpg"
-                      alt="Nghiem Thanh Pham"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* ---- Annotation pills + dashed arrows ---- */}
+        <span className="pill p1">
+          My code <span className="plus">+</span>
+        </span>
+        <svg className="a1 arrow" viewBox="0 0 110 74" aria-hidden="true">
+          <path d="M100 8 C 72 20, 34 36, 14 60" />
+          <path className="head" d="M14 60 l 10 -6 l -3.5 8.5 z" />
+        </svg>
 
-            <h1 className="shimmer-text rise mb-4 text-3xl font-extrabold md:text-4xl" style={{ animationDelay: "0.32s" }}>
-              Nghiem Thanh Pham
-            </h1>
+        <span className="pill p2">
+          Let&rsquo;s connect <span className="plus">+</span>
+        </span>
+        <svg className="a2 arrow" viewBox="0 0 96 94" aria-hidden="true">
+          <path d="M22 88 C 30 54, 52 28, 80 10" />
+          <path className="head" d="M80 10 l -11 2 l 6 -8.5 z" />
+        </svg>
 
-            <p className="sub-text rise mb-6 text-base font-medium md:text-lg" style={{ animationDelay: "0.42s" }}>
-              Senior AI Engineer &amp; Scientific Researcher
-            </p>
+        <span className="pill p3">
+          Say hello <span className="plus">+</span>
+        </span>
+        <svg className="a3 arrow" viewBox="0 0 84 62" aria-hidden="true">
+          <path d="M74 54 C 60 32, 38 16, 12 10" />
+          <path className="head" d="M12 10 l 10.5 -3 l -5.5 9 z" />
+        </svg>
 
-            <div className="badge rise mb-10" style={{ animationDelay: "0.5s" }}>
-              <span className="badge-dot" />
-              Open to collaboration
-            </div>
+        {/* ---- Social cards (clickable) ---- */}
+        <a
+          className="card c-github"
+          href={LINKS.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub — nghiempt"
+        >
+          <div className="thumb">
+            <img src="/assets/github.svg" alt="" />
+          </div>
+          <div className="card-body">
+            <span className="card-domain">GITHUB.COM</span>
+            <span className="card-title">nghiempt — code, projects &amp; open source</span>
+          </div>
+        </a>
 
-            <div className="rise flex items-center gap-5" style={{ animationDelay: "0.58s" }}>
-              {socials.map((social) => (
-                <a
-                  key={social.url}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="social-btn"
-                >
-                  <img
-                    src={social.iconSrc}
-                    alt={social.label}
-                    className="h-6 w-6 object-contain"
-                  />
-                  <span className="social-tip">{social.label}</span>
-                </a>
-              ))}
-            </div>
-          </section>
-        </main>
+        <a
+          className="card c-linkedin"
+          href={LINKS.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn — Nghiem Thanh Pham"
+        >
+          <div className="thumb">
+            <img src="/assets/linkedin.svg" alt="" />
+          </div>
+          <div className="card-body">
+            <span className="card-domain">LINKEDIN.COM</span>
+            <span className="card-title">Nghiem Thanh Pham — Senior AI Engineer</span>
+          </div>
+        </a>
 
-        <footer className="rise pb-7" style={{ animationDelay: "0.7s" }}>
-          <div className="footer-line mx-auto mb-5 w-full max-w-2xl" />
-          <p className="sub-text text-center text-sm">© 2026 Nghiem Thanh Pham</p>
-        </footer>
-      </div>
+        <a
+          className="card c-scholar"
+          href={LINKS.scholar}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Google Scholar — Nian Pham"
+        >
+          <div className="card-body">
+            <span className="link-title">Nian Pham | Google Scholar ⭐</span>
+            <span className="desc">
+              Peer-reviewed publications, citations &amp; ongoing AI research.
+            </span>
+          </div>
+          <div className="thumb">
+            <img src="/assets/scholar.svg" alt="" />
+          </div>
+        </a>
+
+        <a
+          className="card c-facebook"
+          href={LINKS.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook — Nian Pham"
+        >
+          <img className="side-photo" src="/assets/profile.jpg" alt="" />
+          <div className="card-body">
+            <span className="card-domain lower">facebook.com</span>
+            <span className="card-title">Nian Pham — daily life &amp; updates</span>
+          </div>
+        </a>
+
+        <a className="card c-gmail" href={LINKS.email} aria-label="Email Nian Pham">
+          <div className="thumb">
+            <img src="/assets/gmail.svg" alt="" />
+          </div>
+          <div className="card-body">
+            <span className="card-title">Say Hello</span>
+            <span className="desc">
+              Open to collaboration &amp; interesting problems — I reply fast.
+            </span>
+            <span className="card-domain lower">nianpham.reed@gmail.com</span>
+          </div>
+        </a>
+      </section>
+
+      <footer className="foot">© 2026 Nghiem Thanh Pham</footer>
     </div>
   );
 }
