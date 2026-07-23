@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.nianpham.my/"),
   title: "Nian Pham Portfolio",
   description:
-    "The distance between impossible and production is where I work.",
+    "The shortest path from impossible to production runs through my code",
   openGraph: {
     title: "Nian Pham Portfolio",
     description:
-      "The distance between impossible and production is where I work.",
+      "The shortest path from impossible to production runs through my code",
     url: "https://www.nianpham.my/",
     siteName: "Nian Pham Portfolio",
     images: [

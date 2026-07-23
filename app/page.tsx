@@ -8,6 +8,7 @@ const LINKS = {
   linkedin: "https://www.linkedin.com/in/nianpham",
   facebook: "https://www.facebook.com/nianpham.me",
   email: "mailto:nianpham.reed@gmail.com",
+  researchgate: "https://www.researchgate.net/profile/Nghiem-Pham",
 };
 
 function BrokenIcon({ className = "broken-icon" }: { className?: string }) {
@@ -122,31 +123,6 @@ export default function HomePage() {
           <div className="g-line w80" />
         </div>
 
-        {/* ---- Annotation pills + dashed arrows ---- */}
-        <span className="pill p1">
-          My code <span className="plus">+</span>
-        </span>
-        <svg className="a1 arrow" viewBox="0 0 110 74" aria-hidden="true">
-          <path d="M100 8 C 72 20, 34 36, 14 60" />
-          <path className="head" d="M14 60 l 10 -6 l -3.5 8.5 z" />
-        </svg>
-
-        <span className="pill p2">
-          Let&rsquo;s connect <span className="plus">+</span>
-        </span>
-        <svg className="a2 arrow" viewBox="0 0 96 94" aria-hidden="true">
-          <path d="M22 88 C 30 54, 52 28, 80 10" />
-          <path className="head" d="M80 10 l -11 2 l 6 -8.5 z" />
-        </svg>
-
-        <span className="pill p3">
-          Say hello <span className="plus">+</span>
-        </span>
-        <svg className="a3 arrow" viewBox="0 0 84 62" aria-hidden="true">
-          <path d="M74 54 C 60 32, 38 16, 12 10" />
-          <path className="head" d="M12 10 l 10.5 -3 l -5.5 9 z" />
-        </svg>
-
         {/* ---- Social cards (clickable) ---- */}
         <a
           className="card c-github"
@@ -155,9 +131,10 @@ export default function HomePage() {
           rel="noopener noreferrer"
           aria-label="GitHub — nghiempt"
         >
-          <div className="thumb">
-            <img src="/assets/github.svg" alt="" />
-          </div>
+          <span className="card-badge">
+            My code <span className="plus">+</span>
+          </span>
+          <img className="cover" src="/assets/github.jpeg" alt="" />
           <div className="card-body">
             <span className="card-domain">GITHUB.COM</span>
             <span className="card-title">nghiempt — code, projects &amp; open source</span>
@@ -171,9 +148,10 @@ export default function HomePage() {
           rel="noopener noreferrer"
           aria-label="LinkedIn — Nghiem Thanh Pham"
         >
-          <div className="thumb">
-            <img src="/assets/linkedin.svg" alt="" />
-          </div>
+          <span className="card-badge">
+            Let&rsquo;s connect <span className="plus">+</span>
+          </span>
+          <img className="cover" src="/assets/linkedin.jpeg" alt="" />
           <div className="card-body">
             <span className="card-domain">LINKEDIN.COM</span>
             <span className="card-title">Nghiem Thanh Pham — Senior AI Engineer</span>
@@ -193,9 +171,7 @@ export default function HomePage() {
               Peer-reviewed publications, citations &amp; ongoing AI research.
             </span>
           </div>
-          <div className="thumb">
-            <img src="/assets/scholar.svg" alt="" />
-          </div>
+          <img className="cover" src="/assets/google-scholar-thumb.jpg" alt="" />
         </a>
 
         <a
@@ -213,15 +189,30 @@ export default function HomePage() {
         </a>
 
         <a className="card c-gmail" href={LINKS.email} aria-label="Email Nian Pham">
-          <div className="thumb">
-            <img src="/assets/gmail.svg" alt="" />
-          </div>
+          <span className="card-badge">
+            Say hello <span className="plus">+</span>
+          </span>
+          <img className="cover" src="/assets/gmail-banner.jpg" alt="" />
           <div className="card-body">
             <span className="card-title">Say Hello</span>
             <span className="desc">
               Open to collaboration &amp; interesting problems — I reply fast.
             </span>
             <span className="card-domain lower">nianpham.reed@gmail.com</span>
+          </div>
+        </a>
+
+        <a
+          className="card c-rg"
+          href={LINKS.researchgate}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="ResearchGate — Nghiem Pham"
+        >
+          <img className="cover" src="/assets/rs.jpg" alt="" />
+          <div className="card-body">
+            <span className="card-domain">RESEARCHGATE.NET</span>
+            <span className="card-title">Nghiem Pham — research &amp; publications</span>
           </div>
         </a>
       </section>
