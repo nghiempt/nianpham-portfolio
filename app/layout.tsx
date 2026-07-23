@@ -3,22 +3,22 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nianpham.my/"),
-  title: "Nian Pham",
+  metadataBase: new URL("https://www.nianpham.my/"),
+  title: "Nian Pham Portfolio",
   description:
-    "AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by 4 years of experience and 20+ publications. Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.",
+    "Senior Fullstack AI Engineer with proven experience building production-grade AI systems, from Knowledge Graphs and Multi-Agent platforms to Voice AI and enterprise applications. Passionate about turning cutting-edge AI research into scalable, real-world products that deliver measurable business impact.",
   openGraph: {
-    title: "Nian Pham",
+    title: "Nian Pham Portfolio",
     description:
-      "AI Engineer with expertise in LLM systems, multi-agent architectures, and multimodal AI, backed by 4 years of experience and 20+ publications. Lead AI teams and delivered production-grade solutions for enterprise clients in finance, healthcare, and media.",
-    url: "https://nianpham.my/",
-    siteName: "Nian Pham",
+      "Senior Fullstack AI Engineer with proven experience building production-grade AI systems, from Knowledge Graphs and Multi-Agent platforms to Voice AI and enterprise applications. Passionate about turning cutting-edge AI research into scalable, real-world products that deliver measurable business impact.",
+    url: "https://www.nianpham.my/",
+    siteName: "Nian Pham Portfolio",
     images: [
       {
-        url: "https://res.cloudinary.com/farmcode/image/upload/v1774857166/other/mp0r44ovdvs6ktymud3a.png",
+        url: "https://the-brandidentity.com/uploads/products/fractal-glass-gradients/Fractal-Glass-Gradients-1.jpg",
         width: 1200,
         height: 630,
-        alt: "Nian Pham",
+        alt: "Nian Pham Portfolio",
       },
     ],
     locale: "vi_VN",
