@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.nianpham.my/"),
   title: "Nian Pham Portfolio",
   description:
-    "Senior Fullstack AI Engineer with proven experience building production-grade AI systems, from Knowledge Graphs and Multi-Agent platforms to Voice AI and enterprise applications. Passionate about turning cutting-edge AI research into scalable, real-world products that deliver measurable business impact.",
+    "Bridging frontier AI research with production-scale systems, transforming complex ideas into products trusted by enterprises and millions of users.",
   openGraph: {
     title: "Nian Pham Portfolio",
     description:
-      "Senior Fullstack AI Engineer with proven experience building production-grade AI systems, from Knowledge Graphs and Multi-Agent platforms to Voice AI and enterprise applications. Passionate about turning cutting-edge AI research into scalable, real-world products that deliver measurable business impact.",
+      "Bridging frontier AI research with production-scale systems, transforming complex ideas into products trusted by enterprises and millions of users.",
     url: "https://www.nianpham.my/",
     siteName: "Nian Pham Portfolio",
     images: [
