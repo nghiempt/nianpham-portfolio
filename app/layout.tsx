@@ -1,6 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f6fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1020" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nianpham.my/"),
@@ -13,19 +27,14 @@ export const metadata: Metadata = {
       "The shortest path from impossible to production runs through my code",
     url: "https://www.nianpham.my/",
     siteName: "Nian Pham Portfolio",
-    images: [
-      {
-        url: "https://the-brandidentity.com/uploads/products/fractal-glass-gradients/Fractal-Glass-Gradients-1.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Nian Pham Portfolio",
-      },
-    ],
     locale: "vi_VN",
     type: "website",
   },
-  icons: {
-    icon: "/favicon.ico",
+  twitter: {
+    card: "summary_large_image",
+    title: "Nian Pham Portfolio",
+    description:
+      "The shortest path from impossible to production runs through my code",
   },
 };
 
@@ -35,18 +44,8 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="font-body selection:bg-blue-600/20">
-        {children}
-      </body>
+    <html lang="en" className={inter.variable}>
+      <body>{children}</body>
     </html>
   );
 }
