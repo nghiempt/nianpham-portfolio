@@ -4,3 +4,6 @@ dist
 out
 coverage
 *.log
+
+# Raw source notes (contain private contact details)
+/data/

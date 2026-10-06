@@ -1,0 +1,18 @@
+[
+  {"id": "conviction-2026", "name": "Conviction 2026", "year": 2026, "kind": "community", "detail": "", "logo": ""},
+  {"id": "aws-genai-builder-2026", "name": "AWS GenAI Builder Club 2026", "year": 2026, "kind": "community", "detail": "", "logo": "/assets/logos/aws.png"},
+  {"id": "zalo-ai-2025", "name": "Zalo AI Challenge 2025", "year": 2025, "kind": "contest", "detail": "", "logo": "/assets/logos/zalo.svg"},
+  {"id": "aws-cloud-day-2025", "name": "AWS Cloud Day 2025", "year": 2025, "kind": "community", "detail": "", "logo": "/assets/logos/aws.png"},
+  {"id": "conviction-2025", "name": "Conviction 2025", "year": 2025, "kind": "community", "detail": "", "logo": ""},
+  {"id": "oci-ai", "name": "OCI AI Foundations", "year": 2024, "kind": "certificate", "detail": "Oracle", "logo": "/assets/logos/oracle.png"},
+  {"id": "aws-ccp", "name": "AWS Cloud Practitioner", "year": 2024, "kind": "certificate", "detail": "Amazon Web Services", "logo": "/assets/logos/aws.png"},
+  {"id": "gcp-cdl", "name": "Cloud Digital Leader", "year": 2024, "kind": "certificate", "detail": "Google Cloud", "logo": "/assets/logos/google-cloud.png"},
+  {"id": "gecon-2024", "name": "GECON 2024 Conference", "year": 2024, "kind": "conference", "detail": "", "logo": ""},
+  {"id": "iccsa-2024", "name": "ICCSA 2024 Conference", "year": 2024, "kind": "conference", "detail": "", "logo": "/assets/logos/iccsa.png"},
+  {"id": "cloud-2023", "name": "CLOUD 2023", "year": 2023, "kind": "conference", "detail": "Shenzhen, China", "logo": "/assets/logos/ieee.png"},
+  {"id": "business-challenge-2022", "name": "Business Challenge 2022", "year": 2022, "kind": "contest", "detail": "", "logo": ""},
+  {"id": "tech-fest-mekong-2022", "name": "Tech Fest Mekong 2022", "year": 2022, "kind": "community", "detail": "", "logo": ""},
+  {"id": "fpt-autonomous-car-2021", "name": "FPT Autonomous Car 2021", "year": 2021, "kind": "contest", "detail": "", "logo": "/assets/logos/fptu.png"},
+  {"id": "intel-expert-challenge-2020", "name": "Intel Expert Challenge 2020", "year": 2020, "kind": "contest", "detail": "", "logo": "/assets/logos/intel.svg"},
+  {"id": "fptu-scholarship", "name": "FPT University Scholarship — 70%", "year": 2020, "kind": "award", "detail": "FPT University", "logo": "/assets/logos/fptu.png"}
+]

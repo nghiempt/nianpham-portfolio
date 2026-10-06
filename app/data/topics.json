@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ai",
+    "label": "AI & LLMs",
+    "color": "#6d28d9",
+    "icon": "sparkle"
+  },
+  {
+    "id": "privacy",
+    "label": "Privacy & Security",
+    "color": "#1d4ed8",
+    "icon": "shield"
+  },
+  {
+    "id": "blockchain",
+    "label": "Blockchain",
+    "color": "#b45309",
+    "icon": "link"
+  }
+]

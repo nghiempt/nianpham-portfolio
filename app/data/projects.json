@@ -1,0 +1,34 @@
+[
+  {
+    "id": "nhachung",
+    "name": "Nhachung.vn",
+    "tagline": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966",
+    "company": "Tino Group",
+    "role": "Fullstack Engineer",
+    "period": "June 2026 – Present",
+    "year": 2026,
+    "category": "platforms",
+    "metrics": [
+      {
+        "value": "1",
+        "label": "Lorem Ipsum"
+      },
+      {
+        "value": "2",
+        "label": "Lorem Ipsum"
+      }
+    ],
+    "highlightsLabel": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966",
+    "highlights": [
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966"
+    ],
+    "stack": [
+      "Python",
+      "FastAPI",
+      "TypeScript",
+      "React"
+    ],
+    "url": "https://nhachung.vn",
+    "thumbnail": "https://webico-s3.project.webico.ai/assets/nhachung/thumbnail.jpg"
+  }
+]

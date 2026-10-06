@@ -7,7 +7,8 @@
 :root {
   color-scheme: light dark;
 
-  --font: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font: var(--font-sans), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-name: var(--font-display), "Instrument Serif", Georgia, serif;
 
   --fg: #0f172a;
   --fg-muted: #475569;
@@ -20,6 +21,8 @@
   --glass-chrome: rgba(255, 255, 255, 0.55);
   --glass-bar: rgba(255, 255, 255, 0.55);
   --glass-edge: rgba(255, 255, 255, 0.55);
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --sheet-bg: rgba(255, 255, 255, 0.9);
 
   --accent: #2563eb;
   --online: #16a34a;
@@ -61,6 +64,8 @@
     --glass-chrome: rgba(40, 42, 52, 0.6);
     --glass-bar: rgba(15, 17, 26, 0.5);
     --glass-edge: rgba(255, 255, 255, 0.14);
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --sheet-bg: rgba(28, 30, 40, 0.92);
 
     --accent: #60a5fa;
     --online: #4ade80;
@@ -129,7 +134,6 @@ body {
   background: var(--wp-base);
 }
 
-.desktop::before,
 .desktop::after {
   content: "";
   position: fixed;
@@ -138,29 +142,116 @@ body {
   pointer-events: none;
 }
 
-.desktop::before {
-  background: radial-gradient(38% 42% at 18% 22%, var(--wp-a) 0%, transparent 70%),
-    radial-gradient(42% 40% at 78% 30%, var(--wp-c) 0%, transparent 70%),
-    radial-gradient(50% 46% at 62% 88%, var(--wp-b) 0%, transparent 72%),
-    radial-gradient(30% 30% at 34% 70%, var(--wp-d) 0%, transparent 70%);
-  filter: blur(40px) saturate(1.15);
-  opacity: 0.9;
-  animation: wallpaper-drift 40s ease-in-out infinite alternate;
+/* ---------- Living wallpaper ----------
+   Four soft colour blobs, each on its own orbit and period so the mix never
+   repeats the same way twice, plus a slow iridescent sheen.
+   Performance: everything here is a blur-soft gradient, so it is drawn on a
+   quarter-size layer and scaled ×4 — visually identical, ~16× fewer pixels
+   for the glass above to re-sample each frame. Sizes use container units so
+   the layout is resolution-independent; only transform animates. */
+.wp-motion {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 25vw;
+  height: 25vh;
+  overflow: hidden;
+  pointer-events: none;
+  container-type: size;
+  transform: scale(4);
+  transform-origin: 0 0;
+}
+
+.wp-blob {
+  position: absolute;
+  width: 70cqmax;
+  height: 70cqmax;
+  border-radius: 50%;
+  opacity: 0.85;
+  will-change: transform;
+  animation: var(--orbit) var(--dur) ease-in-out infinite;
+}
+
+.b-a {
+  --orbit: orbit-a;
+  --dur: 22s;
+  left: -20cqmax;
+  top: -25cqmax;
+  background: radial-gradient(circle, var(--wp-a) 0%, transparent 62%);
+}
+.b-b {
+  --orbit: orbit-b;
+  --dur: 27s;
+  right: -25cqmax;
+  bottom: -30cqmax;
+  background: radial-gradient(circle, var(--wp-b) 0%, transparent 62%);
+}
+.b-c {
+  --orbit: orbit-c;
+  --dur: 31s;
+  right: -15cqmax;
+  top: -30cqmax;
+  background: radial-gradient(circle, var(--wp-c) 0%, transparent 62%);
+}
+.b-d {
+  --orbit: orbit-d;
+  --dur: 19s;
+  left: 5cqmax;
+  bottom: -35cqmax;
+  width: 55cqmax;
+  height: 55cqmax;
+  background: radial-gradient(circle, var(--wp-d) 0%, transparent 62%);
+}
+
+@keyframes orbit-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(28cqw, 18cqh, 0) scale(1.15); }
+  66% { transform: translate3d(10cqw, 42cqh, 0) scale(0.9); }
+}
+@keyframes orbit-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  30% { transform: translate3d(-34cqw, -12cqh, 0) scale(1.1); }
+  65% { transform: translate3d(-14cqw, -40cqh, 0) scale(0.92); }
+}
+@keyframes orbit-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+  40% { transform: translate3d(-40cqw, 30cqh, 0) scale(1.2); }
+  75% { transform: translate3d(-8cqw, 50cqh, 0) scale(1); }
+}
+@keyframes orbit-d {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(40cqw, -30cqh, 0) scale(1.25); }
+}
+
+/* Iridescent sheen sweeping diagonally, like light across a hologram.
+   Plain opacity instead of a blend mode, which would force an extra pass. */
+.wp-sheen {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.14;
+  will-change: transform;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    #ff9ad5 40%,
+    #9ae6ff 46%,
+    #b9a2ff 52%,
+    #fff3a6 58%,
+    transparent 68%
+  );
+  animation: sheen 14s linear infinite;
+}
+
+@keyframes sheen {
+  from { transform: translate3d(-30%, -10%, 0); }
+  to { transform: translate3d(30%, 10%, 0); }
 }
 
 /* Soft Ventura-style ribbon of light across the wallpaper */
 .desktop::after {
   background: radial-gradient(120% 60% at 70% 120%, rgba(255, 255, 255, 0.28) 0%, transparent 50%),
     radial-gradient(90% 40% at 10% -10%, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
-}
-
-@keyframes wallpaper-drift {
-  from {
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-  }
-  to {
-    transform: translate3d(-4%, 3%, 0) rotate(6deg) scale(1.08);
-  }
 }
 
 /* ---------- Wallpaper variants (switch via data-wallpaper) ----------
@@ -283,8 +374,7 @@ body {
   white-space: nowrap;
 }
 
-.mb-status i,
-.status-pill i {
+.mb-status i {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -364,7 +454,7 @@ body {
 /* ---------- Stage layout ---------- */
 
 .stage {
-  --thumb-h: clamp(58px, calc((100dvh - 150px) / 7 - 18px), 100px);
+  --thumb-h: clamp(58px, calc((100dvh - 150px) / var(--count, 5) - 22px), 112px);
   --thumb-w: calc(var(--thumb-h) * 1.6);
 
   height: calc(100dvh - var(--menubar-h));
@@ -412,8 +502,8 @@ body {
 }
 
 .thumb-window {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  display: block;
   height: var(--thumb-h);
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -421,30 +511,9 @@ body {
   box-shadow: var(--shadow-thumb);
 }
 
-.thumb-bar {
-  display: flex;
-  gap: 3px;
-  padding: 4px 6px;
-  flex-shrink: 0;
-}
-
-.thumb-bar i {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--hairline);
-}
-
-.thumb-media {
-  position: relative;
-  flex: 1;
-  margin: 0 4px 4px;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.thumb-media img {
+.thumb-window img {
   object-fit: cover;
+  object-position: top left;
 }
 
 /* App icon + name overlapping the thumbnail's bottom-left, as in Stage Manager */
@@ -515,6 +584,13 @@ body {
   width: 66%;
   height: 66%;
   object-fit: contain;
+}
+
+/* Glyph tile for windows without a brand logo (Projects, Publications) */
+.app-icon.is-glyph {
+  color: #fff;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--p-accent) 70%, #fff), var(--p-accent));
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.25), inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
 }
 
 .app-icon.is-photo img {
@@ -673,56 +749,10 @@ body {
   object-fit: cover;
 }
 
-.media-caption {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 14px 8px 8px;
-  border-radius: var(--radius-lg);
-  color: #fff;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.2);
-}
 
-.mc-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
 
-.mc-text strong {
-  font-size: 14px;
-  font-weight: 700;
-}
 
-.mc-text span {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.82);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-.status-pill {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.14);
-  white-space: nowrap;
-  --online: #4ade80;
-}
 
 /* ---- Content column ---- */
 
@@ -799,6 +829,15 @@ body {
   text-wrap: balance;
 }
 
+/* The name on About is set in a display serif so it stands apart from the UI type */
+.window.is-about .heading h2 {
+  font-family: var(--font-name);
+  font-size: clamp(40px, 4vw, 60px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
 .heading .role {
   margin: 6px 0 0;
   font-size: 16px;
@@ -826,42 +865,7 @@ body {
   text-wrap: pretty;
 }
 
-.highlights {
-  display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.highlights li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 15px;
-  line-height: 1.45;
-  font-weight: 500;
-}
-
-.check {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  color: var(--p-accent);
-  background: color-mix(in srgb, var(--p-accent) 12%, transparent);
-}
-
-@media (prefers-color-scheme: dark) {
-  .check {
-    color: color-mix(in srgb, var(--p-accent) 45%, #fff);
-    background: color-mix(in srgb, var(--p-accent) 28%, transparent);
-  }
-}
-
-/* "Find me on" — About window's quick switcher */
+/* "Find me on" — external channels */
 .find-me h3 {
   margin: 0 0 10px;
   font-size: 12px;
@@ -873,99 +877,48 @@ body {
 
 .find-me ul {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.find-me button {
+.find-me a {
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  min-height: 48px;
-  padding: 7px 10px;
+  gap: 9px;
+  min-height: 44px;
+  padding: 7px 10px 7px 8px;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-md);
   background: var(--fill);
   color: var(--fg);
-  text-align: left;
-  cursor: pointer;
+  text-decoration: none;
   transition: background-color var(--dur-fast) ease-out, transform var(--dur-fast) ease-out;
 }
 
-.find-me button:hover {
+.find-me a:hover {
   background: var(--fill-hover);
 }
 
-.find-me button:active {
+.find-me a:active {
   transform: scale(0.98);
 }
 
-.find-me button > span:not(.app-icon) {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  flex: 1;
-  min-width: 0;
-}
-
 .find-me strong {
-  font-size: 14px;
-  font-weight: 650;
-}
-
-.find-me small {
-  font-size: 12px;
-  color: var(--fg-subtle);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.find-me button > svg {
-  color: var(--fg-subtle);
-  transition: transform var(--dur-fast) ease-out;
-}
-
-.find-me button:hover > svg {
-  transform: translateX(2px);
-}
-
-.meta {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.meta div {
   min-width: 0;
-  padding: 11px 14px;
-}
-
-.meta div + div {
-  border-left: 1px solid var(--hairline);
-}
-
-.meta dt {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--fg-subtle);
-}
-
-.meta dd {
-  margin: 3px 0 0;
   font-size: 14px;
   font-weight: 650;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
+
+
+
+
+
 
 .actions {
   display: flex;
@@ -1061,6 +1014,1141 @@ kbd {
   box-shadow: inset 0 0 0 1px var(--hairline), 0 1px 0 var(--hairline);
 }
 
+/* ---------- Collection windows (Projects, Publications) ---------- */
+
+.window-body.is-collection {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: clamp(18px, 2vw, 26px) clamp(18px, 2.2vw, 30px) 0;
+}
+
+.collection {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.col-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  animation: content-in 420ms var(--ease-out) 140ms backwards;
+}
+
+.col-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.col-intro h2 {
+  margin: 0;
+  font-size: clamp(26px, 2.3vw, 34px);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.col-desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.col-stats {
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--fill);
+}
+
+.col-stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  padding: 9px 16px;
+}
+
+.col-stats div + div {
+  border-left: 1px solid var(--hairline);
+}
+
+.col-stats dt {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-subtle);
+  white-space: nowrap;
+}
+
+.col-stats dd {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Filter chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  animation: content-in 420ms var(--ease-out) 200ms backwards;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--fg);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out,
+    border-color var(--dur-fast) ease-out;
+}
+
+.chip:hover {
+  background: var(--fill-hover);
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--p-accent);
+  border-color: var(--p-accent);
+  color: #fff;
+}
+
+.chip-toggle {
+  margin-left: auto;
+}
+
+.chip-check {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+  opacity: 0.8;
+}
+
+.chip-toggle[aria-pressed="true"] .chip-check {
+  opacity: 1;
+  background: #fff;
+  color: var(--p-accent);
+  box-shadow: none;
+}
+
+@media (pointer: coarse) {
+  .chip {
+    height: 40px;
+  }
+}
+
+/* Filter tabs — quiet text buttons; the active one gets a soft fill.
+   Counts sit beside the label in a lighter weight (Linear / Vercel style). */
+.seg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+}
+
+.seg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 550;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
+}
+
+.seg-btn > svg {
+  opacity: 0.75;
+}
+
+.seg-btn:hover:not(:disabled) {
+  color: var(--fg);
+  background: var(--fill);
+}
+
+.seg-btn[aria-pressed="true"] {
+  color: var(--fg);
+  font-weight: 650;
+  background: var(--fill-hover);
+}
+
+.seg-btn[aria-pressed="true"] > svg {
+  opacity: 1;
+  color: var(--p-accent);
+}
+
+.seg-btn:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.seg-count {
+  display: inline-block;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 650;
+  /* 19px line in a 20px pill: Plus Jakarta's digits sit low in their line box,
+     so this lifts them to the optical centre (measured in Chromium and WebKit). */
+  line-height: 19px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  transition: background-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
+}
+
+.seg-btn[aria-pressed="true"] .seg-count {
+  color: #fff;
+  background: var(--p-accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .seg-btn[aria-pressed="true"] > svg {
+    color: color-mix(in srgb, var(--p-accent) 45%, #fff);
+  }
+}
+
+/* Projects toolbar: categories on the left, years on the right */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  animation: content-in 420ms var(--ease-out) 200ms backwards;
+}
+
+.toolbar .chips {
+  animation: none;
+}
+
+.seg-years {
+  padding-left: 16px;
+  border-left: 1px solid var(--hairline);
+}
+
+@media (pointer: coarse) {
+  .seg-btn {
+    height: 40px;
+  }
+}
+
+.gallery {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0 calc(-1 * clamp(18px, 2.2vw, 30px));
+  padding: 4px clamp(18px, 2.2vw, 30px) 28px;
+  border-top: 1px solid var(--hairline);
+}
+
+.g-group {
+  margin-top: 20px;
+}
+
+.g-group-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.g-group-title span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--fg-subtle);
+}
+
+.g-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.g-grid > li {
+  display: flex;
+  min-width: 0;
+  animation: card-rise 440ms var(--ease-out) calc(160ms + var(--i, 0) * 40ms) backwards;
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+.g-empty {
+  margin: 28px 0;
+  font-size: 15px;
+  color: var(--fg-muted);
+}
+
+/* Shared card chrome */
+.p-card,
+.pub-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Buttons get browser-specific align-items defaults; stretch explicitly so
+     the cover always spans the full card width. */
+  align-items: stretch;
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  font: inherit;
+  text-align: left;
+  color: var(--fg);
+  background: var(--card-bg);
+  box-shadow: 0 0 0 1px var(--hairline), 0 12px 26px -18px rgba(15, 23, 42, 0.5);
+  cursor: pointer;
+  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+}
+
+.p-card:hover,
+.pub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 38%, transparent),
+    0 24px 40px -22px color-mix(in srgb, var(--c) 70%, rgba(15, 23, 42, 0.6));
+}
+
+.p-card:active,
+.pub-card:active {
+  transform: translateY(-1px) scale(0.99);
+  transition-duration: 90ms;
+}
+
+/* Project card: generated cover in the category colour.
+   The card itself does not clip, so the description tooltip can extend past
+   it; the cover rounds and clips its own top corners instead. */
+.p-card {
+  padding: 0;
+  overflow: visible;
+  text-decoration: none;
+}
+
+.p-card .p-cover {
+  border-radius: 14px 14px 0 0;
+}
+
+/* Cards without a link are plain content: no pointer, no lift */
+.p-card:not(.is-link),
+.pub-card:not(.is-link) {
+  cursor: default;
+}
+
+.pub-card {
+  text-decoration: none;
+}
+
+.p-card:not(.is-link):hover,
+.p-card:not(.is-link):active,
+.pub-card:not(.is-link):hover,
+.pub-card:not(.is-link):active {
+  transform: none;
+  box-shadow: 0 0 0 1px var(--hairline), 0 12px 26px -18px rgba(15, 23, 42, 0.5);
+}
+
+/* Hovered card sits above its neighbours so its tooltips are never covered */
+.g-grid > li:hover {
+  z-index: 5;
+}
+
+.g-grid > li {
+  position: relative;
+}
+
+.p-cover {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: radial-gradient(110% 90% at 100% 0%, color-mix(in srgb, var(--c) 50%, #fff) 0%, transparent 55%),
+    linear-gradient(150deg, var(--c), color-mix(in srgb, var(--c) 55%, #0b1020));
+}
+
+.p-cover {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100%;
+  justify-content: space-between;
+  gap: 18px;
+  height: 144px;
+  padding: 14px 16px;
+}
+
+.p-cover-tag {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 650;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+}
+
+.p-cover-art {
+  position: absolute;
+  right: -14px;
+  bottom: -22px;
+  opacity: 0.2;
+  transform: rotate(-12deg);
+  transition: transform 500ms var(--ease-out);
+}
+
+.p-card:hover .p-cover-art {
+  transform: rotate(-4deg) scale(1.08);
+}
+
+.p-body {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px 16px;
+}
+
+.p-company {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--fg-subtle);
+}
+
+.p-grid {
+  margin-top: 20px;
+}
+
+.p-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.p-desc {
+  position: relative;
+}
+
+.p-tagline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+.p-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.p-stack > span {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 550;
+  background: var(--fill);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+.p-stack .is-more {
+  position: relative;
+  color: var(--fg-subtle);
+  cursor: help;
+}
+
+.p-stack .is-more:hover .more-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+}
+
+/* Metrics pin: an icon in the cover's top-right; the numbers show on hover */
+.p-metric-pin {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.p-metric-ic {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(11, 16, 32, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+  transition: background-color var(--dur-fast) ease-out;
+}
+
+/* One tooltip look for every card hint: metrics, full description, extra stack */
+.p-metric-tip,
+.p-desc-tip,
+.more-tip {
+  z-index: 6;
+  padding: 8px 11px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: left;
+  white-space: normal;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(11, 16, 32, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) ease-out, transform var(--dur-fast) ease-out, visibility var(--dur-fast);
+}
+
+/* Metrics: drops below the chart icon */
+.p-metric-tip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 220px;
+  transform: translateY(-4px);
+}
+
+/* Description: rises above the clamped text, same width */
+.p-desc-tip {
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  bottom: calc(100% + 6px);
+  transform: translateY(4px);
+}
+
+/* Extra stack: centred above the +N chip */
+.more-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  width: max-content;
+  max-width: 240px;
+  transform: translate(-50%, 4px);
+}
+
+.p-metric-tip strong {
+  font-weight: 800;
+  color: #fff;
+}
+
+.p-metric-pin:hover .p-metric-ic,
+.p-card:focus-visible .p-metric-ic {
+  background: rgba(11, 16, 32, 0.75);
+}
+
+.p-metric-pin:hover .p-metric-tip,
+.p-card:focus-visible .p-metric-tip,
+.p-desc[data-clamped="true"]:hover .p-desc-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Touch screens have no hover, so the metrics tooltip stays hidden there */
+@media (hover: none) {
+  .p-metric-tip {
+    display: none;
+  }
+}
+
+/* Cover with a real screenshot of the live product */
+.p-cover.has-image {
+  background: #0b1020;
+}
+
+.p-shot {
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 600ms var(--ease-out);
+}
+
+.p-card:hover .p-shot {
+  transform: scale(1.04);
+}
+
+.p-cover.has-image .p-cover-tag {
+  background: rgba(11, 16, 32, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.p-cover.has-image .p-cover-tag {
+  z-index: 2;
+}
+
+.p-stack .is-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 9%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 22%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .p-stack .is-link {
+    color: color-mix(in srgb, var(--c) 45%, #fff);
+  }
+}
+
+/* Publication card: a "paper" with a coloured spine */
+.pub-card {
+  gap: 10px;
+  min-height: 190px;
+  padding: 16px 16px 14px 21px;
+}
+
+.pub-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--c);
+}
+
+.pub-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--fg-muted);
+}
+
+.pub-venue {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pub-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.42;
+}
+
+.pub-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.pub-topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: auto;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--c);
+}
+
+.pub-flag {
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 650;
+  color: var(--fg-muted);
+  background: var(--fill-hover);
+}
+
+.pub-flag.is-first {
+  color: #fff;
+  background: var(--c);
+}
+
+.pub-flag.is-status {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pub-topic {
+    color: color-mix(in srgb, var(--c) 45%, #fff);
+  }
+}
+
+/* Venue rank badges — tinted fills with dark text keep 4.5:1 in light mode */
+.rank {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.rank-astar {
+  background: #fde68a;
+  color: #78350f;
+}
+.rank-a {
+  background: #fed7aa;
+  color: #7c2d12;
+}
+.rank-q1 {
+  background: #bbf7d0;
+  color: #14532d;
+}
+.rank-b {
+  background: #bfdbfe;
+  color: #1e3a8a;
+}
+.rank-c {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+/* ---------- About: education & contact ---------- */
+
+/* The portrait stays put while the About column scrolls on its own */
+@media (min-width: 1024px) {
+  .window.is-about .window-body {
+    grid-template-rows: minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  .window.is-about .content {
+    justify-content: flex-start;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin-right: calc(-1 * clamp(20px, 2.4vw, 32px));
+    padding: 6px clamp(20px, 2.4vw, 32px) 4px 0;
+  }
+}
+
+.about-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--fill);
+}
+
+.info-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.edu-degree {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.edu-school {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--fg-muted);
+}
+
+.edu-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 0;
+}
+
+.edu-facts div {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--p-accent) 10%, transparent);
+}
+
+.edu-facts dt {
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.edu-facts dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.contact-list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 32px;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.contact-list li > svg {
+  flex-shrink: 0;
+  color: var(--fg-subtle);
+}
+
+.contact-list a,
+.contact-list span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-list a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--p-accent) 45%, transparent);
+  text-underline-offset: 3px;
+}
+
+.contact-list a:hover {
+  text-decoration-color: var(--p-accent);
+}
+
+.icon-btn.is-small {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+}
+
+/* ---------- Tech stack ---------- */
+
+/* One row per area: a fixed-width label column, then a grid of equal tiles,
+   so every row lines up and tiles never leave ragged gaps. */
+.stack-board {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack-card {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: 0 0 0 1px var(--hairline), 0 12px 26px -18px rgba(15, 23, 42, 0.5);
+  animation: card-rise 440ms var(--ease-out) calc(160ms + var(--i, 0) * 40ms) backwards;
+}
+
+.stack-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.stack-head h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.stack-head small {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+
+.stack-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack-tools li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 40px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 550;
+  background: var(--fill);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+/* Long names wrap to a second line; grid rows stretch so tiles stay even */
+.tool-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+/* Brand icon inside a tool tile; colours are pre-tuned for 3:1 per theme */
+.tool-ic {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--ic-l);
+}
+
+.tool-ic svg {
+  display: block;
+  fill: currentColor;
+}
+
+.tool-ic.is-mono {
+  border-radius: 5px;
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  background: var(--c, var(--p-accent));
+}
+
+@media (prefers-color-scheme: dark) {
+  .tool-ic:not(.is-mono) {
+    color: var(--ic-d);
+  }
+}
+
+/* ---------- Achievements ---------- */
+
+/* Issuer-coloured ribbon along the top edge */
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The spine of the timeline */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 57px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(var(--p-accent), color-mix(in srgb, var(--p-accent) 10%, transparent));
+}
+
+.tl-year {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 28px;
+}
+
+.tl-label {
+  position: relative;
+  padding-top: 10px;
+  font-size: 14px;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.tl-label::after {
+  content: "";
+  position: absolute;
+  right: -19px;
+  top: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--p-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--p-accent) 22%, transparent);
+}
+
+.tl-year > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tl-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  box-shadow: 0 0 0 1px var(--hairline);
+}
+
+.tl-glyph {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 13%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tl-glyph {
+    color: color-mix(in srgb, var(--c) 45%, #fff);
+    background: color-mix(in srgb, var(--c) 30%, transparent);
+  }
+}
+
+/* Organisation logo on a white tile, so any brand colour reads */
+.tl-glyph.is-logo {
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+.tl-glyph.is-logo img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.tl-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.tl-text strong {
+  font-size: 14.5px;
+  font-weight: 650;
+}
+
+.tl-text small {
+  font-size: 12.5px;
+  color: var(--fg-muted);
+}
+
 /* ---------- Toast ---------- */
 
 .toast-region {
@@ -1107,12 +2195,6 @@ kbd {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
   }
   .find-me ul {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 1024px) and (max-height: 860px) {
-  .find-me ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1120,6 +2202,16 @@ kbd {
 /* ---------- Tablet & mobile: stage strip becomes a horizontal shelf ---------- */
 
 @media (max-width: 1023px) {
+  /* Tabs swap instantly on phones: no staggered entrances inside the window */
+  .content > *,
+  .col-head,
+  .chips,
+  .toolbar,
+  .g-grid > li,
+  .stack-card {
+    animation: none;
+  }
+
   .stage {
     --thumb-h: 78px;
     height: auto;
@@ -1201,12 +2293,189 @@ kbd {
     grid-template-rows: auto;
   }
 
+  .window-body.is-collection {
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .col-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .col-stats div {
+    flex: 1;
+  }
+
+  .chip-toggle {
+    margin-left: 0;
+  }
+
+  /* One swipeable row of filters instead of three wrapped lines */
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 2px 20px 4px;
+    scrollbar-width: none;
+  }
+
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+  }
+
+  .seg {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .seg-years {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .gallery {
+    overflow: visible;
+    margin: 0;
+    padding: 0 0 24px;
+  }
+
+  .about-info {
+    grid-template-columns: 1fr;
+  }
+
+  .stack-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .stack-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tool-name {
+    -webkit-line-clamp: 3;
+  }
+
+  .timeline::before {
+    left: 6px;
+  }
+
+  .tl-year {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-left: 26px;
+  }
+
+  .tl-label {
+    padding-top: 0;
+    text-align: left;
+  }
+
+  .tl-label::after {
+    left: -25px;
+    right: auto;
+    top: 5px;
+  }
+
+  .tl-year > ul {
+    grid-template-columns: 1fr;
+  }
+
+  .g-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    gap: 12px;
+  }
+
+
   .kbd-hint {
     display: none;
   }
 }
 
 @media (max-width: 640px) {
+  /* Projects: two compact columns on phones */
+  .p-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .p-grid .p-cover {
+    height: 96px;
+    padding: 8px;
+  }
+
+  .p-grid .p-cover-tag {
+    gap: 4px;
+    padding: 3px 8px 3px 6px;
+    font-size: 11px;
+  }
+
+  .p-grid .p-cover-tag svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .p-grid .p-metric-pin {
+    top: 8px;
+    right: 8px;
+  }
+
+  .p-grid .p-metric-ic {
+    width: 24px;
+    height: 24px;
+  }
+
+  .p-grid .p-cover-art svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  .p-grid .p-body {
+    gap: 4px;
+    padding: 10px 10px 12px;
+  }
+
+  .p-grid .p-company {
+    font-size: 11px;
+  }
+
+  .p-grid .p-name {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .p-grid .p-tagline {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .p-grid .p-stack {
+    gap: 4px;
+    padding-top: 6px;
+  }
+
+  .p-grid .p-stack > span {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+
+  /* The whole card already opens the site, so the domain chip can go */
+  .p-grid .p-stack .is-link {
+    display: none;
+  }
+
   .mb-role,
   .mb-status,
   .wp-picker-label,
@@ -1232,34 +2501,26 @@ kbd {
     min-width: 0;
   }
 
-  .meta {
-    grid-template-columns: 1fr;
+
+  /* As many equal columns as there are stats (3 or 4 fit a phone) */
+  .col-stats {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
   }
 
-  .meta div {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
+  .col-stats div {
+    padding: 9px 12px;
   }
 
-  .meta div + div {
+  .col-stats div + div {
     border-left: 0;
-    border-top: 1px solid var(--hairline);
-  }
-
-  .meta dd {
-    margin: 0;
   }
 
   .find-me ul {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* The address bar already names the profile; keep the cover art unobscured */
-  .window:not(.is-about) .media-caption {
-    display: none;
-  }
 
   .btn {
     flex: 1 1 auto;
@@ -1269,15 +2530,25 @@ kbd {
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .desktop::before,
+  .wp-blob,
+  .wp-sheen,
   .thumb,
   .content > *,
+  .col-head,
+  .chips,
   .toast {
     animation: none !important;
   }
   .thumb,
   .btn,
-  .find-me button > svg {
+  .p-card,
+  .pub-card,
+  .p-cover-art,
+  .p-shot {
     transition-duration: 0ms !important;
+  }
+  .g-grid > li,
+  .stack-card {
+    animation: none !important;
   }
 }

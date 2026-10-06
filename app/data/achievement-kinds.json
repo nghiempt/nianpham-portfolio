@@ -1,0 +1,7 @@
+[
+  { "id": "award", "label": "Award", "color": "#b45309", "icon": "trophy" },
+  { "id": "certificate", "label": "Certificate", "color": "#6d28d9", "icon": "award" },
+  { "id": "contest", "label": "Contest", "color": "#c2410c", "icon": "flask" },
+  { "id": "conference", "label": "Conference", "color": "#1d4ed8", "icon": "mic" },
+  { "id": "community", "label": "Community", "color": "#047857", "icon": "users" }
+]

@@ -12,7 +12,9 @@ import {
   type KeyboardEvent,
   type Ref,
 } from "react";
-import { OWNER, PROFILES, type Profile } from "./profiles";
+import { AchievementsView, ProjectsView, PublicationsView, StackView } from "./collections";
+import { CHANNELS, EDUCATION, OWNER, SITE_URL, WINDOWS, type StageItem, type WindowKind } from "./profiles";
+import { AppIcon, Icon, type IconName } from "./ui";
 
 // Motion tokens: arrive with deceleration, leave with acceleration,
 // and keep the exit at roughly 65% of the entrance so switching feels snappy.
@@ -62,71 +64,21 @@ function subscribeWallpaper(notify: () => void) {
   };
 }
 
-const ICONS = {
-  copy: (
-    <>
-      <rect width="14" height="14" x="8" y="8" rx="2" />
-      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-    </>
-  ),
-  external: (
-    <>
-      <path d="M15 3h6v6" />
-      <path d="M10 14 21 3" />
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    </>
-  ),
-  lock: (
-    <>
-      <rect width="18" height="11" x="3" y="11" rx="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-    </>
-  ),
-  check: <path d="M20 6 9 17l-5-5" />,
-  arrow: (
-    <>
-      <path d="M7 7h10v10" />
-      <path d="M7 17 17 7" />
-    </>
-  ),
-  chevron: <path d="m9 18 6-6-6-6" />,
+const GLYPHS: Partial<Record<WindowKind, IconName>> = {
+  projects: "layers",
+  publications: "book",
+  stack: "cpu",
+  achievements: "award",
 };
 
-function Icon({ name, size = 18 }: { name: keyof typeof ICONS; size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {ICONS[name]}
-    </svg>
-  );
-}
+const COLLECTIONS: WindowKind[] = ["projects", "publications", "stack", "achievements"];
 
-function AppIcon({ profile, size }: { profile: Profile; size: number }) {
-  const isPhoto = profile.id === "about";
-  return (
-    <span
-      className={`app-icon${isPhoto ? " is-photo" : ""}`}
-      style={{ width: size, height: size }}
-      aria-hidden="true"
-    >
-      <Image
-        src={profile.icon}
-        alt=""
-        width={size}
-        height={size}
-        sizes={`${size * 2}px`}
-        style={isPhoto ? { objectPosition: "center 20%" } : undefined}
-      />
-    </span>
+function ItemIcon({ item, size }: { item: StageItem; size: number }) {
+  const glyph = GLYPHS[item.kind];
+  return glyph ? (
+    <AppIcon glyph={glyph} accent={item.accent} size={size} />
+  ) : (
+    <AppIcon src={item.icon} photo={item.kind === "about"} size={size} />
   );
 }
 
@@ -140,6 +92,11 @@ function flipTransform(from: DOMRect, to: DOMRect) {
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/** Below the desktop layout the strip is a horizontal shelf; windows swap instantly there. */
+function isCompact() {
+  return window.matchMedia("(max-width: 1023px)").matches;
 }
 
 function Clock() {
@@ -165,7 +122,8 @@ function Clock() {
 function WallpaperPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    const step =
+      e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
     if (!step) return;
     e.preventDefault();
     const i = WALLPAPERS.findIndex((w) => w.id === value);
@@ -202,29 +160,34 @@ function WallpaperPicker({ value, onChange }: { value: string; onChange: (id: st
 }
 
 type WindowProps = {
-  profile: Profile;
+  item: StageItem;
   index: number;
   leaving?: boolean;
   windowRef?: Ref<HTMLElement>;
-  onSelect: (id: string) => void;
   onCopy: (text: string, label: string) => void;
 };
 
-function StageWindow({ profile, index, leaving, windowRef, onSelect, onCopy }: WindowProps) {
-  const isAbout = profile.id === "about";
-  const isMail = profile.href.startsWith("mailto:");
-  const copyValue = profile.copyValue ?? profile.href;
-  const copyLabel = profile.copyLabel ?? "Link";
+function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
+  const isAbout = item.kind === "about";
+  const isCollection = COLLECTIONS.includes(item.kind);
+  const isMail = item.href?.startsWith("mailto:") ?? false;
   const linkProps = isMail ? {} : { target: "_blank", rel: "noopener noreferrer" };
+  const copyLabel = item.copyLabel.toLowerCase();
+  // Title-bar actions always point at the page shown in the address bar; on
+  // About that is the site itself, not the email the body's buttons use.
+  const chromeCopy = isAbout ? SITE_URL : item.copyValue;
+  const chromeCopyLabel = isAbout ? "Link" : item.copyLabel;
+  const chromeHref = isAbout ? SITE_URL : item.href;
+  const chromeIsMail = chromeHref?.startsWith("mailto:") ?? false;
 
   return (
     <article
       ref={windowRef}
-      className={`window${leaving ? " is-leaving" : ""}${isAbout ? " is-about" : ""}`}
-      style={{ "--p-accent": profile.accent } as CSSProperties}
+      className={`window is-${item.kind}${leaving ? " is-leaving" : ""}`}
+      style={{ "--p-accent": item.accent } as CSSProperties}
       {...(leaving
         ? { "aria-hidden": true, inert: true }
-        : { id: "stage-window", role: "tabpanel", "aria-labelledby": `tab-${profile.id}` })}
+        : { id: "stage-window", role: "tabpanel", "aria-labelledby": `tab-${item.id}` })}
     >
       <header className="titlebar">
         <div className="traffic" aria-hidden="true">
@@ -234,125 +197,162 @@ function StageWindow({ profile, index, leaving, windowRef, onSelect, onCopy }: W
         </div>
         <div className="address">
           <Icon name="lock" size={12} />
-          <span>{profile.display}</span>
+          <span>{item.display}</span>
         </div>
         <div className="tb-actions">
           <button
             type="button"
             className="icon-btn"
-            onClick={() => onCopy(copyValue, copyLabel)}
-            aria-label={`Copy ${copyLabel.toLowerCase()}`}
-            title={`Copy ${copyLabel.toLowerCase()}`}
+            onClick={() => onCopy(chromeCopy, chromeCopyLabel)}
+            aria-label={`Copy ${chromeCopyLabel.toLowerCase()}`}
+            title={`Copy ${chromeCopyLabel.toLowerCase()}`}
           >
             <Icon name="copy" size={16} />
           </button>
-          <a
-            className="icon-btn"
-            href={profile.href}
-            {...linkProps}
-            aria-label={`Open ${profile.name}${isMail ? "" : " in a new tab"}`}
-            title={`Open ${profile.name}`}
-          >
-            <Icon name="external" size={16} />
-          </a>
+          {chromeHref && (
+            <a
+              className="icon-btn"
+              href={chromeHref}
+              {...(chromeIsMail ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+              aria-label={`Open ${isAbout ? OWNER.website : item.name}${chromeIsMail ? "" : " in a new tab"}`}
+              title={`Open ${item.name}`}
+            >
+              <Icon name="external" size={16} />
+            </a>
+          )}
         </div>
       </header>
 
-      <div className="window-body">
-        <figure className="media">
-          <Image
-            src={profile.cover}
-            alt={isAbout ? `Portrait of ${OWNER.name}` : ""}
-            fill
-            priority={index === 0}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            style={{ objectPosition: profile.coverPosition ?? "center" }}
-          />
-          <figcaption className="media-caption">
-            <AppIcon profile={profile} size={36} />
-            <span className="mc-text">
-              <strong>{isAbout ? OWNER.nickname : profile.name}</strong>
-              <span>{isAbout ? OWNER.role : profile.display}</span>
-            </span>
-            {isAbout && (
-              <span className="status-pill">
-                <i aria-hidden="true" /> Available
-              </span>
+      {isCollection ? (
+        <div className="window-body is-collection">
+          {item.kind === "projects" && <ProjectsView item={item} />}
+          {item.kind === "publications" && <PublicationsView item={item} />}
+          {item.kind === "stack" && <StackView item={item} />}
+          {item.kind === "achievements" && <AchievementsView item={item} />}
+        </div>
+      ) : (
+        <div className="window-body">
+          <figure className="media">
+            {item.cover && (
+              <Image
+                src={item.cover}
+                alt={isAbout ? `Portrait of ${OWNER.name}` : ""}
+                fill
+                priority={index === 0}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                style={{ objectPosition: item.coverPosition ?? "center" }}
+              />
             )}
-          </figcaption>
-        </figure>
+          </figure>
 
-        <div className="content">
-          <p className="eyebrow">
-            <i aria-hidden="true" />
-            {profile.eyebrow}
-          </p>
-          <div className="heading">
-            <h2>{profile.title}</h2>
-            {isAbout && <p className="role">{OWNER.role}</p>}
-          </div>
-
-          {isAbout && <blockquote className="tagline">{OWNER.tagline}</blockquote>}
-          <p className="desc">{profile.description}</p>
-
-          {isAbout ? (
-            <div className="find-me">
-              <h3>Find me on</h3>
-              <ul>
-                {PROFILES.slice(1).map((p) => (
-                  <li key={p.id}>
-                    <button type="button" onClick={() => onSelect(p.id)}>
-                      <AppIcon profile={p} size={32} />
-                      <span>
-                        <strong>{p.name}</strong>
-                        <small>{p.eyebrow}</small>
-                      </span>
-                      <Icon name="chevron" size={16} />
-                    </button>
-                  </li>
-                ))}
-              </ul>
+          <div className="content">
+            <p className="eyebrow">
+              <i aria-hidden="true" />
+              {item.eyebrow}
+            </p>
+            <div className="heading">
+              <h2>{item.title}</h2>
+              {isAbout && <p className="role">{OWNER.role}</p>}
             </div>
-          ) : (
-            <ul className="highlights" aria-label="What you'll find">
-              {profile.highlights.map((h) => (
-                <li key={h}>
-                  <span className="check">
-                    <Icon name="check" size={13} />
-                  </span>
-                  {h}
-                </li>
-              ))}
-            </ul>
-          )}
 
-          {profile.meta.length > 0 && (
-            <dl className="meta">
-              {profile.meta.map((m) => (
-                <div key={m.label}>
-                  <dt>{m.label}</dt>
-                  <dd title={m.value}>{m.value}</dd>
+            {isAbout && <blockquote className="tagline">{OWNER.tagline}</blockquote>}
+            {!isAbout && <p className="desc">{item.description}</p>}
+
+            {isAbout ? (
+              <>
+                <div className="about-info">
+                  <section className="info-card">
+                    <h3>
+                      <Icon name="cap" size={15} />
+                      Education
+                    </h3>
+                    <p className="edu-degree">{EDUCATION.degree}</p>
+                    <p className="edu-school">
+                      {EDUCATION.school} · Graduated {EDUCATION.graduated}
+                    </p>
+                    <dl className="edu-facts">
+                      {EDUCATION.facts.map((f) => (
+                        <div key={f.label}>
+                          <dt>{f.label}</dt>
+                          <dd>{f.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </section>
+                  <section className="info-card">
+                    <h3>
+                      <Icon name="mail" size={15} />
+                      Contact
+                    </h3>
+                    <ul className="contact-list">
+                      <li>
+                        <Icon name="mail" size={16} />
+                        <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a>
+                        <button
+                          type="button"
+                          className="icon-btn is-small"
+                          onClick={() => onCopy(OWNER.email, "Email address")}
+                          aria-label="Copy email address"
+                          title="Copy email address"
+                        >
+                          <Icon name="copy" size={14} />
+                        </button>
+                      </li>
+                      <li>
+                        <Icon name="pin" size={16} />
+                        <span>{OWNER.location}</span>
+                      </li>
+                      <li>
+                        <Icon name="globe" size={16} />
+                        <span>{OWNER.website}</span>
+                      </li>
+                    </ul>
+                  </section>
                 </div>
-              ))}
-            </dl>
-          )}
+                <div className="find-me">
+                  <h3>Find me on</h3>
+                  <ul>
+                    {CHANNELS.map((c) => (
+                      <li key={c.id}>
+                        <a
+                          href={c.href}
+                          {...(c.href.startsWith("mailto:") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                          aria-label={`${c.name} — ${c.label}`}
+                          title={c.label}
+                        >
+                          <AppIcon src={c.icon} size={28} />
+                          <strong>{c.name}</strong>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            ) : null}
 
-          <div className="actions">
-            <a className="btn btn-primary" href={profile.href} {...linkProps}>
-              {profile.cta}
-              <Icon name="arrow" size={16} />
-            </a>
-            <button type="button" className="btn btn-secondary" onClick={() => onCopy(copyValue, copyLabel)}>
-              <Icon name="copy" size={16} />
-              Copy {copyLabel.toLowerCase()}
-            </button>
+            {item.href && (
+              <div className="actions">
+                <a className="btn btn-primary" href={item.href} {...linkProps}>
+                  {item.cta}
+                  <Icon name="arrow" size={16} />
+                </a>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => onCopy(item.copyValue, item.copyLabel)}
+                >
+                  <Icon name="copy" size={16} />
+                  Copy {copyLabel}
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
 
       <footer className="statusbar">
         <span>
-          {index + 1} of {PROFILES.length} · {profile.name}
+          {index + 1} of {WINDOWS.length} · {item.name}
         </span>
         <span className="kbd-hint" aria-hidden="true">
           <kbd>↑</kbd>
@@ -364,7 +364,7 @@ function StageWindow({ profile, index, leaving, windowRef, onSelect, onCopy }: W
 }
 
 export default function StageManager() {
-  const [activeId, setActiveId] = useState(PROFILES[0].id);
+  const [activeId, setActiveId] = useState(WINDOWS[0].id);
   const [leavingId, setLeavingId] = useState<string | null>(null);
   const wallpaper = useSyncExternalStore(subscribeWallpaper, readWallpaper, () => DEFAULT_WALLPAPER);
   const [toast, setToast] = useState<{ text: string; key: number } | null>(null);
@@ -378,15 +378,15 @@ export default function StageManager() {
   const animations = useRef<Animation[]>([]);
   const mounted = useRef(false);
 
-  const activeIndex = PROFILES.findIndex((p) => p.id === activeId);
-  const active = PROFILES[activeIndex];
-  const leaving = PROFILES.find((p) => p.id === leavingId);
+  const activeIndex = WINDOWS.findIndex((p) => p.id === activeId);
+  const active = WINDOWS[activeIndex];
+  const leaving = WINDOWS.find((p) => p.id === leavingId);
 
   const select = useCallback((id: string) => {
     const current = activeIdRef.current;
     if (current === id) return;
-    // Under reduced motion the old window just disappears — no exit flight.
-    const outgoing = prefersReducedMotion() ? null : current;
+    // On phones and under reduced motion the old window just disappears — no exit flight.
+    const outgoing = prefersReducedMotion() || isCompact() ? null : current;
     activeIdRef.current = id;
     leavingIdRef.current = outgoing;
     setLeavingId(outgoing);
@@ -410,7 +410,7 @@ export default function StageManager() {
   useEffect(() => {
     const fromHash = () => {
       const id = window.location.hash.slice(1);
-      if (PROFILES.some((p) => p.id === id)) select(id);
+      if (WINDOWS.some((p) => p.id === id)) select(id);
     };
     fromHash();
     window.addEventListener("hashchange", fromHash);
@@ -432,6 +432,9 @@ export default function StageManager() {
     const thumb = thumbRefs.current[activeId];
     thumb?.scrollIntoView({ block: "nearest", inline: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
     if (!win || !thumb) return;
+
+    // Phones: the flight across a stacked layout reads as noise, so swap instantly.
+    if (isCompact()) return;
 
     if (prefersReducedMotion()) {
       animations.current.push(win.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: "ease-out" }));
@@ -478,17 +481,21 @@ export default function StageManager() {
       await navigator.clipboard.writeText(text);
       setToast({ text: `${label} copied to clipboard`, key: Date.now() });
     } catch {
-      setToast({ text: `Couldn't copy — ${text}`, key: Date.now() });
+      setToast({ text: `Couldn't copy ${label.toLowerCase()} — clipboard unavailable`, key: Date.now() });
     }
   }, []);
 
   const onStripKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    const last = PROFILES.length - 1;
+    const last = WINDOWS.length - 1;
     const next =
       e.key === "ArrowDown" || e.key === "ArrowRight"
-        ? activeIndex === last ? 0 : activeIndex + 1
+        ? activeIndex === last
+          ? 0
+          : activeIndex + 1
         : e.key === "ArrowUp" || e.key === "ArrowLeft"
-          ? activeIndex === 0 ? last : activeIndex - 1
+          ? activeIndex === 0
+            ? last
+            : activeIndex - 1
           : e.key === "Home"
             ? 0
             : e.key === "End"
@@ -496,13 +503,21 @@ export default function StageManager() {
               : -1;
     if (next < 0) return;
     e.preventDefault();
-    const id = PROFILES[next].id;
+    const id = WINDOWS[next].id;
     select(id);
     thumbRefs.current[id]?.focus();
   };
 
   return (
     <div className="desktop" ref={desktopRef} data-wallpaper={wallpaper}>
+      {/* Living wallpaper: colour blobs on independent orbits plus an iridescent sheen */}
+      <div className="wp-motion" aria-hidden="true">
+        <i className="wp-blob b-a" />
+        <i className="wp-blob b-b" />
+        <i className="wp-blob b-c" />
+        <i className="wp-blob b-d" />
+        <i className="wp-sheen" />
+      </div>
       <h1 className="sr-only">
         {OWNER.name} ({OWNER.nickname}) — {OWNER.role}
       </h1>
@@ -525,15 +540,9 @@ export default function StageManager() {
         </div>
       </header>
 
-      <main className="stage">
-        <div
-          className="strip"
-          role="tablist"
-          aria-label="My profiles"
-          aria-orientation="vertical"
-          onKeyDown={onStripKey}
-        >
-          {PROFILES.map((p, i) => {
+      <main className="stage" style={{ "--count": WINDOWS.length } as CSSProperties}>
+        <div className="strip" role="tablist" aria-label="Windows" aria-orientation="vertical" onKeyDown={onStripKey}>
+          {WINDOWS.map((p, i) => {
             const selected = p.id === activeId;
             return (
               <button
@@ -548,27 +557,15 @@ export default function StageManager() {
                 aria-controls="stage-window"
                 tabIndex={selected ? 0 : -1}
                 className={`thumb${selected ? " is-active" : ""}`}
-                style={{ "--i": i } as CSSProperties}
+                style={{ "--i": i, "--p-accent": p.accent } as CSSProperties}
                 onClick={() => select(p.id)}
               >
+                {/* A real miniature of the window, as Stage Manager shows it */}
                 <span className="thumb-window" aria-hidden="true">
-                  <span className="thumb-bar">
-                    <i />
-                    <i />
-                    <i />
-                  </span>
-                  <span className="thumb-media">
-                    <Image
-                      src={p.cover}
-                      alt=""
-                      fill
-                      sizes="200px"
-                      style={{ objectPosition: p.coverPosition ?? "center" }}
-                    />
-                  </span>
+                  <Image src={`/assets/thumbs/${p.id}-v4.webp`} alt="" fill sizes="240px" priority={i < 4} />
                 </span>
                 <span className="thumb-label">
-                  <AppIcon profile={p} size={22} />
+                  <ItemIcon item={p} size={22} />
                   {p.name}
                 </span>
               </button>
@@ -580,24 +577,21 @@ export default function StageManager() {
           {leaving && (
             <StageWindow
               key={`leaving-${leaving.id}`}
-              profile={leaving}
-              index={PROFILES.indexOf(leaving)}
+              item={leaving}
+              index={WINDOWS.indexOf(leaving)}
               leaving
               windowRef={leavingRef}
-              onSelect={select}
               onCopy={copy}
             />
           )}
           <StageWindow
             key={active.id}
-            profile={active}
+            item={active}
             index={activeIndex}
             windowRef={windowRef}
-            onSelect={select}
             onCopy={copy}
           />
         </div>
-
       </main>
 
       <div className="toast-region" role="status" aria-live="polite">
