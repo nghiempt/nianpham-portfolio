@@ -50,18 +50,17 @@ export const CATEGORY_BY_ID: Record<string, Category> = Object.fromEntries(CATEG
 export type Project = {
   id: string;
   name: string;
-  tagline: string;
-  company: string;
-  role: string;
-  /** Free text, e.g. "Oct 2024 – Present"; empty to hide. */
-  period: string;
-  /** Drives the per-year count in the header. */
-  year: number;
+  /** Shown as two lines on the card; the full text appears on hover. */
+  description: string;
+  /** An id from categories.json. */
   category: ProjectCategory;
-  metrics: { value: string; label: string }[];
-  /** Heading over the highlights, e.g. "What I built" or "What it does". */
-  highlightsLabel: string;
-  highlights: string[];
+  /** One headline sentence, shown behind the chart icon; empty to hide the icon. */
+  metric: string;
+  /** Empty to hide the company line. */
+  company: string;
+  /** Drives the year filter; null until known. */
+  year: number | null;
+  /** Tool names, ideally as written in stack.json; the first two show as chips. */
   stack: string[];
   /** Live product link; empty for none. */
   url: string;
@@ -71,13 +70,14 @@ export type Project = {
 
 function check(p: Project, i: number): Project {
   const where = `projects.json[${i}] (${p.id ?? "no id"})`;
-  for (const key of ["id", "name", "tagline", "company", "category"] as const) {
+  for (const key of ["id", "name", "description", "category"] as const) {
     if (!p[key]) throw new Error(`${where}: "${key}" is required`);
   }
   if (!CATEGORY_BY_ID[p.category]) {
     throw new Error(`${where}: category "${p.category}" must be an id from categories.json: ${CATEGORIES.map((c) => c.id).join(", ")}`);
   }
-  if (!Number.isInteger(p.year)) throw new Error(`${where}: "year" must be a number like 2025`);
+  if (p.year !== null && !Number.isInteger(p.year)) throw new Error(`${where}: "year" must be a number like 2025, or null`);
+  if (!Array.isArray(p.stack)) throw new Error(`${where}: "stack" must be a list (it can be empty)`);
   return p;
 }
 

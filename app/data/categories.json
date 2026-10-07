@@ -1,7 +1,38 @@
 [
-  { "id": "rag", "label": "RAG & Knowledge", "color": "#0e7490", "icon": "database" },
-  { "id": "agents", "label": "Agentic AI", "color": "#6d28d9", "icon": "bot" },
-  { "id": "vision", "label": "Vision & Media", "color": "#be123c", "icon": "eye" },
-  { "id": "platforms", "label": "Platforms", "color": "#b45309", "icon": "grid" },
-  { "id": "research", "label": "Research", "color": "#047857", "icon": "flask" }
+  {
+    "id": "agentic-ai",
+    "label": "Agentic AI",
+    "color": "#6d28d9",
+    "icon": "bot"
+  },
+  {
+    "id": "rag-knowledge",
+    "label": "RAG & Knowledge AI",
+    "color": "#0e7490",
+    "icon": "database"
+  },
+  {
+    "id": "vision-media",
+    "label": "Vision, Voice & Media AI",
+    "color": "#be123c",
+    "icon": "eye"
+  },
+  {
+    "id": "enterprise",
+    "label": "Enterprise AI Platforms",
+    "color": "#b45309",
+    "icon": "layers"
+  },
+  {
+    "id": "web-commerce",
+    "label": "Web & Commerce",
+    "color": "#1d4ed8",
+    "icon": "globe"
+  },
+  {
+    "id": "map-gis",
+    "label": "Map & GIS",
+    "color": "#15803d",
+    "icon": "map"
+  }
 ]

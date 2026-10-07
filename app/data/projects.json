@@ -1,34 +1,1140 @@
 [
   {
-    "id": "nhachung",
-    "name": "Nhachung.vn",
-    "tagline": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966",
-    "company": "Tino Group",
-    "role": "Fullstack Engineer",
-    "period": "June 2026 – Present",
-    "year": 2026,
-    "category": "platforms",
-    "metrics": [
-      {
-        "value": "1",
-        "label": "Lorem Ipsum"
-      },
-      {
-        "value": "2",
-        "label": "Lorem Ipsum"
-      }
+    "id": "smart-gis",
+    "name": "Smart GIS",
+    "description": "Mobile geospatial intelligence platform streaming government planning layers from GeoServer WMS onto dual Mapbox and Leaflet engines over satellite imagery, with precision area, distance and coordinate measurement tools, province switching and offline-ready state built in React Native and Redux.",
+    "category": "map-gis",
+    "metric": "10+ land-measurement tools on live GeoServer planning layers",
+    "company": "Alpha Group",
+    "year": null,
+    "stack": [
+      "GeoServer",
+      "Mapbox GL",
+      "Leaflet",
+      "React Native",
+      "Redux Toolkit"
     ],
-    "highlightsLabel": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966",
-    "highlights": [
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966"
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "smart-pos",
+    "name": "Smart POS",
+    "description": "Cross-platform hotel and restaurant operations suite unifying room maps, bookings, menu ordering, kitchen printing, invoicing, cash shifts, debts, inventory and staff timekeeping across multiple branches, with revenue analytics dashboards, PDF reporting and over-the-air CodePush releases.",
+    "category": "enterprise",
+    "metric": "20 operational modules, multi-branch ready",
+    "company": "",
+    "year": null,
+    "stack": [
+      "CodePush / AppCenter"
     ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "smart-call-center",
+    "name": "Smart Call Center",
+    "description": "Realtime AI call center combining a SIP.js/WebRTC softphone (Kamailio/FreeSWITCH) with a Vietnamese voice agent on OpenAI Realtime and Pipecat, featuring semantic turn detection, Silero VAD, function calling over Twilio, Daily and WebRTC, plus Whisper transcription and call analytics.",
+    "category": "vision-media",
+    "metric": "3 telephony transports: Twilio, Daily, WebRTC",
+    "company": "",
+    "year": null,
+    "stack": [
+      "SIP.js / WebRTC softphone",
+      "OpenAI Realtime API",
+      "Pipecat",
+      "Silero VAD",
+      "Twilio",
+      "OpenAI Whisper"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "thongtinland",
+    "name": "Thongtinland",
+    "description": "Nationwide land-intelligence super-app fusing parcel lookup, zoning and urban-planning layers into instant spatial insights, with on-device land measurement, GeoJSON markers and Mapbox rendering, helping buyers and investors validate land legality and value within seconds.",
+    "category": "map-gis",
+    "metric": "100+ planning map layers",
+    "company": "Alpha Group",
+    "year": null,
+    "stack": [
+      "React Native",
+      "Redux Toolkit",
+      "Mapbox GL",
+      "Leaflet",
+      "QGIS",
+      "Firebase",
+      "GeoJSON / GeoTIFF / MBTiles / Shapefile"
+    ],
+    "url": "https://app.thongtin.land",
+    "thumbnail": "/assets/projects/land-gis.webp"
+  },
+  {
+    "id": "onland",
+    "name": "Onland",
+    "description": "End-to-end real-estate auction platform with realtime bidding over Socket.io, eKYC identity verification, e-signed contracts, wallet, CRM workflows, map-based listings and MoMo/VNPay payments, plus Firebase push notifications, digitizing Vietnam's land transactions. Published on the App Store.",
+    "category": "map-gis",
+    "metric": "26 feature modules, 2 payment gateways",
+    "company": "Alpha Group",
+    "year": null,
+    "stack": [
+      "WebSocket / Socket.io",
+      "eKYC",
+      "MoMo",
+      "VNPay",
+      "Firebase"
+    ],
+    "url": "https://onland.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "do-nghe-tu-chon",
+    "name": "Đồ Nghề Tự Chọn",
+    "description": "Omnichannel tools-and-equipment commerce platform for a multi-showroom retail chain, featuring smart catalog search across hundreds of thousands of SKUs from Makita, Bosch and DeWalt, tiered loyalty points, installment checkout and SEO-driven content marketing.",
+    "category": "web-commerce",
+    "metric": "Hundreds of thousands of products from top brands",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "https://donghetuchon.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "smart-e-commerce",
+    "name": "Smart E-commerce",
+    "description": "Multi-vendor marketplace with buyer storefront, seller and admin dashboards, vouchers, analytics and MoMo checkout, powered by a FastAPI AI recommendation service using collaborative filtering (SVD) trained on 2M+ product records to personalize discovery and lift conversion.",
+    "category": "web-commerce",
+    "metric": "2M+ product records powering AI recommendations",
+    "company": "",
+    "year": null,
+    "stack": [
+      "MoMo",
+      "FastAPI"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "alovax-app",
+    "name": "Alovax App",
+    "description": "Flutter vaccination booking platform with a live epidemic statistics dashboard, province-level appointment scheduling, QR-code check-in, booking status tracking and Firebase push notifications, orchestrating mass immunization flows during the COVID-19 pandemic.",
+    "category": "enterprise",
+    "metric": "63-province booking with QR check-in",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Flutter",
+      "Firebase"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "smart-boarding-house-app",
+    "name": "Smart Boarding House App",
+    "description": "Native Android rental platform matching tenants to rooms through Google Maps discovery, with vacancy tracking, room member management, in-app rent payments and full transaction history, built on MVVM with Retrofit and LiveData.",
+    "category": "map-gis",
+    "metric": "13 screens, Google Maps room discovery",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Native Android",
+      "Google Maps SDK"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "material-management",
+    "name": "Material Management",
+    "description": "QR-powered inventory and catalog system turning every construction material into a scannable digital product sheet with live pricing, ratings and technical specifications, plus PDF quotation export, digitizing sales and supply chains for building-material suppliers.",
+    "category": "enterprise",
+    "metric": "15 material categories behind one QR scan",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "restaurant-pos",
+    "name": "Restaurant POS",
+    "description": "Smart F&B point-of-sale covering menus, table ordering, kitchen ticket printing, party and event bookings, receipts, debts and cash shifts, with revenue analytics that surface sales trends and optimize restaurant operations across branches.",
+    "category": "enterprise",
+    "metric": "Order to kitchen print in one tap",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "e-payroll-singapore",
+    "name": "e-Payroll Singapore",
+    "description": "Enterprise payroll SaaS modernizing a legacy ASP.NET system into event-driven NestJS microservices on AWS Lambda, SQS and S3, automating CPF, IRAS IR8A, FWL and GIRO compliance, with Puppeteer payslip rendering, OTP 2FA, audit logs and 588 REST endpoints.",
+    "category": "enterprise",
+    "metric": "588 REST endpoints, 92 DB tables",
+    "company": "Freelance",
+    "year": null,
+    "stack": [
+      "FastAPI",
+      "FAISS",
+      "Ollama",
+      "NestJS",
+      "MySQL",
+      "AWS Lambda",
+      "AWS SQS",
+      "GitHub Actions"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "sale-ai-for-real-estate",
+    "name": "Sale AI for Real Estate",
+    "description": "Private on-prem sales AI for property developers: an Ollama-powered RAG over FAISS and sentence-transformers answers inventory questions with zero data leaving the company, while GPT-4o and OpenCV pinpoint and highlight matching units on floor blueprints and site maps.",
+    "category": "rag-knowledge",
+    "metric": "100% private LLM, zero data leaves the company",
+    "company": "",
+    "year": null,
+    "stack": [
+      "FAISS",
+      "sentence-transformers",
+      "OpenAI",
+      "OpenCV"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "ielts-viet-center",
+    "name": "IELTS VIET Center",
+    "description": "Digital ecosystem for an IELTS academy: SEO marketing site, course, blog and media CMS, staff timekeeping and student management, running on a shared Fastify, MongoDB and Redis backend with Socket.io, Google OAuth, S3 storage and LangChain-powered AI services.",
+    "category": "enterprise",
+    "metric": "68 API routes, 16 data models",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Fastify",
+      "MongoDB",
+      "Redis",
+      "WebSocket / Socket.io",
+      "AWS S3"
+    ],
+    "url": "https://ieltsviet.edu.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "ielts-viet-test-platform",
+    "name": "IELTS VIET Test Platform",
+    "description": "AI-powered IELTS mock-test platform covering Listening, Reading and Writing with student submissions and scoring, where GPT-4o and LangChain parse PDF exam papers into structured interactive tests, automating content production across a 90+ test bank.",
+    "category": "rag-knowledge",
+    "metric": "92 full tests, AI PDF-to-quiz import",
+    "company": "",
+    "year": null,
+    "stack": [
+      "OpenAI",
+      "LangChain"
+    ],
+    "url": "https://quizzes.ieltsviet.edu.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "in-anh-ha-thu",
+    "name": "In Ảnh Hạ Thu",
+    "description": "Photo-printing commerce suite of five apps: storefront, in-browser album and frame designer with drag-and-drop editing, Flutter mobile app, admin dashboard and payment service with PayOS/MoMo, backed by Cloudinary image pipelines and a shared Fastify/MongoDB API.",
+    "category": "web-commerce",
+    "metric": "5 apps, 2 payment gateways",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Flutter",
+      "PayOS",
+      "MoMo",
+      "Cloudinary",
+      "Fastify",
+      "MongoDB"
+    ],
+    "url": "https://www.inanhhathu.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "ecoka-handicraft",
+    "name": "Ecoka Handicraft",
+    "description": "Bilingual export platform for a sustainable handicraft manufacturer, presenting four product lines and ESG commitments through a Next.js headless CMS with rich-text editing, locale routing, S3 media and Google Maps, built to win global B2B buyers.",
+    "category": "web-commerce",
+    "metric": "Bilingual, 4 product lines, ESG showcase",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Next.js",
+      "AWS S3",
+      "Google Maps SDK"
+    ],
+    "url": "https://ecoka.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "anh-mau-tuan-anh",
+    "name": "Ảnh Màu Tuân Anh",
+    "description": "High-conversion photo-printing storefront with an online album builder, price lists, order lookup and SSO accounts, plus seasonal campaign micro-sites, sharing a scalable Fastify/MongoDB commerce backend with MoMo payments and Cloudinary media.",
+    "category": "web-commerce",
+    "metric": "11-page storefront with built-in album designer",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Fastify",
+      "MongoDB",
+      "MoMo",
+      "Cloudinary"
+    ],
+    "url": "https://www.anhmautuananh.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "anh-mau-tuan-anh-erp",
+    "name": "Ảnh Màu Tuân Anh ERP",
+    "description": "Shop-floor production ERP tracking every print order by barcode/QR scanning (zxing-wasm, Quagga) across eight workshop stages, with role-based stations, 30-minute SLA timers, rework loops, defect analytics and JWT-secured APIs for full production traceability.",
+    "category": "enterprise",
+    "metric": "8 production stages tracked with 30-min SLA",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "https://donhang.anhmautuananh.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "nu-cuoi-me-kong",
+    "name": "Nụ Cười Mê Kông",
+    "description": "Travel commerce platform for a leading Mekong Delta operator, unifying tours, flights across 900+ airlines, high-speed ferries, car rentals, hotels, visas and eSIMs into one booking experience with secure multi-method payments.",
+    "category": "web-commerce",
+    "metric": "900+ global airlines, operating since 2017",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "https://nucuoimekong.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "k-gallery-short-url-multi-tenant-domains",
+    "name": "K-Gallery Short URL & Multi-tenant domains",
+    "description": "Multi-tenant SaaS app gallery where Next.js edge middleware routes each tenant to its own custom domain or subdomain, with short links, member management, theming, drag-and-drop categories, ticketing, transactional email and S3/Vercel Blob assets on Prisma and MongoDB.",
+    "category": "enterprise",
+    "metric": "Hostname-based multi-tenant routing with custom domains",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Next.js",
+      "AWS S3",
+      "Vercel",
+      "Prisma",
+      "MongoDB"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "aivin-vn",
+    "name": "AIVIN.vn",
+    "description": "AI Workforce platform where autonomous agents discover plugins via semantic vector search on Milvus, reranking and LLM fallback, executing MCP, OpenAPI, n8n and Zapier tools inside Docker and isolated-VM sandboxes orchestrated over gRPC, with a published SDK, CLI and OAuth MCP support.",
+    "category": "agentic-ai",
+    "metric": "30 MCP servers tested, 172 plugins audited",
+    "company": "Freelance",
+    "year": null,
+    "stack": [
+      "TypeScript",
+      "gRPC / Protobuf",
+      "Docker",
+      "NestJS",
+      "MongoDB",
+      "Redis",
+      "Milvus",
+      "MCP"
+    ],
+    "url": "https://aivin.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "i-pledge-cam-do",
+    "name": "i-Pledge - Cầm Đồ",
+    "description": "Workflow automation for pawn businesses where n8n pipelines convert Google Sheets entries into legally formatted pledge, deposit and renewal contracts on Google Docs and Drive, with amount-to-words conversion and zero manual paperwork.",
+    "category": "agentic-ai",
+    "metric": "34-node n8n workflow automation",
+    "company": "",
+    "year": null,
+    "stack": [
+      "n8n"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "secure-qr",
+    "name": "Secure QR",
+    "description": "Zero-trust secure QR platform that AES-encrypts payloads client-side behind passwords and decrypts them on scan via camera, protecting payment authentication and confidential communication with no backend exposure, built on Next.js and shadcn.",
+    "category": "enterprise",
+    "metric": "AES-encrypted, 100% client-side",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Next.js"
+    ],
+    "url": "https://secureqr.imutably.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "ghost-for-website",
+    "name": "Ghost for Website",
+    "description": "AI content engine on self-hosted Ghost CMS, where n8n workflows and OpenAI agents draft, rewrite and auto-publish articles syndicated from Facebook and social channels, creating a hands-free publishing pipeline.",
+    "category": "agentic-ai",
+    "metric": "Self-hosted Ghost 5 with AI auto-publishing",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Ghost CMS",
+      "n8n",
+      "OpenAI"
+    ],
+    "url": "https://ghost.org",
+    "thumbnail": ""
+  },
+  {
+    "id": "ivita",
+    "name": "iVita",
+    "description": "Healthcare AI ecosystem of seven services: multimodal medical chat with image understanding, web-grounded Perplexity answers, Qdrant RAG on LangServe and safety guardrails, plus a pharmacy marketplace synced from Sapo, health community, OTP/social login and Dockerized Next.js apps.",
+    "category": "rag-knowledge",
+    "metric": "2,446 medicines indexed, 88 API routes",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Perplexity",
+      "Qdrant",
+      "LangServe",
+      "Sapo",
+      "2FA / OTP",
+      "Next.js"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "zeedata",
+    "name": "Zeedata",
+    "description": "Document-grounded chatbot SaaS: ingest PDF, Office and spreadsheet files into a Pinecone RAG pipeline with LangChain and GPT, manage knowledge in a cloud drive, and embed the assistant anywhere through a public v1 API and a published npm web-component widget.",
+    "category": "rag-knowledge",
+    "metric": "Embed in 2 lines of HTML via npm widget",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Pinecone",
+      "LangChain",
+      "OpenAI"
+    ],
+    "url": "https://zeedata.io",
+    "thumbnail": ""
+  },
+  {
+    "id": "kafi-lms",
+    "name": "Kafi LMS",
+    "description": "White-label investment-education LMS whose AI Studio turns PDF/DOCX/PPTX into narrated video courses with Claude, TTS and generative video, plus pgvector RAG tutor, LiveKit live classes with recording, proctored exams, QR-verifiable certificates, RBAC and 400+ automated tests.",
+    "category": "vision-media",
+    "metric": "195 API operations, 416 automated tests",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Anthropic Claude",
+      "pgvector",
+      "LiveKit",
+      "RBAC / ABAC"
+    ],
+    "url": "https://kafilms.lumidemo.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "shbf",
+    "name": "SHBF",
+    "description": "Banking AI for SHBFinance: an OCR pipeline (Tesseract plus GPT) extracts transactions from bank statements of six banks, while a strictly grounded RAG assistant on Qdrant and Voyage embeddings answers questions and refuses anything unsupported by evidence.",
+    "category": "rag-knowledge",
+    "metric": "1,110+ transactions extracted from 6 banks",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Tesseract / EasyOCR",
+      "OpenAI",
+      "Qdrant"
+    ],
+    "url": "https://shbf.zeedata.io",
+    "thumbnail": ""
+  },
+  {
+    "id": "medipay-nfc-vneid-kiosk",
+    "name": "Medipay (NFC, VNeID, Kiosk)",
+    "description": "Smart-hospital app and self-service kiosk verifying patients through NFC chip ID, VNeID and face liveness, with HIS-integrated booking, queue tickets, prescription OCR, doctor consulting, health records and VietQR/card payments, built on Flutter, Fastify, Socket.io and Redis.",
+    "category": "vision-media",
+    "metric": "Identity verified in 5–15 s at kiosk",
+    "company": "",
+    "year": null,
+    "stack": [
+      "NFC chip-ID (CCCD)",
+      "eKYC",
+      "VietQR",
+      "Flutter",
+      "Fastify",
+      "WebSocket / Socket.io",
+      "Redis"
+    ],
+    "url": "https://medipay.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "edupay",
+    "name": "Edupay",
+    "description": "Embeddable Flutter learning SDK for school payment apps delivering video lessons, homework and quizzes to parents, teachers and students, backed by a NestJS API where GPT generates non-duplicated multiple-choice questions from PDFs at configurable language and difficulty.",
+    "category": "rag-knowledge",
+    "metric": "Flutter SDK + 34-endpoint NestJS API",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Flutter",
+      "NestJS",
+      "OpenAI"
+    ],
+    "url": "https://edupay.vn",
+    "thumbnail": "/assets/projects/edupay.webp"
+  },
+  {
+    "id": "gotrust-detector",
+    "name": "Gotrust Detector",
+    "description": "eKYC and fraud-prevention engine reading NFC chip IDs through a custom native SDK with cryptographic chip verification and audio-guided face liveness, appraising companies, branches and household businesses to stop identity fraud in onboarding.",
+    "category": "vision-media",
+    "metric": "NFC chip-ID + liveness for 3 entity types",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "eKYC",
+      "NFC chip-ID (CCCD)"
+    ],
+    "url": "https://gotrust.vn",
+    "thumbnail": "/assets/projects/gotrust.webp"
+  },
+  {
+    "id": "hsu-crm",
+    "name": "HSU CRM",
+    "description": "AI admissions CRM unifying Zalo OA, Messenger, web chat, email and VoIP click-to-call in one inbox, with a LangGraph Smart Query agent, AI lead scoring, Whisper/Google STT call transcription, auto lead distribution, KPI dashboards, 18 scheduled AI jobs and 368 API endpoints.",
+    "category": "agentic-ai",
+    "metric": "150,000+ leads, 368 API endpoints",
+    "company": "Lumination.vn",
+    "year": null,
     "stack": [
       "Python",
       "FastAPI",
+      "LangChain",
+      "LangGraph",
       "TypeScript",
+      "OpenAI",
+      "Anthropic Claude",
+      "PostgreSQL"
+    ],
+    "url": "https://www.hoasen.edu.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "benh-vien-nhi-trung-uong",
+    "name": "Bệnh viện Nhi Trung Ương",
+    "description": "Hallucination-proof LangGraph RAG for the National Children's Hospital that cites exact legal clauses, refuses weak evidence and falls back gracefully, with LLM-based legal ETL, human labeling and fine-tuning export, dynamic RBAC, OTP login, audit logs and sub-2-second streaming.",
+    "category": "rag-knowledge",
+    "metric": "< 2 s first token, 100+ concurrent users",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Python",
+      "FastAPI",
+      "LangChain",
+      "LangGraph",
+      "OpenAI",
+      "Qdrant",
+      "MongoDB",
+      "PostgreSQL"
+    ],
+    "url": "https://bhyt.nch.gov.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "vieon",
+    "name": "Vieon",
+    "description": "Multimodal AI highlight engine for VieON fusing scene detection, Whisper, vision LLMs and YOLO/MediaPipe face tracking to turn full-length shows into ranked 9:16 shorts with subtitles and branding on GPU FFmpeg, plus shoppable product detection and a Shopee publishing workflow.",
+    "category": "vision-media",
+    "metric": "Top-20 vertical highlights from 60-min videos",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "OpenAI Whisper",
+      "YOLOv8 / Ultralytics",
+      "MediaPipe",
+      "FFmpeg",
+      "Shopee Open Platform"
+    ],
+    "url": "https://vieon.lumination.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "vtvlive",
+    "name": "VTVLive",
+    "description": "Broadcast-grade AI highlight automation for VTV fusing caster audio energy, Whisper ASR, kill-feed OCR and GPT-4o vision to detect climactic esports and sports moments, plus an analytics dashboard with viewer behavior, engagement heatmaps, trend prediction and AI chat.",
+    "category": "vision-media",
+    "metric": "5-signal highlight detection",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "OpenAI Whisper",
+      "OpenAI"
+    ],
+    "url": "https://vtvlive.lumination.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "az-plus-innext",
+    "name": "Az-Plus Innext",
+    "description": "Fintech sales-network platform for loans and credit cards with NFC eKYC, e-signed contracts, order and commission management, collaborator training, and realtime Socket.io chat with file sharing, built on Flutter Clean Architecture with Retrofit and AWS S3.",
+    "category": "vision-media",
+    "metric": "54 API endpoints, 16 feature modules",
+    "company": "",
+    "year": null,
+    "stack": [
+      "NFC chip-ID (CCCD)",
+      "eKYC",
+      "WebSocket / Socket.io",
+      "Flutter",
+      "AWS S3"
+    ],
+    "url": "https://innext.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "mega-market",
+    "name": "Mega Market",
+    "description": "Multimodal AI shopping agent for MM Mega Market accepting voice, image and chat, reasoning over budgets and a crawled catalog of 1,300+ products to recommend optimized baskets rendered as shoppable markdown cards in a Flutter app.",
+    "category": "agentic-ai",
+    "metric": "1,300+ products in AI shopping chat",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Flutter"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "travel-app",
+    "name": "Travel App",
+    "description": "Realtime voice AI travel companion on LiveKit WebRTC with intent-classified agents, multi-day itinerary planning, must-see recommendations grounded by Perplexity web search, and accommodation and activity booking details, built on Flutter Clean Architecture and Claude.",
+    "category": "agentic-ai",
+    "metric": "Realtime voice agent, multi-day AI itineraries",
+    "company": "",
+    "year": null,
+    "stack": [
+      "LiveKit",
+      "Perplexity",
+      "Flutter",
+      "Anthropic Claude"
+    ],
+    "url": "https://apps.apple.com/vn/app/lumi-buddy/id6754752737",
+    "thumbnail": ""
+  },
+  {
+    "id": "camera-monitor",
+    "name": "Camera Monitor",
+    "description": "AIoT smart-home companion turning any webcam into a proactive voice assistant: WebSocket video streaming, YOLO detection, change-triggered vision LLMs, OpenAI Realtime voice with barge-in, spatial memory, habits and chores, on async FastAPI and PostgreSQL with 97 tests.",
+    "category": "vision-media",
+    "metric": "~2–3 s vision latency, 97 automated tests",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "YOLOv8 / Ultralytics",
+      "OpenAI Realtime API",
+      "Google Gemini",
+      "PostgreSQL",
       "React"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "agibot",
+    "name": "Agibot",
+    "description": "Embodied AI for humanoid robots bridging LLM agents with ROS 2 perception and motion planning, enabling robots to understand natural-language instructions, plan multi-step tasks and act autonomously in real environments.",
+    "category": "agentic-ai",
+    "metric": "LLM agent + ROS 2 motion planning",
+    "company": "",
+    "year": null,
+    "stack": [
+      "ROS 2"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "apollo",
+    "name": "Apollo",
+    "description": "AI video studio turning long podcasts and talk shows into viral 9:16 shorts via Whisper transcripts, LLM segment selection, pose-tracking smart crop, AI-voiced hooks, burned-in subtitles and background music, rendered in 1080×1920 with per-user storage quotas.",
+    "category": "vision-media",
+    "metric": "5–60 s shorts rendered at 1080×1920",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "OpenAI Whisper"
+    ],
+    "url": "https://apollo.lumidemo.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "creative-adapt",
+    "name": "Creative Adapt",
+    "description": "Generative AI design engine for bank marketing teams that detects text, logos and subjects, then adapts one master creative into 40+ ad formats with Gemini, GPT-Image and layer separation, plus a collaborative editor, multi-round client review, 4K export and banner-to-video.",
+    "category": "vision-media",
+    "metric": "40+ ad formats from one design, 409 tests",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Google Gemini"
+    ],
+    "url": "https://creative.lumination.vn",
+    "thumbnail": "/assets/projects/creative-adapt.webp"
+  },
+  {
+    "id": "customer-care",
+    "name": "Customer Care",
+    "description": "Omnichannel AI customer-care hub unifying Zalo, Messenger, Telegram, web chat and hotline with AI reply suggestions, sentiment and next-best-action, Whisper call summaries, safety-gated auto-replies, Zalo campaigns with account rotation and topic-clustering analytics.",
+    "category": "agentic-ai",
+    "metric": "5 channels, 108 API routes",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Zalo OA",
+      "Facebook Messenger",
+      "Telegram Bot",
+      "OpenAI Whisper"
+    ],
+    "url": "https://omni-staging.zeedata.io",
+    "thumbnail": ""
+  },
+  {
+    "id": "vpshop",
+    "name": "VPShop",
+    "description": "AI merchant copilot behind VPBank's Shop Thịnh Vượng: a text-to-SQL agent pipeline for business chat streamed over SSE, vision OCR for menus, ID cards and business licenses, and conversational flows for shop registration, ordering and customer management.",
+    "category": "agentic-ai",
+    "metric": "Text-to-SQL over 19 POS tables",
+    "company": "",
+    "year": null,
+    "stack": [
+      "SSE streaming"
+    ],
+    "url": "https://apps.apple.com/vn/app/shop-thịnh-vượng-pro/id6760748618",
+    "thumbnail": ""
+  },
+  {
+    "id": "ai-meeting",
+    "name": "AI Meeting",
+    "description": "Vietnamese-optimized AI meeting platform on web and iOS that runs video meetings, records and diarizes speakers, transcribes in realtime and auto-generates structured summaries, decisions and action items exported as reports.",
+    "category": "vision-media",
+    "metric": "Auto transcript, summary and report",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [],
+    "url": "https://meet.lumination.vn",
+    "thumbnail": "/assets/projects/lumi-meet.webp"
+  },
+  {
+    "id": "elasticv",
+    "name": "ElasticV",
+    "description": "Vietnamese voice AI platform delivering natural neural TTS, consent-based voice cloning, regional dialect understanding, tone preservation and realtime transcription, exposed through a voice library and developer API.",
+    "category": "vision-media",
+    "metric": "Voice cloning with regional dialects",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [],
+    "url": "https://elasticv.io",
+    "thumbnail": "/assets/projects/elasticv.webp"
+  },
+  {
+    "id": "vnps",
+    "name": "VNPS",
+    "description": "AI professional-services marketplace connecting citizens with verified tax, legal and healthcare experts, with Claude-powered tools for tax calculation, company risk analysis and CV-to-JD matching, plus service requests, messaging, provider onboarding, OTP/OAuth and tiered paywalls.",
+    "category": "agentic-ai",
+    "metric": "6 AI quick tools, 170+ API routes",
+    "company": "",
+    "year": null,
+    "stack": [
+      "2FA / OTP"
+    ],
+    "url": "https://vnps.ai",
+    "thumbnail": ""
+  },
+  {
+    "id": "linh",
+    "name": "Linh",
+    "description": "Agentic AI personal assistant on web, mobile and desktop with tool-calling loops, 60+ skills, OAuth integrations (Gmail, Calendar, Drive), deep web research, spaced-repetition memory, multi-document reasoning, a 39-block canvas UI, partner APIs with MCP scopes and 3,400+ tests.",
+    "category": "agentic-ai",
+    "metric": "3,400+ test cases, 67 skills, 3 platforms",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "TypeScript",
+      "SSE streaming",
+      "Anthropic Claude",
+      "DeepSeek",
+      "Google Gemini",
+      "PostgreSQL",
+      "AWS S3",
+      "Expo"
+    ],
+    "url": "https://apps.apple.com/vn/app/linh/id6796389336",
+    "thumbnail": "/assets/projects/linh-assistant.webp"
+  },
+  {
+    "id": "lumirag",
+    "name": "LumiRAG",
+    "description": "Multi-tenant RAG infrastructure auto-routing between graph RAG (LightRAG) and document RAG (RAGFlow), with VLM/OCR ingestion jobs, five query modes, reranking, knowledge-graph visualization, RBAC, tiered API keys with rate limits, audit logs, webhooks and Langfuse tracing.",
+    "category": "rag-knowledge",
+    "metric": "2 RAG engines, 5 query modes, 200+ tests",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Python",
+      "FastAPI",
+      "LightRAG",
+      "RAGFlow",
+      "TypeScript",
+      "React",
+      "PostgreSQL",
+      "pgvector"
+    ],
+    "url": "https://lumirag.lumination.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "lumination-vn",
+    "name": "Lumination.vn",
+    "description": "Cinematic corporate platform for an AI production house featuring a WebGL/Three.js 3D studio, bilingual product catalog, contact API and an Expo companion app, built as a pnpm monorepo on React 19, Express and PostgreSQL.",
+    "category": "web-commerce",
+    "metric": "WebGL 3D experience, 7 AI products showcased",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Three.js / WebGL",
+      "Expo",
+      "Turborepo / pnpm",
+      "React",
+      "PostgreSQL"
+    ],
+    "url": "https://lumination.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "lumistu",
+    "name": "Lumistu",
+    "description": "Generative AI creative studio producing images, videos and consistent AI characters across scenes with Seedance and Veo, with storyboard and ad templates, orchestrated by the Linh agent as its creative brain through OAuth SSO and partner APIs.",
+    "category": "vision-media",
+    "metric": "Consistent AI characters across scenes",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Seedance / Seedream"
+    ],
+    "url": "https://lumistu.com",
+    "thumbnail": "/assets/projects/lumistu.webp"
+  },
+  {
+    "id": "knowledge-graph-for-stock-program",
+    "name": "Knowledge Graph for Stock Program",
+    "description": "LLM ETL pipeline distilling 2,300 pages of investment literature into an interactive knowledge graph of 3,887 nodes, using Claude Batch API, prompt caching, fixed-schema extraction, entity normalization and D3 visualization, with idempotent runs and per-call cost tracking.",
+    "category": "rag-knowledge",
+    "metric": "3,887 nodes, 5,486 edges, ~80% cost cut",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Python",
+      "OpenAI",
+      "PyMuPDF",
+      "D3.js",
+      "Anthropic Claude"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "hepza",
+    "name": "Hepza",
+    "description": "GovTech AI reviewing business-registration filings for HCMC's industrial-zone authority: Claude vision OCR and auto-fill, cross-document comparison, rule-based legal checks, precedent retrieval and citation verification, with Zod-validated outputs, token quotas, reproducible AI runs and append-only audit logs.",
+    "category": "agentic-ai",
+    "metric": "7-layer AI appraisal pipeline",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "TypeScript",
+      "Next.js",
+      "Anthropic Claude",
+      "PostgreSQL",
+      "Drizzle",
+      "AWS S3",
+      "Docker Compose"
+    ],
+    "url": "https://hepza.lumidemo.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "lazuresort",
+    "name": "Lazuresort",
+    "description": "Resort direct-booking website showcasing rooms, amenities and experiences, optimized for organic search, page speed and conversion on managed cPanel hosting.",
+    "category": "web-commerce",
+    "metric": "Direct-booking resort showcase",
+    "company": "",
+    "year": null,
+    "stack": [
+      "cPanel / DirectAdmin / LiteSpeed"
+    ],
+    "url": "https://lazureresort.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "pnj-lab",
+    "name": "PNJ-lab",
+    "description": "Corporate WordPress platform for PNJ's gemstone and jewelry inspection laboratory, presenting certification services and verification information to build consumer trust.",
+    "category": "web-commerce",
+    "metric": "Gem certification services showcase",
+    "company": "",
+    "year": null,
+    "stack": [
+      "WordPress"
+    ],
+    "url": "https://pnjlab.com.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "royacha",
+    "name": "Royacha",
+    "description": "Export brand platform for a premium charcoal producer with a custom WordPress theme, ACF-powered client editing, product and FAQ post types, multilingual reach and Rank Math SEO targeting global distributors.",
+    "category": "web-commerce",
+    "metric": "4 premium product lines, multilingual",
+    "company": "",
+    "year": null,
+    "stack": [
+      "WordPress",
+      "Rank Math SEO"
+    ],
+    "url": "https://royacha.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "vinachaki",
+    "name": "Vinachaki",
+    "description": "Internal business operating system on Google Apps Script automating daily operations with geolocation-aware workflows, Google Workspace data and a lightweight embedded web shell.",
+    "category": "enterprise",
+    "metric": "Google Apps Script business OS",
+    "company": "",
+    "year": null,
+    "stack": [
+      "Google Apps Script"
+    ],
+    "url": "https://vinachaki.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "sala-hotel-group",
+    "name": "Sala Hotel Group",
+    "description": "24/7 agentic RAG concierge for a four-hotel chain on LangGraph and Qdrant with intent routing and strict tool calling, plus a livechat platform with human takeover, room-service ordering, SiteMinder/PMS integration, per-hotel RBAC, knowledge-base crawling and an agent evaluation suite.",
+    "category": "agentic-ai",
+    "metric": "4 hotels, 24/7 AI concierge",
+    "company": "Tino Group (Webico)",
+    "year": null,
+    "stack": [
+      "Node.js",
+      "LangGraph",
+      "DeepSeek",
+      "FastAPI",
+      "Qdrant",
+      "PostgreSQL",
+      "Docker Compose",
+      "Traefik"
+    ],
+    "url": "https://salahotelgroup.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "pallet-go-mien-tay",
+    "name": "Pallet Gỗ Miền Tây",
+    "description": "Bilingual B2B export catalog for a wooden-pallet manufacturer serving EU, Korea and USA markets, with custom post types, market-filtered specs, WPML localization, quote-request forms and 301 SEO migration.",
+    "category": "web-commerce",
+    "metric": "Bilingual export catalog for EU, KR, US",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "https://palletgomientay.vn",
+    "thumbnail": ""
+  },
+  {
+    "id": "tam-duong-ip",
+    "name": "Tam Dương IP",
+    "description": "Five-language investment portal for an industrial park on WordPress and WPML, engineered for Core Web Vitals with automated critical CSS, WebP pipelines and LiteSpeed caching, lifting Lighthouse from 71 to 98, plus structured-data SEO and pixel-diff QA.",
+    "category": "web-commerce",
+    "metric": "Lighthouse 71 → 98, 5 languages",
+    "company": "",
+    "year": null,
+    "stack": [
+      "WordPress",
+      "Core Web Vitals",
+      "HTML / CSS",
+      "cPanel / DirectAdmin / LiteSpeed"
+    ],
+    "url": "https://tamduongip.com",
+    "thumbnail": ""
+  },
+  {
+    "id": "son-ha-nghe-an",
+    "name": "Sơn Hà Nghệ An",
+    "description": "Corporate and investor-relations platform with a structured product catalog, news hub and downloadable shareholder documents on custom post types and shortcodes, delivered pixel-perfect through automated visual QA.",
+    "category": "web-commerce",
+    "metric": "9 pixel-perfect pages, investor-relations hub",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "https://sonhanghean.project.webico.ai",
+    "thumbnail": ""
+  },
+  {
+    "id": "kim-phu-thanh-powdercoatings",
+    "name": "Kim Phú Thành (powdercoatings)",
+    "description": "Industrial platform for a powder-coating manufacturer covering 13 product lines, a searchable 213-colour RAL library, an interactive coating-defect diagnosis guide, ASTM test criteria and a technical blog, with headless-Chrome automated testing.",
+    "category": "web-commerce",
+    "metric": "213-colour RAL library, 26 pages",
+    "company": "",
+    "year": null,
+    "stack": [],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "danmotion-lms",
+    "name": "Danmotion LMS",
+    "description": "Course-selling LMS with chapters, progress tracking, community and announcements, DRM-grade video protection (signed Bunny streams, dynamic watermarks, device limits), and SePay QR checkout with webhook-driven instant enrollment, on NestJS, Prisma and Next.js.",
+    "category": "enterprise",
+    "metric": "134 API endpoints, 19 modules",
+    "company": "Tino Group (Webico)",
+    "year": null,
+    "stack": [
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "MinIO",
+      "Next.js",
+      "hls.js",
+      "Docker",
+      "Bunny Stream"
+    ],
+    "url": "https://lms.project.webico.ai",
+    "thumbnail": ""
+  },
+  {
+    "id": "nhachung",
+    "name": "Nhachung.vn",
+    "description": "Apartment-management SaaS covering fees, billing, bank reconciliation, maintenance fund, work orders and transparent reports, with omnichannel notifications via Zalo, Telegram, web push and email, VietQR payments, 2FA, and an AI agent on a 16-tool MCP server secured by HMAC tickets.",
+    "category": "agentic-ai",
+    "metric": "316 API endpoints, 16 MCP tools",
+    "company": "Tino Group",
+    "year": 2026,
+    "stack": [
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "MinIO",
+      "Next.js",
+      "MCP",
+      "SSE streaming",
+      "Telegram Bot"
     ],
     "url": "https://nhachung.vn",
     "thumbnail": "https://webico-s3.project.webico.ai/assets/nhachung/thumbnail.jpg"
+  },
+  {
+    "id": "erp-for-cable-reel",
+    "name": "ERP for Cable Reel",
+    "description": "AI-native ERP for a cable distributor spanning sales, purchasing, reel-level warehouse traceability, finance, payroll and projects, with face-recognition attendance, internal chat, meetings, webmail, drive and calendar, plus a DeepSeek copilot and a role-scoped Telegram AI agent.",
+    "category": "enterprise",
+    "metric": "12,000+ stock transactions, 57.7B VND inventory reconciled 100%",
+    "company": "Tino Group (Webico)",
+    "year": null,
+    "stack": [
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "Next.js",
+      "React",
+      "DeepSeek",
+      "Docker",
+      "Coolify"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "luatvietnam-legal-api",
+    "name": "LuatVietnam Legal API",
+    "description": "Partner-facing legal AI gateway delivering streaming and non-streaming graph-RAG chat over LightRAG with cited references, conversation management and document upload, secured by API keys and IP whitelisting, fed by an anti-bot crawler parsing laws to clause level.",
+    "category": "rag-knowledge",
+    "metric": "11 document types across 16 legal domains",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Python",
+      "FastAPI",
+      "MongoDB",
+      "Redis",
+      "LightRAG",
+      "Camoufox",
+      "BeautifulSoup / lxml",
+      "Docker Compose"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "lumi-api-portal",
+    "name": "Lumi API Portal",
+    "description": "Multi-tenant AI API hub for VPBank, OCB and SHB serving text-to-SQL agents, vision OCR for products and ID cards, Qdrant vector RAG and web-grounded travel planning over SSE, with per-tenant Swagger documentation and role-based access.",
+    "category": "agentic-ai",
+    "metric": "5 enterprise tenants, 70+ AI endpoints",
+    "company": "Lumination.vn",
+    "year": null,
+    "stack": [
+      "Node.js",
+      "OpenAI",
+      "Anthropic Claude",
+      "Perplexity",
+      "Qdrant",
+      "MongoDB",
+      "PostgreSQL",
+      "OpenAPI / Swagger"
+    ],
+    "url": "",
+    "thumbnail": ""
+  },
+  {
+    "id": "webico-garage-console",
+    "name": "Webico Garage Console",
+    "description": "Self-hosted S3 object-storage console on a Garage cluster providing isolated buckets per project, scoped access keys and API tokens, presigned and public links, drag-and-drop uploads, in-browser previews and cluster health dashboards.",
+    "category": "enterprise",
+    "metric": "150GB S3-compatible cluster, 1 bucket per project",
+    "company": "",
+    "year": null,
+    "stack": [
+      "AWS S3",
+      "Garage"
+    ],
+    "url": "",
+    "thumbnail": ""
   }
 ]

@@ -1,223 +1,39 @@
-// Every tool here appears in data/projects.pdf, the CV, or was named by me
-// directly (n8n, Mapbox, Milvus, Pinecone).
-// Groups follow how an AI product is built: language → models → agents/RAG →
-// data → evaluation → interfaces → infrastructure.
+// The tech stack is edited in stack.json: groups in display order, each with
+// tools as { "name": ..., "detail"?: ... }. This file only types and checks
+// that data, so a typo there fails the build with a clear message.
+import raw from "./stack.json";
+
+export type Tool = {
+  name: string;
+  /** Optional second line under the name, e.g. versions or sub-tools. */
+  detail?: string;
+};
 
 export type StackGroup = {
   id: string;
   label: string;
   blurb: string;
+  /** Hex colour for the group's monogram tiles; white text sits on it. */
   color: string;
-  tools: { name: string }[];
+  tools: Tool[];
 };
 
-export const STACK: StackGroup[] = [
-  {
-    id: "languages",
-    label: "Languages",
-    blurb: "What I write every day",
-    color: "#1d4ed8",
-    tools: [
-      { name: "Python" },
-      { name: "TypeScript" },
-      { name: "JavaScript" },
-      { name: "SQL" },
-    ],
-  },
-  {
-    id: "llms",
-    label: "LLMs & model APIs",
-    blurb: "Providers I route between in production",
-    color: "#6d28d9",
-    tools: [
-      { name: "OpenAI" },
-      { name: "Anthropic Claude" },
-      { name: "Google Gemini" },
-      { name: "DeepSeek" },
-      { name: "OpenRouter" },
-      { name: "Perplexity" },
-      { name: "Groq" },
-      { name: "Ollama" },
-      { name: "Gemma 3" },
-      { name: "OpenAI Realtime" },
-      { name: "Claude Batch API" },
-    ],
-  },
-  {
-    id: "agents",
-    label: "Agents, RAG & automation",
-    blurb: "Orchestration, retrieval and tool calling",
-    color: "#7c3aed",
-    tools: [
-      { name: "LangGraph" },
-      { name: "LangChain" },
-      { name: "LightRAG" },
-      { name: "MCP" },
-      { name: "RAGFlow" },
-      { name: "LangGraph.js" },
-      { name: "PydanticAI" },
-      { name: "Hermes Agent" },
-      { name: "n8n" },
-      { name: "Zapier" },
-      { name: "OpenAI Actions" },
-      { name: "Firecrawl" },
-    ],
-  },
-  {
-    id: "vector",
-    label: "Vector & graph stores",
-    blurb: "Embeddings, hybrid search and knowledge graphs",
-    color: "#0e7490",
-    tools: [
-      { name: "Qdrant" },
-      { name: "pgvector" },
-      { name: "Milvus" },
-      { name: "Pinecone" },
-      { name: "FAISS" },
-      { name: "Neo4j" },
-      { name: "sentence-transformers" },
-      { name: "FastEmbed" },
-      { name: "MiniLM" },
-    ],
-  },
-  {
-    id: "llmops",
-    label: "LLMOps & evaluation",
-    blurb: "Tracing, evals and cost control",
-    color: "#047857",
-    tools: [
-      { name: "Langfuse" },
-      { name: "promptfoo" },
-      { name: "OpenTelemetry" },
-      { name: "Prompt caching" },
-      { name: "Zod structured output" },
-    ],
-  },
-  {
-    id: "ml",
-    label: "ML, vision & speech",
-    blurb: "Models beyond text",
-    color: "#be123c",
-    tools: [
-      { name: "Hugging Face" },
-      { name: "YOLOv8" },
-      { name: "PyTorch" },
-      { name: "MediaPipe" },
-      { name: "Whisper" },
-      { name: "Google Speech-to-Text" },
-      { name: "FFmpeg" },
-      { name: "PyMuPDF" },
-      { name: "OCR / VLM extraction" },
-      { name: "ROS 2" },
-    ],
-  },
-  {
-    id: "backend",
-    label: "Backend & APIs",
-    blurb: "Services the models live behind",
-    color: "#334155",
-    tools: [
-      { name: "FastAPI" },
-      { name: "NestJS" },
-      { name: "Express" },
-      { name: "Node.js" },
-      { name: "Prisma" },
-      { name: "Drizzle" },
-      { name: "SQLAlchemy" },
-      { name: "asyncpg" },
-      { name: "Motor" },
-      { name: "gRPC" },
-      { name: "WebSocket" },
-      { name: "SSE" },
-      { name: "OpenAPI / Swagger" },
-    ],
-  },
-  {
-    id: "data",
-    label: "Databases & queues",
-    blurb: "Where the state goes",
-    color: "#b45309",
-    tools: [
-      { name: "PostgreSQL" },
-      { name: "MongoDB" },
-      { name: "Redis" },
-      { name: "MySQL" },
-      { name: "SQLite" },
-      { name: "MinIO" },
-      { name: "AWS SQS" },
-      { name: "Postgres job queue" },
-    ],
-  },
-  {
-    id: "frontend",
-    label: "Frontend & mobile",
-    blurb: "Interfaces for the people using it",
-    color: "#0369a1",
-    tools: [
-      { name: "Next.js" },
-      { name: "React" },
-      { name: "React Native" },
-      { name: "Expo" },
-      { name: "Redux" },
-      { name: "D3.js" },
-      { name: "hls.js" },
-    ],
-  },
-  {
-    id: "gis",
-    label: "Maps & GIS",
-    blurb: "Land, planning and location data",
-    color: "#15803d",
-    tools: [
-      { name: "Mapbox" },
-      { name: "Leaflet" },
-      { name: "QGIS" },
-      { name: "GeoServer" },
-      { name: "react-native-maps" },
-      { name: "GeoJSON / MBTiles" },
-    ],
-  },
-  {
-    id: "cloud",
-    label: "Cloud & DevOps",
-    blurb: "Shipping and running it",
-    color: "#c2410c",
-    tools: [
-      { name: "AWS" },
-      { name: "Docker" },
-      { name: "Docker Compose" },
-      { name: "AWS S3" },
-      { name: "AWS Lambda" },
-      { name: "Google Cloud" },
-      { name: "Oracle Cloud (OCI)" },
-      { name: "Firebase" },
-      { name: "GitHub Actions" },
-      { name: "Coolify" },
-      { name: "Traefik" },
-      { name: "Nginx" },
-      { name: "PM2" },
-    ],
-  },
-  {
-    id: "integrations",
-    label: "Crawling & integrations",
-    blurb: "Data in, messages out",
-    color: "#a21caf",
-    tools: [
-      { name: "Playwright" },
-      { name: "BeautifulSoup" },
-      { name: "Camoufox" },
-      { name: "pandas" },
-      { name: "Zalo OA" },
-      { name: "Messenger" },
-      { name: "Telegram Bot" },
-      { name: "VNPay" },
-      { name: "SePay" },
-      { name: "Bunny Stream" },
-      { name: "SiteMinder" },
-      { name: "Mattermost" },
-      { name: "Jitsi" },
-      { name: "Nextcloud" },
-    ],
-  },
-];
+function check(g: StackGroup, i: number): StackGroup {
+  const where = `stack.json[${i}] (${g.id ?? "no id"})`;
+  if (!g.id || !g.label) throw new Error(`${where}: "id" and "label" are required`);
+  if (!/^#[0-9a-fA-F]{6}$/.test(g.color)) throw new Error(`${where}: "color" must be a hex like #1d4ed8`);
+  if (!Array.isArray(g.tools) || g.tools.length === 0) throw new Error(`${where}: "tools" must be a non-empty list`);
+  return g;
+}
+
+export const STACK: StackGroup[] = (raw as StackGroup[]).map(check);
+
+// One tile per tool across the whole page.
+const seen = new Map<string, string>();
+for (const g of STACK) {
+  for (const t of g.tools) {
+    const key = t.name.toLowerCase();
+    if (seen.has(key)) throw new Error(`stack.json: "${t.name}" appears in both "${seen.get(key)}" and "${g.id}"`);
+    seen.set(key, g.id);
+  }
+}

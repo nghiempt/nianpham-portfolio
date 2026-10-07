@@ -124,6 +124,19 @@ function GalleryGroup({ title, meta, children }: { title: string | number; meta?
 
 /* ---------------------------------------------------------------- Projects */
 
+/** Bolds the leading figure of a metric sentence, e.g. "**588** REST endpoints". */
+function MetricText({ text }: { text: string }) {
+  const m = text.match(/^([<~>≈]?\s?[\d.,]+(?:[–-][\d.,]+)?\s?(?:[%+×x]|[kKMB]\+?|s)?\+?)(\s.*)$/);
+  return m ? (
+    <span>
+      <strong>{m[1]}</strong>
+      {m[2]}
+    </span>
+  ) : (
+    <span>{text}</span>
+  );
+}
+
 /** Flags a clamped description so its full-text tooltip only appears when text was cut. */
 function markClamped(e: MouseEvent<HTMLElement>) {
   const text = e.currentTarget.firstElementChild as HTMLElement | null;
@@ -156,34 +169,32 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           )}
           <span className="p-cover-tag">
             <Icon name={style.icon} size={14} />
-            {CATEGORY_BY_ID[project.category].label}
+            <span className="p-cover-tag-text">{CATEGORY_BY_ID[project.category].label}</span>
           </span>
-          {project.metrics.length > 0 && (
+          {project.metric && (
             // Key numbers live behind an icon; hovering (or focusing the card) reveals them.
             <span className="p-metric-pin">
               <span className="p-metric-ic" aria-hidden="true">
                 <Icon name="chart" size={15} />
               </span>
               <span className="p-metric-tip" role="tooltip">
-                {project.metrics.map((m, i) => (
-                  <span key={i}>
-                    <strong>{m.value}</strong> {m.label}
-                  </span>
-                ))}
+                <MetricText text={project.metric} />
               </span>
             </span>
           )}
         </span>
         <span className="p-body">
-          <span className="p-company">
-            <Icon name="briefcase" size={13} />
-            {project.company}
-          </span>
+          {project.company && (
+            <span className="p-company">
+              <Icon name="briefcase" size={13} />
+              {project.company}
+            </span>
+          )}
           <strong className="p-name">{project.name}</strong>
           <span className="p-desc" onMouseEnter={markClamped}>
-            <span className="p-tagline">{project.tagline}</span>
+            <span className="p-tagline">{project.description}</span>
             <span className="p-desc-tip" aria-hidden="true">
-              {project.tagline}
+              {project.description}
             </span>
           </span>
           <span className="p-stack">
@@ -262,7 +273,7 @@ export function ProjectsView({ item }: { item: StageItem }) {
   const catCounts: Record<string, number> = { all: inYear.length };
   for (const p of inYear) catCounts[p.category] = (catCounts[p.category] ?? 0) + 1;
   const yearCounts: Record<string, number> = { all: inCategory.length };
-  for (const p of inCategory) yearCounts[p.year] = (yearCounts[p.year] ?? 0) + 1;
+  for (const p of inCategory) if (p.year !== null) yearCounts[p.year] = (yearCounts[p.year] ?? 0) + 1;
   // Which categories exist at all, so tabs don't appear and vanish as the year changes.
   const used = new Set(PROJECTS.map((p) => p.category));
 
@@ -436,7 +447,7 @@ export function StackView({ item }: { item: StageItem }) {
       stats={[
         { value: all.length, label: "Tools & services" },
         { value: STACK.length, label: "Areas" },
-        { value: STACK.find((g) => g.id === "llms")?.tools.length ?? 0, label: "LLM APIs" },
+        { value: STACK.find((g) => g.id === "llms")?.tools.length ?? 0, label: "LLMs & model APIs" },
       ]}
       filters={null}
     >
@@ -449,9 +460,12 @@ export function StackView({ item }: { item: StageItem }) {
             </header>
             <ul className="stack-tools">
               {g.tools.map((t) => (
-                <li key={t.name} title={t.name}>
+                <li key={t.name} title={t.detail ? `${t.name} — ${t.detail}` : t.name}>
                   <ToolIcon name={t.name} />
-                  <span className="tool-name">{t.name}</span>
+                  <span className="tool-text">
+                    <span className="tool-name">{t.name}</span>
+                    {t.detail && <span className="tool-detail">{t.detail}</span>}
+                  </span>
                 </li>
               ))}
             </ul>

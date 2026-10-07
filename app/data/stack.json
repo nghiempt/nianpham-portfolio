@@ -1,0 +1,1442 @@
+[
+  {
+    "id": "languages",
+    "label": "Languages",
+    "blurb": "What I write every day",
+    "color": "#1d4ed8",
+    "tools": [
+      {
+        "name": "Python"
+      },
+      {
+        "name": "TypeScript"
+      },
+      {
+        "name": "JavaScript"
+      },
+      {
+        "name": "SQL"
+      },
+      {
+        "name": "Dart"
+      },
+      {
+        "name": "Java"
+      },
+      {
+        "name": "PHP"
+      },
+      {
+        "name": "Kotlin",
+        "detail": "Android SDK integration"
+      },
+      {
+        "name": "Swift",
+        "detail": "iOS SDK integration"
+      },
+      {
+        "name": "C++",
+        "detail": "basic"
+      },
+      {
+        "name": "Bash"
+      },
+      {
+        "name": "HTML / CSS"
+      },
+      {
+        "name": "SCSS"
+      }
+    ]
+  },
+  {
+    "id": "llms",
+    "label": "LLMs & model APIs",
+    "blurb": "Providers and models I route between",
+    "color": "#6d28d9",
+    "tools": [
+      {
+        "name": "OpenAI",
+        "detail": "GPT-4o, GPT-4.1, GPT-5.1, o-series, Realtime, Whisper, TTS, gpt-image"
+      },
+      {
+        "name": "Anthropic Claude",
+        "detail": "Opus, Sonnet, Haiku · Batch API, prompt caching, vision"
+      },
+      {
+        "name": "Google Gemini",
+        "detail": "2.5 / 3 Flash, Embedding 001"
+      },
+      {
+        "name": "DeepSeek"
+      },
+      {
+        "name": "Perplexity",
+        "detail": "Sonar"
+      },
+      {
+        "name": "Groq"
+      },
+      {
+        "name": "Mistral"
+      },
+      {
+        "name": "Qwen"
+      },
+      {
+        "name": "OpenRouter"
+      },
+      {
+        "name": "Ollama",
+        "detail": "Gemma 3, local LLMs"
+      },
+      {
+        "name": "Open models",
+        "detail": "Hugging Face SLMs under 7B"
+      },
+      {
+        "name": "vLLM",
+        "detail": "self-hosted inference"
+      },
+      {
+        "name": "LiteLLM",
+        "detail": "LLM gateway"
+      },
+      {
+        "name": "AWS Bedrock"
+      },
+      {
+        "name": "Vertex AI",
+        "detail": "Gemini API"
+      },
+      {
+        "name": "Azure OpenAI"
+      },
+      {
+        "name": "Fireworks / Together AI"
+      },
+      {
+        "name": "Embedding models",
+        "detail": "OpenAI, Cohere, Jina, BGE-M3"
+      },
+      {
+        "name": "Voyage AI",
+        "detail": "embeddings"
+      },
+      {
+        "name": "sentence-transformers",
+        "detail": "FastEmbed, MiniLM"
+      }
+    ]
+  },
+  {
+    "id": "agents",
+    "label": "Agents & orchestration",
+    "blurb": "Tool calling, memory and multi-agent systems",
+    "color": "#7c3aed",
+    "tools": [
+      {
+        "name": "LangChain",
+        "detail": "Python & JS"
+      },
+      {
+        "name": "LangGraph",
+        "detail": "Python & LangGraph.js"
+      },
+      {
+        "name": "LlamaIndex"
+      },
+      {
+        "name": "PydanticAI"
+      },
+      {
+        "name": "DSPy",
+        "detail": "basic"
+      },
+      {
+        "name": "CrewAI"
+      },
+      {
+        "name": "AutoGen"
+      },
+      {
+        "name": "MCP",
+        "detail": "servers & clients, OAuth MCP"
+      },
+      {
+        "name": "FastMCP"
+      },
+      {
+        "name": "Tool / function calling"
+      },
+      {
+        "name": "OpenAI Actions"
+      },
+      {
+        "name": "Multi-agent orchestration"
+      },
+      {
+        "name": "Hermes Agent"
+      },
+      {
+        "name": "Flowise"
+      },
+      {
+        "name": "Langflow"
+      },
+      {
+        "name": "Agent memory",
+        "detail": "skills, short/long-term, spaced repetition"
+      },
+      {
+        "name": "mem0 / SimpleMem",
+        "detail": "agent memory"
+      },
+      {
+        "name": "Human-in-the-loop approval"
+      },
+      {
+        "name": "Tavily / SerpAPI / Serper",
+        "detail": "search tools"
+      },
+      {
+        "name": "Exa",
+        "detail": "web search"
+      },
+      {
+        "name": "Arcade",
+        "detail": "tool auth"
+      }
+    ]
+  },
+  {
+    "id": "rag",
+    "label": "RAG & document AI",
+    "blurb": "Retrieval, parsing and grounded answers",
+    "color": "#0f766e",
+    "tools": [
+      {
+        "name": "LightRAG",
+        "detail": "graph RAG"
+      },
+      {
+        "name": "RAGFlow",
+        "detail": "document RAG"
+      },
+      {
+        "name": "Hybrid search",
+        "detail": "vector + BM25"
+      },
+      {
+        "name": "Reranking",
+        "detail": "FlashRank, RAGatouille"
+      },
+      {
+        "name": "Chunking & embedding pipelines"
+      },
+      {
+        "name": "MinerU / DocLayout-YOLO",
+        "detail": "document layout analysis"
+      },
+      {
+        "name": "Docling"
+      },
+      {
+        "name": "Unstructured / MarkItDown"
+      },
+      {
+        "name": "PyMuPDF"
+      },
+      {
+        "name": "pdf-parse / mammoth"
+      },
+      {
+        "name": "Text-to-SQL agents"
+      },
+      {
+        "name": "Citation verification"
+      },
+      {
+        "name": "Multi-tenant RAG isolation"
+      },
+      {
+        "name": "Semantic caching",
+        "detail": "embedding caches"
+      }
+    ]
+  },
+  {
+    "id": "vector",
+    "label": "Vector, search & graph stores",
+    "blurb": "Embeddings, hybrid search and knowledge graphs",
+    "color": "#0e7490",
+    "tools": [
+      {
+        "name": "Qdrant"
+      },
+      {
+        "name": "pgvector"
+      },
+      {
+        "name": "Pinecone"
+      },
+      {
+        "name": "Milvus"
+      },
+      {
+        "name": "FAISS"
+      },
+      {
+        "name": "Chroma"
+      },
+      {
+        "name": "Weaviate"
+      },
+      {
+        "name": "Elasticsearch / OpenSearch"
+      },
+      {
+        "name": "Meilisearch"
+      },
+      {
+        "name": "Azure AI Search"
+      },
+      {
+        "name": "Neo4j"
+      },
+      {
+        "name": "Memgraph"
+      },
+      {
+        "name": "NetworkX"
+      }
+    ]
+  },
+  {
+    "id": "llm-engineering",
+    "label": "LLM engineering",
+    "blurb": "How I make LLM features reliable and affordable",
+    "color": "#4338ca",
+    "tools": [
+      {
+        "name": "Prompt engineering"
+      },
+      {
+        "name": "Context engineering"
+      },
+      {
+        "name": "Structured outputs",
+        "detail": "JSON schema / Zod"
+      },
+      {
+        "name": "Prompt caching"
+      },
+      {
+        "name": "Intent routing & classification"
+      },
+      {
+        "name": "Provider routing & fallback",
+        "detail": "LLM gateway"
+      },
+      {
+        "name": "Token & cost accounting",
+        "detail": "quotas"
+      },
+      {
+        "name": "Hallucination guardrails",
+        "detail": "refusal policies"
+      }
+    ]
+  },
+  {
+    "id": "llmops",
+    "label": "LLMOps & evaluation",
+    "blurb": "Tracing, evals and feedback loops",
+    "color": "#047857",
+    "tools": [
+      {
+        "name": "Langfuse"
+      },
+      {
+        "name": "LangSmith"
+      },
+      {
+        "name": "promptfoo"
+      },
+      {
+        "name": "OpenTelemetry"
+      },
+      {
+        "name": "Agent evaluation",
+        "detail": "harnesses, eval suites, golden datasets"
+      },
+      {
+        "name": "A/B prompt versioning"
+      },
+      {
+        "name": "Human feedback loops",
+        "detail": "RLHF-style labeling"
+      },
+      {
+        "name": "Reproducible AI run records",
+        "detail": "model, prompt, inputs, cost"
+      },
+      {
+        "name": "Latency SLAs",
+        "detail": "TTFT under 2 s, load testing"
+      }
+    ]
+  },
+  {
+    "id": "ml",
+    "label": "ML & research",
+    "blurb": "Training, benchmarking and data science",
+    "color": "#9d174d",
+    "tools": [
+      {
+        "name": "PyTorch"
+      },
+      {
+        "name": "Hugging Face",
+        "detail": "Transformers, Datasets, Evaluate, Accelerate"
+      },
+      {
+        "name": "scikit-learn"
+      },
+      {
+        "name": "TensorFlow / Keras",
+        "detail": "basic"
+      },
+      {
+        "name": "ONNX Runtime"
+      },
+      {
+        "name": "pandas / NumPy"
+      },
+      {
+        "name": "NLTK / spaCy"
+      },
+      {
+        "name": "tiktoken"
+      },
+      {
+        "name": "Surprise",
+        "detail": "recommender SVD"
+      },
+      {
+        "name": "Fine-tuning dataset curation",
+        "detail": "JSONL"
+      },
+      {
+        "name": "Teacher–student fine-tuning"
+      },
+      {
+        "name": "LoRA",
+        "detail": "basic"
+      },
+      {
+        "name": "Model benchmarking",
+        "detail": "accuracy, latency, energy, CO₂"
+      },
+      {
+        "name": "Experimental design"
+      },
+      {
+        "name": "Reproducible pipelines",
+        "detail": "Docker, Hugging Face"
+      }
+    ]
+  },
+  {
+    "id": "vision",
+    "label": "Computer vision & robotics",
+    "blurb": "Detection, OCR and identity",
+    "color": "#be123c",
+    "tools": [
+      {
+        "name": "YOLOv8 / Ultralytics"
+      },
+      {
+        "name": "MediaPipe"
+      },
+      {
+        "name": "OpenCV"
+      },
+      {
+        "name": "Vision LLMs",
+        "detail": "GPT-4o, Claude, Gemini · OCR / VLM extraction"
+      },
+      {
+        "name": "Tesseract / EasyOCR"
+      },
+      {
+        "name": "PaddleOCR / VietOCR"
+      },
+      {
+        "name": "Google ML Kit"
+      },
+      {
+        "name": "CLIP"
+      },
+      {
+        "name": "Face recognition & liveness",
+        "detail": "eKYC"
+      },
+      {
+        "name": "Scene detection"
+      },
+      {
+        "name": "Smart 9:16 reframing",
+        "detail": "face & pose tracking"
+      },
+      {
+        "name": "NFC chip-ID (CCCD)",
+        "detail": "reading & cryptographic verification"
+      },
+      {
+        "name": "ROS 2",
+        "detail": "robot motion planning"
+      }
+    ]
+  },
+  {
+    "id": "voice",
+    "label": "Speech & realtime voice",
+    "blurb": "ASR, TTS and voice agents",
+    "color": "#c2410c",
+    "tools": [
+      {
+        "name": "OpenAI Whisper"
+      },
+      {
+        "name": "faster-whisper"
+      },
+      {
+        "name": "OpenAI Realtime API"
+      },
+      {
+        "name": "Google Speech-to-Text",
+        "detail": "v2, diarization"
+      },
+      {
+        "name": "Azure Speech",
+        "detail": "STT"
+      },
+      {
+        "name": "Deepgram"
+      },
+      {
+        "name": "pyannote",
+        "detail": "speaker diarization"
+      },
+      {
+        "name": "Silero VAD"
+      },
+      {
+        "name": "ElevenLabs",
+        "detail": "TTS"
+      },
+      {
+        "name": "FPT.AI / Vbee",
+        "detail": "Vietnamese TTS"
+      },
+      {
+        "name": "Pipecat"
+      },
+      {
+        "name": "LiveKit",
+        "detail": "WebRTC SFU"
+      },
+      {
+        "name": "Twilio"
+      },
+      {
+        "name": "Daily"
+      },
+      {
+        "name": "SIP.js / WebRTC softphone"
+      },
+      {
+        "name": "Barge-in voice pipelines",
+        "detail": "interruptible"
+      },
+      {
+        "name": "Audio segmentation",
+        "detail": "audio-energy & silence-based"
+      }
+    ]
+  },
+  {
+    "id": "media",
+    "label": "Generative media & video",
+    "blurb": "Image, video and avatar generation",
+    "color": "#a21caf",
+    "tools": [
+      {
+        "name": "gpt-image"
+      },
+      {
+        "name": "Nano Banana",
+        "detail": "Gemini image"
+      },
+      {
+        "name": "Seedance / Seedream"
+      },
+      {
+        "name": "Google Veo"
+      },
+      {
+        "name": "fal.ai"
+      },
+      {
+        "name": "Replicate"
+      },
+      {
+        "name": "Runway / Kling / Stability",
+        "detail": "evaluated"
+      },
+      {
+        "name": "HeyGen / Tavus / Simli",
+        "detail": "streaming avatars"
+      },
+      {
+        "name": "FFmpeg",
+        "detail": "GPU NVENC pipelines, parallel workers"
+      },
+      {
+        "name": "Remotion",
+        "detail": "programmatic video"
+      },
+      {
+        "name": "Sharp",
+        "detail": "image processing"
+      }
+    ]
+  },
+  {
+    "id": "backend",
+    "label": "Backend & APIs",
+    "blurb": "Services the models live behind",
+    "color": "#334155",
+    "tools": [
+      {
+        "name": "Node.js"
+      },
+      {
+        "name": "FastAPI",
+        "detail": "async"
+      },
+      {
+        "name": "NestJS"
+      },
+      {
+        "name": "Express"
+      },
+      {
+        "name": "Fastify"
+      },
+      {
+        "name": "Flask"
+      },
+      {
+        "name": "Laravel",
+        "detail": "integration"
+      },
+      {
+        "name": "LangServe"
+      },
+      {
+        "name": "Streamlit"
+      },
+      {
+        "name": "REST"
+      },
+      {
+        "name": "gRPC / Protobuf"
+      },
+      {
+        "name": "GraphQL",
+        "detail": "basic"
+      },
+      {
+        "name": "SSE streaming"
+      },
+      {
+        "name": "WebSocket / Socket.io"
+      },
+      {
+        "name": "Webhooks"
+      },
+      {
+        "name": "OpenAPI / Swagger",
+        "detail": "contract-first, Orval codegen"
+      },
+      {
+        "name": "Prisma"
+      },
+      {
+        "name": "Drizzle"
+      },
+      {
+        "name": "TypeORM"
+      },
+      {
+        "name": "SQLAlchemy",
+        "detail": "async, Alembic"
+      },
+      {
+        "name": "Mongoose"
+      },
+      {
+        "name": "Motor"
+      },
+      {
+        "name": "asyncpg"
+      },
+      {
+        "name": "Pydantic"
+      },
+      {
+        "name": "Zod"
+      }
+    ]
+  },
+  {
+    "id": "data",
+    "label": "Databases, queues & storage",
+    "blurb": "Where the state goes",
+    "color": "#b45309",
+    "tools": [
+      {
+        "name": "PostgreSQL"
+      },
+      {
+        "name": "MongoDB"
+      },
+      {
+        "name": "MySQL"
+      },
+      {
+        "name": "MariaDB"
+      },
+      {
+        "name": "MSSQL"
+      },
+      {
+        "name": "SQLite"
+      },
+      {
+        "name": "Neon",
+        "detail": "serverless Postgres"
+      },
+      {
+        "name": "Supabase"
+      },
+      {
+        "name": "DynamoDB"
+      },
+      {
+        "name": "Redis"
+      },
+      {
+        "name": "BullMQ"
+      },
+      {
+        "name": "Celery"
+      },
+      {
+        "name": "Kafka",
+        "detail": "basic"
+      },
+      {
+        "name": "RabbitMQ",
+        "detail": "basic"
+      },
+      {
+        "name": "AWS SQS"
+      },
+      {
+        "name": "GCP Pub/Sub"
+      },
+      {
+        "name": "Postgres job queue"
+      },
+      {
+        "name": "Job queues",
+        "detail": "cron, retry/backoff, idempotency"
+      },
+      {
+        "name": "AWS S3"
+      },
+      {
+        "name": "MinIO"
+      },
+      {
+        "name": "Garage",
+        "detail": "S3-compatible"
+      },
+      {
+        "name": "Cloudflare R2"
+      },
+      {
+        "name": "Google Cloud Storage"
+      },
+      {
+        "name": "Cloudinary"
+      },
+      {
+        "name": "Bunny Stream"
+      }
+    ]
+  },
+  {
+    "id": "crawling",
+    "label": "Crawling & data pipelines",
+    "blurb": "Scraping, ETL and migrations",
+    "color": "#854d0e",
+    "tools": [
+      {
+        "name": "Playwright",
+        "detail": "crawling & E2E"
+      },
+      {
+        "name": "Puppeteer"
+      },
+      {
+        "name": "Selenium"
+      },
+      {
+        "name": "Scrapy"
+      },
+      {
+        "name": "Crawl4AI"
+      },
+      {
+        "name": "Firecrawl"
+      },
+      {
+        "name": "BeautifulSoup / lxml"
+      },
+      {
+        "name": "Cheerio / jsdom"
+      },
+      {
+        "name": "Camoufox",
+        "detail": "anti-bot"
+      },
+      {
+        "name": "newspaper3k"
+      },
+      {
+        "name": "asyncio pipelines"
+      },
+      {
+        "name": "ETL pipelines"
+      },
+      {
+        "name": "LLM data labelling"
+      },
+      {
+        "name": "Data migration & reconciliation"
+      },
+      {
+        "name": "Excel / openpyxl",
+        "detail": "data migration"
+      }
+    ]
+  },
+  {
+    "id": "integrations",
+    "label": "Payments & integrations",
+    "blurb": "Messaging, payments and third-party platforms",
+    "color": "#be185d",
+    "tools": [
+      {
+        "name": "VNPay"
+      },
+      {
+        "name": "MoMo"
+      },
+      {
+        "name": "ZaloPay"
+      },
+      {
+        "name": "PayOS"
+      },
+      {
+        "name": "SePay"
+      },
+      {
+        "name": "VietQR"
+      },
+      {
+        "name": "Stripe"
+      },
+      {
+        "name": "Zalo OA",
+        "detail": "and Zalo personal"
+      },
+      {
+        "name": "Facebook Messenger"
+      },
+      {
+        "name": "Telegram Bot"
+      },
+      {
+        "name": "WhatsApp",
+        "detail": "Baileys"
+      },
+      {
+        "name": "Slack / Discord bots"
+      },
+      {
+        "name": "SendGrid / Brevo / Resend"
+      },
+      {
+        "name": "Mailgun"
+      },
+      {
+        "name": "Shopee Open Platform"
+      },
+      {
+        "name": "Sapo"
+      },
+      {
+        "name": "SiteMinder / PMS"
+      },
+      {
+        "name": "Google Workspace APIs",
+        "detail": "Sheets, Docs, Drive, Gmail, Calendar"
+      },
+      {
+        "name": "Mattermost",
+        "detail": "self-hosted"
+      },
+      {
+        "name": "Jitsi",
+        "detail": "self-hosted"
+      },
+      {
+        "name": "Nextcloud",
+        "detail": "self-hosted"
+      },
+      {
+        "name": "SOGo / mailcow",
+        "detail": "self-hosted webmail"
+      }
+    ]
+  },
+  {
+    "id": "frontend",
+    "label": "Frontend & web",
+    "blurb": "Interfaces for the people using it",
+    "color": "#0369a1",
+    "tools": [
+      {
+        "name": "React",
+        "detail": "18 / 19"
+      },
+      {
+        "name": "Next.js",
+        "detail": "13–16, App Router, SSR / ISR, server components"
+      },
+      {
+        "name": "Vite"
+      },
+      {
+        "name": "Vue",
+        "detail": "basic"
+      },
+      {
+        "name": "TanStack Query"
+      },
+      {
+        "name": "SWR"
+      },
+      {
+        "name": "Redux Toolkit"
+      },
+      {
+        "name": "Zustand"
+      },
+      {
+        "name": "React Hook Form"
+      },
+      {
+        "name": "Tailwind CSS"
+      },
+      {
+        "name": "shadcn/ui"
+      },
+      {
+        "name": "Radix UI"
+      },
+      {
+        "name": "MUI"
+      },
+      {
+        "name": "Ant Design"
+      },
+      {
+        "name": "Refine.dev"
+      },
+      {
+        "name": "Framer Motion"
+      },
+      {
+        "name": "Three.js / WebGL"
+      },
+      {
+        "name": "D3.js"
+      },
+      {
+        "name": "Recharts"
+      },
+      {
+        "name": "ApexCharts"
+      },
+      {
+        "name": "Chart.js"
+      },
+      {
+        "name": "TipTap / TinyMCE / Quill"
+      },
+      {
+        "name": "hls.js"
+      },
+      {
+        "name": "i18next",
+        "detail": "5+ languages"
+      },
+      {
+        "name": "Storybook"
+      },
+      {
+        "name": "Turborepo / pnpm",
+        "detail": "monorepos"
+      },
+      {
+        "name": "Embeddable widgets",
+        "detail": "web components"
+      },
+      {
+        "name": "Realtime UI",
+        "detail": "SSE streaming, WebSocket"
+      }
+    ]
+  },
+  {
+    "id": "cms",
+    "label": "CMS, SEO & performance",
+    "blurb": "Content sites that load fast and rank",
+    "color": "#3f6212",
+    "tools": [
+      {
+        "name": "WordPress",
+        "detail": "custom themes, ACF, WPML"
+      },
+      {
+        "name": "Flatsome / UX Builder"
+      },
+      {
+        "name": "Rank Math SEO"
+      },
+      {
+        "name": "Ghost CMS"
+      },
+      {
+        "name": "Headless CMS"
+      },
+      {
+        "name": "Technical SEO"
+      },
+      {
+        "name": "Core Web Vitals",
+        "detail": "Lighthouse, performance optimization"
+      }
+    ]
+  },
+  {
+    "id": "mobile",
+    "label": "Mobile & desktop",
+    "blurb": "Apps on phones, kiosks and desktops",
+    "color": "#7c2d12",
+    "tools": [
+      {
+        "name": "Flutter",
+        "detail": "GetX, Clean Architecture"
+      },
+      {
+        "name": "React Native",
+        "detail": "TypeScript"
+      },
+      {
+        "name": "Expo"
+      },
+      {
+        "name": "Native Android",
+        "detail": "Java"
+      },
+      {
+        "name": "Electron",
+        "detail": "desktop"
+      },
+      {
+        "name": "CodePush / AppCenter",
+        "detail": "OTA updates"
+      },
+      {
+        "name": "Firebase Cloud Messaging"
+      },
+      {
+        "name": "Clean Architecture for mobile"
+      },
+      {
+        "name": "Biometric login",
+        "detail": "local_auth"
+      }
+    ]
+  },
+  {
+    "id": "gis",
+    "label": "Maps & GIS",
+    "blurb": "Land, planning and location data",
+    "color": "#15803d",
+    "tools": [
+      {
+        "name": "Mapbox GL"
+      },
+      {
+        "name": "Leaflet"
+      },
+      {
+        "name": "MapLibre"
+      },
+      {
+        "name": "Google Maps SDK"
+      },
+      {
+        "name": "react-native-maps"
+      },
+      {
+        "name": "flutter_map"
+      },
+      {
+        "name": "GeoServer",
+        "detail": "WMS"
+      },
+      {
+        "name": "QGIS"
+      },
+      {
+        "name": "Turf.js"
+      },
+      {
+        "name": "Shapely"
+      },
+      {
+        "name": "GeoJSON / GeoTIFF / MBTiles / Shapefile"
+      }
+    ]
+  },
+  {
+    "id": "cloud",
+    "label": "Cloud platforms",
+    "blurb": "Where it runs",
+    "color": "#b91c1c",
+    "tools": [
+      {
+        "name": "AWS EC2"
+      },
+      {
+        "name": "AWS Lambda"
+      },
+      {
+        "name": "AWS ECR"
+      },
+      {
+        "name": "AWS CloudFront"
+      },
+      {
+        "name": "AWS SES"
+      },
+      {
+        "name": "AWS Pinpoint"
+      },
+      {
+        "name": "AWS SageMaker",
+        "detail": "basic"
+      },
+      {
+        "name": "GCP Cloud Run"
+      },
+      {
+        "name": "Firebase"
+      },
+      {
+        "name": "Oracle Cloud (OCI)"
+      },
+      {
+        "name": "Vercel"
+      },
+      {
+        "name": "Netlify"
+      },
+      {
+        "name": "Cloudflare",
+        "detail": "Tunnel"
+      },
+      {
+        "name": "Replit"
+      },
+      {
+        "name": "Azure Container Instances",
+        "detail": "ACR, CI deploy"
+      }
+    ]
+  },
+  {
+    "id": "devops",
+    "label": "DevOps & observability",
+    "blurb": "Shipping, running and watching it",
+    "color": "#374151",
+    "tools": [
+      {
+        "name": "Docker"
+      },
+      {
+        "name": "Docker Compose"
+      },
+      {
+        "name": "Kubernetes",
+        "detail": "basic"
+      },
+      {
+        "name": "Helm charts"
+      },
+      {
+        "name": "GitHub Actions",
+        "detail": "CI/CD pipelines"
+      },
+      {
+        "name": "Coolify",
+        "detail": "self-hosted PaaS"
+      },
+      {
+        "name": "Traefik",
+        "detail": "reverse proxy & TLS"
+      },
+      {
+        "name": "Nginx"
+      },
+      {
+        "name": "Caddy"
+      },
+      {
+        "name": "Let's Encrypt",
+        "detail": "SSL"
+      },
+      {
+        "name": "PM2"
+      },
+      {
+        "name": "Linux VPS administration"
+      },
+      {
+        "name": "cPanel / DirectAdmin / LiteSpeed"
+      },
+      {
+        "name": "Zero-downtime deploys"
+      },
+      {
+        "name": "Prometheus",
+        "detail": "node-exporter, infrastructure monitoring"
+      },
+      {
+        "name": "Sentry"
+      },
+      {
+        "name": "PostHog"
+      },
+      {
+        "name": "Pino / Winston",
+        "detail": "logging"
+      },
+      {
+        "name": "Codecov"
+      },
+      {
+        "name": "Husky / lint-staged"
+      }
+    ]
+  },
+  {
+    "id": "security",
+    "label": "Security & identity",
+    "blurb": "Auth, access control and hardening",
+    "color": "#991b1b",
+    "tools": [
+      {
+        "name": "JWT",
+        "detail": "refresh rotation"
+      },
+      {
+        "name": "OAuth 2.0",
+        "detail": "Google & Facebook login"
+      },
+      {
+        "name": "NextAuth / better-auth / Clerk / Passport"
+      },
+      {
+        "name": "2FA / OTP"
+      },
+      {
+        "name": "RBAC / ABAC",
+        "detail": "permission matrices, multi-tenant isolation"
+      },
+      {
+        "name": "API keys",
+        "detail": "tiered rate limits"
+      },
+      {
+        "name": "HMAC per-request tickets"
+      },
+      {
+        "name": "AES-256 encryption"
+      },
+      {
+        "name": "Audit logs",
+        "detail": "append-only, DB triggers"
+      },
+      {
+        "name": "Signed URLs & DRM",
+        "detail": "watermarking, signed streaming"
+      },
+      {
+        "name": "eKYC",
+        "detail": "NFC CCCD, VNeID, face liveness"
+      },
+      {
+        "name": "Security audits & incident response",
+        "detail": "CVE remediation"
+      },
+      {
+        "name": "OWASP hardening",
+        "detail": "rate limiting, IP whitelisting"
+      },
+      {
+        "name": "Helmet"
+      },
+      {
+        "name": "express-rate-limit"
+      },
+      {
+        "name": "DOMPurify"
+      },
+      {
+        "name": "Secrets management",
+        "detail": "key rotation"
+      }
+    ]
+  },
+  {
+    "id": "testing",
+    "label": "Testing & QA",
+    "blurb": "Proving it works",
+    "color": "#115e59",
+    "tools": [
+      {
+        "name": "pytest"
+      },
+      {
+        "name": "Vitest"
+      },
+      {
+        "name": "Jest"
+      },
+      {
+        "name": "Testing Library"
+      },
+      {
+        "name": "Supertest"
+      },
+      {
+        "name": "Visual regression QA",
+        "detail": "pixel-perfect, pixel-diff"
+      }
+    ]
+  },
+  {
+    "id": "automation",
+    "label": "Automation & AI dev tools",
+    "blurb": "Workflows I automate and tools I build with",
+    "color": "#6b21a8",
+    "tools": [
+      {
+        "name": "n8n"
+      },
+      {
+        "name": "Zapier"
+      },
+      {
+        "name": "Make.com"
+      },
+      {
+        "name": "Google Apps Script"
+      },
+      {
+        "name": "Claude Code"
+      },
+      {
+        "name": "Cursor"
+      },
+      {
+        "name": "GitHub Copilot"
+      },
+      {
+        "name": "Context7"
+      },
+      {
+        "name": "v0 / Lovable"
+      },
+      {
+        "name": "ChatGPT / Claude",
+        "detail": "spec writing"
+      }
+    ]
+  },
+  {
+    "id": "architecture",
+    "label": "Architecture & domains",
+    "blurb": "How I structure systems",
+    "color": "#1e40af",
+    "tools": [
+      {
+        "name": "Microservices",
+        "detail": "and modular monolith"
+      },
+      {
+        "name": "Event-driven architecture"
+      },
+      {
+        "name": "Multi-tenancy",
+        "detail": "row-level & schema isolation"
+      },
+      {
+        "name": "Domain-driven design",
+        "detail": "ERP, CRM, LMS, POS, Payroll"
+      },
+      {
+        "name": "Database design & migrations"
+      },
+      {
+        "name": "Omnichannel messaging",
+        "detail": "Zalo, Messenger, Telegram, Email, VoIP"
+      },
+      {
+        "name": "Internal collaboration suite",
+        "detail": "chat, meeting, webmail, drive, calendar"
+      }
+    ]
+  }
+]
