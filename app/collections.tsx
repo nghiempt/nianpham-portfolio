@@ -1,11 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
 import { CATEGORIES, CATEGORY_BY_ID, PROJECTS, type Project, type ProjectCategory } from "./data/projects";
 import { isPublished, PUBLICATIONS, TOPIC_BY_ID, TOPICS, type Publication, type Topic } from "./data/publications";
 import { ACHIEVEMENT_KINDS, ACHIEVEMENTS, KIND_BY_ID } from "./data/achievements";
 import { STACK } from "./data/stack";
+import { StackGraph } from "./stack-graph";
 import { TOOL_ICONS } from "./data/tool-icons";
 import type { StageItem } from "./profiles";
 import { Icon, type IconName } from "./ui";
@@ -86,8 +95,8 @@ function FilterChips<T extends string>({
   );
   return (
     <div className="chips">
-      {/* macOS-style segmented control: one track, the selected segment lifts */}
-      <div className="seg" role="toolbar" aria-label={label}>
+      {/* One row of tabs; scrolls sideways (with edge fades) when it can't fit */}
+      <div className="seg" role="toolbar" aria-label={label} ref={useEdgeFade<HTMLDivElement>()}>
         {all.map((o) => {
           const icon = icons?.[o.id as T | "all"];
           return (
@@ -135,6 +144,32 @@ function MetricText({ text }: { text: string }) {
   ) : (
     <span>{text}</span>
   );
+}
+
+/**
+ * Marks a horizontally scrollable row with data-fade-left / data-fade-right
+ * while content is hidden past that edge, so CSS can fade only real overflow.
+ */
+function useEdgeFade<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      el.dataset.fadeLeft = String(el.scrollLeft > 1);
+      el.dataset.fadeRight = String(el.scrollLeft < max - 1);
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", update);
+      ro.disconnect();
+    };
+  }, []);
+  return ref;
 }
 
 /** Flags a clamped description so its full-text tooltip only appears when text was cut. */
@@ -224,13 +259,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 const YEARS = [2022, 2023, 2024, 2025, 2026];
-const CATEGORY_ICONS = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.icon])) as Record<
-  ProjectCategory,
-  IconName
->;
-
 /** Year facet: every year 2022–2026 with its count; empty years stay visible but disabled. */
-function YearFilter({
+/** Year facet as a compact select; years with no projects are listed but disabled. */
+function YearSelect({
   value,
   onChange,
   counts,
@@ -240,24 +271,19 @@ function YearFilter({
   counts: Record<string, number>;
 }) {
   return (
-    <div className="seg seg-years" role="toolbar" aria-label="Filter projects by year">
-      {(["all", ...[...YEARS].reverse()] as const).map((y) => {
-        const n = y === "all" ? counts.all : (counts[y] ?? 0);
-        return (
-          <button
-            key={y}
-            type="button"
-            className="seg-btn"
-            aria-pressed={value === y}
-            disabled={y !== "all" && n === 0}
-            onClick={() => onChange(y)}
-          >
-            {y === "all" ? "All years" : y}
-            <span className="seg-count">{n}</span>
-          </button>
-        );
-      })}
-    </div>
+    <label className="year-select">
+      <Icon name="calendar" size={15} />
+      <span className="sr-only">Filter projects by year</span>
+      <select value={value} onChange={(e) => onChange(e.target.value === "all" ? "all" : Number(e.target.value))}>
+        <option value="all">All years · {counts.all}</option>
+        {[...YEARS].reverse().map((y) => (
+          <option key={y} value={y} disabled={!counts[y]}>
+            {y} · {counts[y] ?? 0}
+          </option>
+        ))}
+      </select>
+      <Icon name="chevronDown" size={15} />
+    </label>
   );
 }
 
@@ -280,19 +306,15 @@ export function ProjectsView({ item }: { item: StageItem }) {
   return (
     <CollectionShell
       item={item}
-      stats={null}
+      stats={<YearSelect value={year} onChange={setYear} counts={yearCounts} />}
       filters={
-        <div className="toolbar">
-          <FilterChips
-            label="Filter projects by area"
-            options={CATEGORIES.filter((c) => used.has(c.id))}
-            value={category}
-            onChange={setCategory}
-            counts={catCounts}
-            icons={{ all: "grid", ...CATEGORY_ICONS }}
-          />
-          <YearFilter value={year} onChange={setYear} counts={yearCounts} />
-        </div>
+        <FilterChips
+          label="Filter projects by area"
+          options={CATEGORIES.filter((c) => used.has(c.id))}
+          value={category}
+          onChange={setCategory}
+          counts={catCounts}
+        />
       }
     >
       {visible.length === 0 ? (
@@ -425,6 +447,22 @@ function ToolIcon({ name }: { name: string }) {
       </span>
     );
   }
+  if ("img" in icon) {
+    return (
+      <span className="tool-ic is-img" aria-hidden="true">
+        <img src={icon.img} alt="" width={18} height={18} loading="lazy" decoding="async" />
+      </span>
+    );
+  }
+  if ("line" in icon) {
+    return (
+      <span className="tool-ic is-line" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <use href={`/assets/tool-icons.svg#${icon.line}`} />
+        </svg>
+      </span>
+    );
+  }
   return (
     <span
       className="tool-ic"
@@ -439,7 +477,32 @@ function ToolIcon({ name }: { name: string }) {
 }
 
 export function StackView({ item }: { item: StageItem }) {
+  // Nothing is picked at first: the panel shows the knowledge graph.
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const active = STACK.find((g) => g.id === activeId) ?? null;
   const all = STACK.flatMap((g) => g.tools);
+
+  // Vertical tablist keyboard model: arrows move and select, Home/End jump.
+  const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    const i = active ? STACK.indexOf(active) : -1;
+    const last = STACK.length - 1;
+    const next =
+      e.key === "ArrowDown" || e.key === "ArrowRight" ? (i === last ? 0 : i + 1)
+      : e.key === "ArrowUp" || e.key === "ArrowLeft" ? (i <= 0 ? last : i - 1)
+      : e.key === "Home" ? 0
+      : e.key === "End" ? last
+      : -1;
+    if (next < 0) return;
+    e.preventDefault();
+    setActiveId(STACK[next].id);
+    tabRefs.current[STACK[next].id]?.focus();
+  };
+
+  // Keep the chosen area visible in the sidebar (and in the phone's swipe row).
+  useEffect(() => {
+    if (activeId) tabRefs.current[activeId]?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [activeId]);
 
   return (
     <CollectionShell
@@ -451,15 +514,52 @@ export function StackView({ item }: { item: StageItem }) {
       ]}
       filters={null}
     >
-      <ul className="stack-board">
-        {STACK.map((g, i) => (
-          <li key={g.id} className="stack-card" style={{ ...tint(g.color), "--i": Math.min(i, 8) } as CSSProperties}>
+      <div className="stack-split">
+        <div className="stack-nav" role="tablist" aria-label="Tech stack areas" aria-orientation="vertical" onKeyDown={onKey}>
+          {STACK.map((g, gi) => {
+            const selected = g.id === active?.id;
+            return (
+              <button
+                key={g.id}
+                ref={(el) => {
+                  tabRefs.current[g.id] = el;
+                }}
+                id={`stack-tab-${g.id}`}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-controls="stack-panel"
+                tabIndex={selected || (!active && gi === 0) ? 0 : -1}
+                className="stack-nav-item"
+                style={tint(g.color)}
+                onClick={() => setActiveId(g.id)}
+              >
+                <i aria-hidden="true" />
+                {g.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {active ? (
+          <section
+            key={active.id}
+            id="stack-panel"
+            className="stack-panel"
+            role="tabpanel"
+            aria-labelledby={`stack-tab-${active.id}`}
+            style={tint(active.color)}
+          >
             <header className="stack-head">
-              <h3>{g.label}</h3>
-              <small>{g.blurb}</small>
+              <button type="button" className="stack-back" onClick={() => setActiveId(null)}>
+                <Icon name="back" size={14} />
+                Overview
+              </button>
+              <h3>{active.label}</h3>
+              <small>{active.blurb}</small>
             </header>
             <ul className="stack-tools">
-              {g.tools.map((t) => (
+              {active.tools.map((t) => (
                 <li key={t.name} title={t.detail ? `${t.name} — ${t.detail}` : t.name}>
                   <ToolIcon name={t.name} />
                   <span className="tool-text">
@@ -469,9 +569,13 @@ export function StackView({ item }: { item: StageItem }) {
                 </li>
               ))}
             </ul>
-          </li>
-        ))}
-      </ul>
+          </section>
+        ) : (
+          <section id="stack-panel" className="stack-panel is-graph">
+            <StackGraph onPick={setActiveId} />
+          </section>
+        )}
+      </div>
     </CollectionShell>
   );
 }
@@ -504,7 +608,6 @@ export function AchievementsView({ item }: { item: StageItem }) {
           value={kind}
           onChange={setKind}
           counts={counts}
-          icons={{ all: "grid", ...Object.fromEntries(ACHIEVEMENT_KINDS.map((k) => [k.id, k.icon])) }}
           hideEmpty
         />
       }

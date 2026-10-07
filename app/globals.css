@@ -1163,23 +1163,43 @@ kbd {
    Counts sit beside the label in a lighter weight (Linear / Vercel style). */
 .seg {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 2px;
+  /* A little air so one tab's hover fill never touches the next */
+  gap: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  --fade-l: 0px;
+  --fade-r: 0px;
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+}
+
+.seg::-webkit-scrollbar {
+  display: none;
+}
+
+.seg[data-fade-left="true"] {
+  --fade-l: 28px;
+}
+
+.seg[data-fade-right="true"] {
+  --fade-r: 40px;
 }
 
 .seg-btn {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   height: 32px;
-  padding: 0 10px;
+  padding: 0 9px;
   border: 0;
   border-radius: 8px;
   background: transparent;
   color: var(--fg-muted);
   font: inherit;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 550;
   white-space: nowrap;
   cursor: pointer;
@@ -1242,25 +1262,74 @@ kbd {
 
 /* Projects toolbar: categories on the left, years on the right */
 /* Two stacked rows: categories, then years — stays tidy however many categories exist */
-.toolbar {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  animation: content-in 420ms var(--ease-out) 200ms backwards;
-}
 
-.toolbar .chips {
-  animation: none;
-}
-
-.seg-years .seg-btn:not([aria-pressed="true"]) {
-  font-weight: 500;
+.chips:has(> .seg) {
+  max-width: 100%;
+  min-width: 0;
 }
 
 @media (pointer: coarse) {
   .seg-btn {
     height: 40px;
+  }
+}
+
+/* Year filter: a native select styled as a glass pill, top-right of the header */
+.year-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: flex-end;
+  height: 36px;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  background: var(--fill);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background-color var(--dur-fast) ease-out;
+}
+
+.year-select:hover {
+  background: var(--fill-hover);
+}
+
+.year-select:focus-within {
+  box-shadow: inset 0 0 0 1px var(--p-accent), 0 0 0 3px color-mix(in srgb, var(--p-accent) 22%, transparent);
+}
+
+.year-select > svg {
+  position: absolute;
+  pointer-events: none;
+}
+
+.year-select > svg:first-of-type {
+  left: 12px;
+}
+
+.year-select > svg:last-of-type {
+  right: 11px;
+}
+
+.year-select select {
+  height: 100%;
+  padding: 0 34px;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+@media (pointer: coarse) {
+  .year-select {
+    height: 42px;
   }
 }
 
@@ -1938,27 +2007,205 @@ kbd {
 
 /* ---------- Tech stack ---------- */
 
-/* One row per area: a fixed-width label column, then a grid of equal tiles,
-   so every row lines up and tiles never leave ragged gaps. */
-.stack-board {
+/* Two columns: a sticky list of areas, and the chosen area's tools */
+.stack-split {
   display: grid;
-  gap: 12px;
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
+  grid-template-columns: 236px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin-top: 18px;
 }
 
-.stack-card {
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  align-items: start;
-  gap: 20px;
-  padding: 16px 18px;
+.stack-nav {
+  position: sticky;
+  top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* Fit the visible part of the scrolling gallery (a size container on desktop) */
+  max-height: calc(100cqh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: 0 0 0 1px var(--hairline);
+  scrollbar-width: none;
+}
+
+.stack-nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop: the gallery has a fixed height, so it can be the size container
+   the sidebar measures against (phones keep auto height and no container). */
+@media (min-width: 1024px) {
+  .gallery:has(.stack-split) {
+    container-type: size;
+  }
+}
+
+.stack-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  width: 100%;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 550;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
+}
+
+/* Colour dot keyed to the area */
+.stack-nav-item i {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: 0.55;
+}
+
+.stack-nav-item:hover {
+  color: var(--fg);
+  background: var(--fill);
+}
+
+.stack-nav-item[aria-selected="true"] {
+  color: var(--fg);
+  font-weight: 650;
+  background: color-mix(in srgb, var(--c) 13%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 28%, transparent);
+}
+
+.stack-nav-item[aria-selected="true"] i {
+  opacity: 1;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent);
+}
+
+.stack-panel {
+  min-width: 0;
+  padding: 18px 20px 20px;
   border-radius: 14px;
   background: var(--card-bg);
   box-shadow: 0 0 0 1px var(--hairline), 0 12px 26px -18px rgba(15, 23, 42, 0.5);
-  animation: card-rise 440ms var(--ease-out) calc(160ms + var(--i, 0) * 40ms) backwards;
+  animation: detail-swap 260ms var(--ease-out);
 }
+
+.stack-panel .stack-head {
+  margin-bottom: 14px;
+}
+
+.stack-panel .stack-head h3 {
+  font-size: 18px;
+}
+
+.stack-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin: -4px 0 8px -6px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stack-back:hover {
+  color: var(--fg);
+  background: var(--fill);
+}
+
+/* ---------- Knowledge graph ---------- */
+
+/* The graph floats free on the window — no card behind it */
+.stack-panel.is-graph {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0 0;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+@media (min-width: 1024px) {
+  .stack-panel.is-graph {
+    height: calc(100cqh - 24px);
+    min-height: 420px;
+  }
+}
+
+.kg {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.kg-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kg-head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.kg-head small {
+  max-width: 70ch;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+
+.kg-canvas {
+  position: relative;
+  flex: 1;
+  min-height: 360px;
+  margin-top: 6px;
+}
+
+.kg-canvas canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  touch-action: manipulation;
+}
+
+/* Signals flow along the edges: hub links pulse outwards, project links drift */
+
+/* Soft halo behind each hub that breathes on its own beat (opacity only, no filters) */
+
+/* Tool names stay hidden until a node (or one of its neighbours) is hovered */
+
+@keyframes detail-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* One row per area: a fixed-width label column, then a grid of equal tiles,
+   so every row lines up and tiles never leave ragged gaps. */
 
 .stack-head {
   display: flex;
@@ -2046,6 +2293,24 @@ kbd {
   fill: currentColor;
 }
 
+/* Full-colour logo files */
+.tool-ic.is-img img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Lucide line icons for concepts, drawn in the area colour */
+.tool-ic.is-line {
+  color: var(--c, var(--p-accent));
+}
+
+.tool-ic.is-line svg {
+  fill: none;
+}
+
 .tool-ic.is-mono {
   border-radius: 5px;
   font-size: 10.5px;
@@ -2056,8 +2321,11 @@ kbd {
 }
 
 @media (prefers-color-scheme: dark) {
-  .tool-ic:not(.is-mono) {
+  .tool-ic:not(.is-mono, .is-line, .is-img) {
     color: var(--ic-d);
+  }
+  .tool-ic.is-line {
+    color: color-mix(in srgb, var(--c, var(--p-accent)) 50%, #fff);
   }
 }
 
@@ -2234,13 +2502,40 @@ kbd {
 /* ---------- Tablet & mobile: stage strip becomes a horizontal shelf ---------- */
 
 @media (max-width: 1023px) {
+  /* Tech stack: the area list becomes one swipeable row above the tools */
+  .stack-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .stack-nav {
+    position: static;
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  .stack-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stack-nav-item {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .stack-panel {
+    padding: 14px;
+    animation: none;
+  }
+
   /* Tabs swap instantly on phones: no staggered entrances inside the window */
   .content > *,
   .col-head,
   .chips,
-  .toolbar,
-  .g-grid > li,
-  .stack-card {
+  .g-grid > li {
     animation: none;
   }
 
@@ -2335,6 +2630,17 @@ kbd {
     align-items: stretch;
   }
 
+  /* Projects: title and year select share one row on phones */
+  .col-head:has(.year-select) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .year-select {
+    align-self: center;
+  }
+
   .col-stats div {
     flex: 1;
   }
@@ -2366,11 +2672,6 @@ kbd {
     scrollbar-width: none;
   }
 
-  .toolbar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .gallery {
     overflow: visible;
     margin: 0;
@@ -2379,12 +2680,6 @@ kbd {
 
   .about-info {
     grid-template-columns: 1fr;
-  }
-
-  .stack-card {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 14px;
   }
 
   .stack-tools {
@@ -2574,8 +2869,7 @@ kbd {
   .p-shot {
     transition-duration: 0ms !important;
   }
-  .g-grid > li,
-  .stack-card {
+  .g-grid > li {
     animation: none !important;
   }
 }
