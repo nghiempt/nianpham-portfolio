@@ -1305,6 +1305,46 @@ kbd {
   padding: 14px 16px 16px;
 }
 
+/* Skeleton: until its cover image loads, a card keeps its real layout but
+   paints the cover and each line of text as a shimmering block. */
+.p-grid > li.is-loading .p-cover,
+.p-grid > li.is-loading :is(.p-company, .p-name, .p-tagline, .p-stack > span) {
+  color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  background: linear-gradient(90deg, var(--fill) 25%, var(--fill-hover) 50%, var(--fill) 75%) 0 0 / 200% 100%;
+  animation: sk-shimmer 1.3s linear infinite;
+}
+.p-grid > li.is-loading .p-cover > * {
+  opacity: 0;
+}
+.p-grid > li.is-loading :is(.p-company, .p-name, .p-tagline, .p-stack > span) {
+  border-radius: 6px;
+}
+.p-grid > li.is-loading .p-company {
+  align-self: flex-start;
+}
+.p-grid > li.is-loading :is(.p-desc-tip, .more-tip, .p-company svg) {
+  visibility: hidden;
+}
+.p-grid > li.is-loading .p-card {
+  pointer-events: none;
+}
+.p-grid > li.is-revealed :is(.p-cover > *, .p-body) {
+  animation: sk-reveal 420ms var(--ease-out) both;
+}
+
+@keyframes sk-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes sk-reveal {
+  from {
+    opacity: 0;
+  }
+}
+
 .p-company {
   display: inline-flex;
   align-items: center;
@@ -2511,9 +2551,10 @@ kbd {
 }
 
 @media (max-width: 640px) {
+  /* Keep the name on one line: the logo plus "ghiem Thanh Pham" is about
+     10.1em wide, so the size follows the column. */
   .window.is-about .heading h2 {
-    font-size: 36px;
-    white-space: normal;
+    font-size: min(36px, 9.6cqi);
   }
 
   /* Projects: two compact columns on phones */
@@ -2650,5 +2691,154 @@ kbd {
   }
   .g-grid > li {
     animation: none !important;
+  }
+}
+
+/* ---------- Logo mark ---------- */
+
+/* The GIF sits in a line of text as the N of the name: its N spans about half
+   the image height, so 1.4em gives it the cap height of the display face, and
+   the negative margins keep the orbits from growing the line box. */
+.logo-mark {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  margin: -0.4em -0.12em -0.3em -0.04em;
+  vertical-align: -0.02em;
+  user-select: none;
+  /* Same function list everywhere so the intro can tween between them. */
+  filter: invert(0) hue-rotate(0deg) drop-shadow(0 0 0 rgba(34, 211, 238, 0));
+}
+
+/* White mark on the light theme's title: flip it dark, keep the trail green. */
+.window.is-about .heading .logo-mark {
+  filter: invert(1) hue-rotate(180deg) drop-shadow(0 0 0 rgba(34, 211, 238, 0));
+}
+@media (prefers-color-scheme: dark) {
+  .window.is-about .heading .logo-mark {
+    filter: invert(0) hue-rotate(0deg) drop-shadow(0 0 0 rgba(34, 211, 238, 0));
+  }
+}
+
+/* ---------- Intro splash ---------- */
+
+html.intro-on,
+html.intro-on body {
+  overflow: hidden;
+}
+
+/* The title stays blank until the intro lays the name onto it. */
+html.intro-on .window.is-about .heading h2 {
+  visibility: hidden;
+}
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.intro[data-phase="leaving"] {
+  pointer-events: none;
+}
+
+.intro-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 45%, #0b1a3a 0%, #050b1f 55%, #020617 100%);
+}
+
+.intro-glow {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0;
+  transition: opacity 1200ms ease;
+  animation: intro-drift 9s ease-in-out infinite alternate;
+}
+.intro:not([data-phase="logo"]) .intro-glow {
+  opacity: 0.4;
+}
+.intro-glow-a {
+  background: #0891b2;
+  top: -25vmax;
+  left: -15vmax;
+}
+.intro-glow-b {
+  background: #7c3aed;
+  bottom: -30vmax;
+  right: -20vmax;
+  animation-delay: -4s;
+}
+
+/* Same font and metrics as the About title, so the line can be laid onto it. */
+.intro-line {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-name);
+  font-weight: 400;
+  font-size: clamp(34px, 7vw, 84px);
+  line-height: 1.1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: #f8fafc;
+}
+
+/* Step 1: the logo alone, still and large, centered over the hidden name.
+   The shift is half the width of "ghiem Thanh Pham" (8.83em) in this font, less the logo's overlap. */
+.intro-line .logo-mark {
+  transform: translateX(4.38em) scale(2.5);
+  transform-origin: 50% 55%;
+  filter: invert(0) hue-rotate(0deg) drop-shadow(0 0 18px rgba(74, 222, 128, 0.35));
+  animation: intro-logo-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+/* Step 2: the logo shrinks and slides into place as the N of the name. */
+.intro:not([data-phase="logo"]) .intro-line .logo-mark {
+  transform: none;
+}
+
+/* Step 3: the rest of the name slides in and joins the N. */
+.intro-rest span {
+  display: inline-block;
+  opacity: 0;
+}
+.intro[data-phase="name"] .intro-rest span,
+.intro[data-phase="leaving"] .intro-rest span {
+  animation: intro-join 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes intro-logo-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes intro-join {
+  from {
+    opacity: 0;
+    transform: translateX(0.9em);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes intro-drift {
+  to { transform: translate(8vmax, 6vmax) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro *,
+  .intro {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
   }
 }

@@ -14,6 +14,7 @@ import {
 } from "react";
 import { AchievementsView, ProjectsView, PublicationsView, StackView } from "./collections";
 import { CHANNELS, EDUCATION, OWNER, SITE_URL, WINDOWS, type StageItem, type WindowKind } from "./profiles";
+import LogoMark from "./logo-mark";
 import { AppIcon, Icon, type IconName } from "./ui";
 
 // Motion tokens: arrive with deceleration, leave with acceleration,
@@ -248,7 +249,15 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
               {item.eyebrow}
             </p>
             <div className="heading">
-              <h2>{item.title}</h2>
+              {isAbout ? (
+                // The logo mark stands in for the N; the intro lands on it.
+                <h2 aria-label={item.title}>
+                  <LogoMark />
+                  <span aria-hidden="true">{item.title.slice(1)}</span>
+                </h2>
+              ) : (
+                <h2>{item.title}</h2>
+              )}
               {isAbout && <p className="role">{OWNER.role}</p>}
             </div>
 

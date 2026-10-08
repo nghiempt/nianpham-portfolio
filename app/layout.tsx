@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Hammersmith_One, Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
+import Intro from "./intro";
 
 // Body and UI text.
 const jakarta = Plus_Jakarta_Sans({
@@ -53,8 +54,11 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${display.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${jakarta.variable} ${display.variable} intro-on`}>
+      <body>
+        <Intro />
+        {children}
+      </body>
     </html>
   );
 }

@@ -178,14 +178,33 @@ function markClamped(e: MouseEvent<HTMLElement>) {
   if (text) e.currentTarget.dataset.clamped = String(text.scrollHeight > text.clientHeight + 1);
 }
 
+// Thumbnails that have already loaded once, so re-mounted cards (e.g. after
+// switching filters) skip the skeleton.
+const loadedThumbs = new Set<string>();
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const style = CATEGORY_BY_ID[project.category];
+  const thumb = project.thumbnail;
+  // The card shows as a skeleton until its cover image is ready, then reveals.
+  const [ready, setReady] = useState(() => !thumb || loadedThumbs.has(thumb));
+  const [revealed, setRevealed] = useState(false);
+  const onThumbDone = () => {
+    if (thumb) loadedThumbs.add(thumb);
+    if (!ready) {
+      setReady(true);
+      setRevealed(true);
+    }
+  };
   const extra = project.stack.length - 2;
   // The whole card links to the live project; without a URL it is plain content.
   const Card = project.url ? "a" : "div";
   const linkProps = project.url ? { href: project.url, target: "_blank", rel: "noopener noreferrer" } : {};
   return (
-    <li style={{ ...tint(style.color), "--i": Math.min(index, 8) } as CSSProperties}>
+    <li
+      className={ready ? (revealed ? "is-revealed" : undefined) : "is-loading"}
+      aria-busy={!ready || undefined}
+      style={{ ...tint(style.color), "--i": Math.min(index, 8) } as CSSProperties}
+    >
       <Card className={`p-card${project.url ? " is-link" : ""}`} {...linkProps}>
         <span className={`p-cover${project.thumbnail ? " has-image" : ""}`}>
           {project.thumbnail ? (
@@ -196,6 +215,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               fill
               sizes="(min-width: 1024px) 320px, 100vw"
               unoptimized={isRemote(project.thumbnail)}
+              onLoad={onThumbDone}
+              onError={onThumbDone}
             />
           ) : (
             <span className="p-cover-art" aria-hidden="true">
