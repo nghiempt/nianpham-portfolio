@@ -25,6 +25,11 @@ const hostOf = (url: string) => new URL(url).host.replace(/^www\./, "");
 // optimizer so no domain allow-list has to be maintained.
 const isRemote = (src: string) => /^https?:\/\//.test(src);
 
+// Project covers are uploaded at full size (several MB each); ask Cloudinary
+// for a card-sized, modern-format copy instead. Other hosts are left as-is.
+const coverSrc = (src: string) =>
+  src.includes("res.cloudinary.com/") ? src.replace("/image/upload/", "/image/upload/f_auto,q_auto,c_limit,w_640/") : src;
+
 /* ------------------------------------------------------------------ Shell */
 
 function CollectionShell({
@@ -210,7 +215,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.thumbnail ? (
             <Image
               className="p-shot"
-              src={project.thumbnail}
+              src={coverSrc(project.thumbnail)}
               alt=""
               fill
               sizes="(min-width: 1024px) 320px, 100vw"
