@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { CATEGORIES, CATEGORY_BY_ID, PROJECTS, type Project, type ProjectCategory } from "./data/projects";
-import { isPublished, PUBLICATIONS, TOPIC_BY_ID, TOPICS, type Publication, type Topic } from "./data/publications";
+import { isPublished, PUBLICATIONS, type Publication } from "./data/publications";
 import { ACHIEVEMENT_KINDS, ACHIEVEMENTS, KIND_BY_ID } from "./data/achievements";
 import { STACK } from "./data/stack";
 import { StackGraph } from "./stack-graph";
@@ -258,74 +258,34 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-const YEARS = [2022, 2023, 2024, 2025, 2026];
-/** Year facet: every year 2022–2026 with its count; empty years stay visible but disabled. */
-/** Year facet as a compact select; years with no projects are listed but disabled. */
-function YearSelect({
-  value,
-  onChange,
-  counts,
-}: {
-  value: number | "all";
-  onChange: (v: number | "all") => void;
-  counts: Record<string, number>;
-}) {
-  return (
-    <label className="year-select">
-      <Icon name="calendar" size={15} />
-      <span className="sr-only">Filter projects by year</span>
-      <select value={value} onChange={(e) => onChange(e.target.value === "all" ? "all" : Number(e.target.value))}>
-        <option value="all">All years · {counts.all}</option>
-        {[...YEARS].reverse().map((y) => (
-          <option key={y} value={y} disabled={!counts[y]}>
-            {y} · {counts[y] ?? 0}
-          </option>
-        ))}
-      </select>
-      <Icon name="chevronDown" size={15} />
-    </label>
-  );
-}
-
 export function ProjectsView({ item }: { item: StageItem }) {
   const [category, setCategory] = useState<ProjectCategory | "all">("all");
-  const [year, setYear] = useState<number | "all">("all");
 
-  const inYear = year === "all" ? PROJECTS : PROJECTS.filter((p) => p.year === year);
-  const inCategory = category === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === category);
-  const visible = inYear.filter((p) => category === "all" || p.category === category);
-
-  // Faceted counts: each filter counts within the other's current selection.
-  const catCounts: Record<string, number> = { all: inYear.length };
-  for (const p of inYear) catCounts[p.category] = (catCounts[p.category] ?? 0) + 1;
-  const yearCounts: Record<string, number> = { all: inCategory.length };
-  for (const p of inCategory) if (p.year !== null) yearCounts[p.year] = (yearCounts[p.year] ?? 0) + 1;
-  // Which categories exist at all, so tabs don't appear and vanish as the year changes.
+  const visible = category === "all" ? PROJECTS : PROJECTS.filter((p) => p.category === category);
+  const counts: Record<string, number> = { all: PROJECTS.length };
+  for (const p of PROJECTS) counts[p.category] = (counts[p.category] ?? 0) + 1;
+  // Only categories that have projects get a tab.
   const used = new Set(PROJECTS.map((p) => p.category));
 
   return (
     <CollectionShell
       item={item}
-      stats={<YearSelect value={year} onChange={setYear} counts={yearCounts} />}
+      stats={null}
       filters={
         <FilterChips
           label="Filter projects by area"
           options={CATEGORIES.filter((c) => used.has(c.id))}
           value={category}
           onChange={setCategory}
-          counts={catCounts}
+          counts={counts}
         />
       }
     >
-      {visible.length === 0 ? (
-        <p className="g-empty">No projects match these filters.</p>
-      ) : (
-        <ul className="g-grid p-grid">
-          {visible.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} />
-          ))}
-        </ul>
-      )}
+      <ul className="g-grid p-grid">
+        {visible.map((p, i) => (
+          <ProjectCard key={p.id} project={p} index={i} />
+        ))}
+      </ul>
     </CollectionShell>
   );
 }
@@ -333,24 +293,17 @@ export function ProjectsView({ item }: { item: StageItem }) {
 /* ------------------------------------------------------------ Publications */
 
 const rankClass = (rank: string) => `rank rank-${rank === "A*" ? "astar" : rank.toLowerCase()}`;
-const isSelf = (author: string) => /nghiem/i.test(author);
 
-function authorLine(p: Publication) {
-  const n = p.authors.length;
-  if (!n) return p.firstAuthor ? "Lead author" : "Co-author";
-  const pos = p.authors.findIndex(isSelf) + 1;
-  return pos === 1 ? `Lead author · ${n} authors` : `Co-author · ${n} authors`;
-}
+// Within a year, papers run from the strongest venue down; unranked ones go last.
+const RANK_ORDER = ["A*", "A", "Q1", "B", "C"];
+const rankWeight = (rank: string) => (rank ? RANK_ORDER.indexOf(rank) : RANK_ORDER.length);
 
 function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
-  const style = TOPIC_BY_ID[pub.topic];
   // The whole card links to the paper's DOI; without one it is plain content.
   const Card = pub.doi ? "a" : "div";
-  const linkProps = pub.doi
-    ? { href: `https://doi.org/${pub.doi}`, target: "_blank", rel: "noopener noreferrer" }
-    : {};
+  const linkProps = pub.doi ? { href: `https://doi.org/${pub.doi}`, target: "_blank", rel: "noopener noreferrer" } : {};
   return (
-    <li style={{ ...tint(style.color), "--i": Math.min(index, 8) } as CSSProperties}>
+    <li style={{ ...tint("var(--p-accent)"), "--i": Math.min(index, 8) } as CSSProperties}>
       <Card className={`pub-card${pub.doi ? " is-link" : ""}`} {...linkProps}>
         <span className="pub-card-top">
           {pub.rank && <span className={rankClass(pub.rank)}>{pub.rank}</span>}
@@ -358,14 +311,10 @@ function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
         </span>
         <strong className="pub-title">{pub.title}</strong>
         <span className="pub-card-foot">
-          <span className="pub-topic">
-            <Icon name={style.icon} size={13} />
-            {style.label}
-          </span>
           {pub.firstAuthor ? (
             <span className="pub-flag is-first">1st author</span>
           ) : (
-            <span className="pub-flag">{authorLine(pub).split(" · ")[1] ?? "Co-author"}</span>
+            <span className="pub-flag">Co-author</span>
           )}
           {/* Drafts already say so in the venue slot; submissions need the flag. */}
           {pub.venue && !isPublished(pub) && <span className="pub-flag is-status">{pub.kind}</span>}
@@ -376,16 +325,8 @@ function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
 }
 
 export function PublicationsView({ item }: { item: StageItem }) {
-  const [topic, setTopic] = useState<Topic | "all">("all");
-  const [firstOnly, setFirstOnly] = useState(false);
-
   const published = PUBLICATIONS.filter(isPublished);
-  const visible = PUBLICATIONS.filter((p) => (topic === "all" || p.topic === topic) && (!firstOnly || p.firstAuthor));
-
-  const counts: Record<string, number> = { all: PUBLICATIONS.length };
-  for (const p of PUBLICATIONS) counts[p.topic] = (counts[p.topic] ?? 0) + 1;
-
-  const years = [...new Set(visible.map((p) => p.year))].sort((a, b) => b - a);
+  const years = [...new Set(PUBLICATIONS.map((p) => p.year))].sort((a, b) => b - a);
 
   let i = 0;
   return (
@@ -397,40 +338,17 @@ export function PublicationsView({ item }: { item: StageItem }) {
         { value: published.filter((p) => p.rank === "A*" || p.rank === "A").length, label: "CORE A*/A" },
         { value: published.filter((p) => p.rank === "Q1").length, label: "Q1 journals" },
       ]}
-      filters={
-        <FilterChips
-          label="Filter publications by topic"
-          options={TOPICS}
-          value={topic}
-          onChange={setTopic}
-          counts={counts}
-          extra={
-            <button
-              type="button"
-              className="chip chip-toggle"
-              aria-pressed={firstOnly}
-              onClick={() => setFirstOnly((v) => !v)}
-            >
-              <span className="chip-check" aria-hidden="true">
-                {firstOnly && <Icon name="check" size={11} />}
-              </span>
-              First-author only
-            </button>
-          }
-        />
-      }
+      filters={null}
     >
-      {visible.length === 0 && <p className="g-empty">No papers match these filters.</p>}
       {years.map((year) => (
         <GalleryGroup key={year} title={year}>
-          {visible
-            .filter((p) => p.year === year)
+          {PUBLICATIONS.filter((p) => p.year === year)
+            .sort((a, b) => rankWeight(a.rank) - rankWeight(b.rank))
             .map((p) => (
-              <PublicationCard key={p.id} pub={p} index={i++} />
-            ))}
+            <PublicationCard key={p.id} pub={p} index={i++} />
+          ))}
         </GalleryGroup>
       ))}
-
     </CollectionShell>
   );
 }
@@ -443,7 +361,10 @@ function ToolIcon({ name }: { name: string }) {
   if (!icon) {
     return (
       <span className="tool-ic is-mono" aria-hidden="true">
-        {name.replace(/[^A-Za-z0-9]/g, "").charAt(0).toUpperCase()}
+        {name
+          .replace(/[^A-Za-z0-9]/g, "")
+          .charAt(0)
+          .toUpperCase()}
       </span>
     );
   }
@@ -464,11 +385,7 @@ function ToolIcon({ name }: { name: string }) {
     );
   }
   return (
-    <span
-      className="tool-ic"
-      aria-hidden="true"
-      style={{ "--ic-l": icon.light, "--ic-d": icon.dark } as CSSProperties}
-    >
+    <span className="tool-ic" aria-hidden="true" style={{ "--ic-l": icon.light, "--ic-d": icon.dark } as CSSProperties}>
       <svg viewBox="0 0 24 24" width="15" height="15">
         <use href={`/assets/tool-icons.svg#${icon.id}`} />
       </svg>
@@ -488,11 +405,19 @@ export function StackView({ item }: { item: StageItem }) {
     const i = active ? STACK.indexOf(active) : -1;
     const last = STACK.length - 1;
     const next =
-      e.key === "ArrowDown" || e.key === "ArrowRight" ? (i === last ? 0 : i + 1)
-      : e.key === "ArrowUp" || e.key === "ArrowLeft" ? (i <= 0 ? last : i - 1)
-      : e.key === "Home" ? 0
-      : e.key === "End" ? last
-      : -1;
+      e.key === "ArrowDown" || e.key === "ArrowRight"
+        ? i === last
+          ? 0
+          : i + 1
+        : e.key === "ArrowUp" || e.key === "ArrowLeft"
+          ? i <= 0
+            ? last
+            : i - 1
+          : e.key === "Home"
+            ? 0
+            : e.key === "End"
+              ? last
+              : -1;
     if (next < 0) return;
     e.preventDefault();
     setActiveId(STACK[next].id);
@@ -508,14 +433,20 @@ export function StackView({ item }: { item: StageItem }) {
     <CollectionShell
       item={item}
       stats={[
-        { value: all.length, label: "Tools & services" },
+        { value: all.length, label: "Tools & Services" },
         { value: STACK.length, label: "Areas" },
         { value: STACK.find((g) => g.id === "llms")?.tools.length ?? 0, label: "LLMs & model APIs" },
       ]}
       filters={null}
     >
       <div className="stack-split">
-        <div className="stack-nav" role="tablist" aria-label="Tech stack areas" aria-orientation="vertical" onKeyDown={onKey}>
+        <div
+          className="stack-nav"
+          role="tablist"
+          aria-label="Tech Stack areas"
+          aria-orientation="vertical"
+          onKeyDown={onKey}
+        >
           {STACK.map((g, gi) => {
             const selected = g.id === active?.id;
             return (
@@ -562,10 +493,7 @@ export function StackView({ item }: { item: StageItem }) {
               {active.tools.map((t) => (
                 <li key={t.name} title={t.detail ? `${t.name} — ${t.detail}` : t.name}>
                   <ToolIcon name={t.name} />
-                  <span className="tool-text">
-                    <span className="tool-name">{t.name}</span>
-                    {t.detail && <span className="tool-detail">{t.detail}</span>}
-                  </span>
+                  <span className="tool-name">{t.name}</span>
                 </li>
               ))}
             </ul>
@@ -590,7 +518,9 @@ export function AchievementsView({ item }: { item: StageItem }) {
 
   const counts: Record<string, number> = { all: ACHIEVEMENTS.length };
   for (const a of ACHIEVEMENTS) counts[a.kind] = (counts[a.kind] ?? 0) + 1;
-  const count = (id: string) => counts[id] ?? 0;
+  // Stats count only what is done; goals still show in the filters and timeline.
+  const done = ACHIEVEMENTS.filter((a) => !a.goal);
+  const count = (id: string) => done.filter((a) => a.kind === id).length;
 
   return (
     <CollectionShell
@@ -619,10 +549,11 @@ export function AchievementsView({ item }: { item: StageItem }) {
             <ul>
               {visible
                 .filter((a) => a.year === year)
+                .sort((a, b) => Number(!!a.goal) - Number(!!b.goal))
                 .map((a) => {
                   const k = KIND_BY_ID[a.kind];
                   return (
-                    <li key={a.id} className="tl-event" style={tint(k.color)}>
+                    <li key={a.id} className={`tl-event${a.goal ? " is-goal" : ""}`} style={tint(k.color)}>
                       {a.logo ? (
                         <span className="tl-glyph is-logo" aria-hidden="true">
                           <Image
@@ -640,6 +571,7 @@ export function AchievementsView({ item }: { item: StageItem }) {
                       )}
                       <span className="tl-text">
                         <strong>{a.name}</strong>
+                        {a.goal && <span className="tl-goal">Goal</span>}
                         <small>{[k.label, a.detail].filter(Boolean).join(" · ")}</small>
                       </span>
                     </li>

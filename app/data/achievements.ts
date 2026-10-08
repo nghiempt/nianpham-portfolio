@@ -16,6 +16,8 @@ export type Achievement = {
   detail: string;
   /** Organisation logo: a path under /public or any image URL. Empty uses the kind's icon. */
   logo: string;
+  /** A target not reached yet: shown with a "Goal" badge and left out of the stats. */
+  goal?: boolean;
 };
 
 export const ACHIEVEMENT_KINDS: Category[] = rawKinds.map((k, i) => checkCategory(k, i, "achievement-kinds.json"));

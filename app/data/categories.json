@@ -7,7 +7,7 @@
   },
   {
     "id": "rag-knowledge",
-    "label": "RAG & Knowledge AI",
+    "label": "RAG & Knowledge Graph",
     "color": "#0e7490",
     "icon": "database"
   },

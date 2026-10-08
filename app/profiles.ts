@@ -4,7 +4,6 @@ export const OWNER = {
   name: "Nghiem Thanh Pham",
   nickname: "Nian Pham",
   role: "Senior AI Engineer & Scientific Researcher",
-  tagline: "The shortest path from impossible to production goes through my code.",
   email: "nianpham.reed@gmail.com",
   location: "Ho Chi Minh City, Vietnam",
   website: "nianpham.my",
@@ -12,13 +11,30 @@ export const OWNER = {
 };
 
 export const EDUCATION = {
-  degree: "Bachelor of Software Engineering with AI",
+  degree: "Bachelor of Software Engineering with Artificial Intelligence",
   school: "FPT University",
   graduated: "Oct 2024",
   facts: [
     { label: "GPA", value: "3.2" },
     { label: "Scholarship", value: "70%" },
     { label: "IELTS", value: "6.0" },
+  ],
+  /** Subjects covered by the degree, shown as chips under the facts. */
+  coursework: [
+    "C/C++",
+    "Java",
+    "Python",
+    "Data Structures & Algorithms",
+    "OOP",
+    "Databases",
+    "Operating Systems",
+    "Computer Networks",
+    "Software Engineering",
+    "Machine Learning",
+    "Deep Learning",
+    "Computer Vision",
+    "Natural Language Processing",
+    "Data Mining",
   ],
 };
 
@@ -35,7 +51,7 @@ export const CHANNELS: Channel[] = [
   { id: "github", name: "GitHub", label: "Code & open source", icon: "/assets/icons/github.png", href: "https://github.com/nghiempt" },
   { id: "linkedin", name: "LinkedIn", label: "Career & experience", icon: "/assets/icons/linkedin.png", href: "https://www.linkedin.com/in/nianpham" },
   { id: "scholar", name: "Scholar", label: "Research & citations", icon: "/assets/icons/scholar.png", href: "https://scholar.google.com/citations?user=23NArXYAAAAJ" },
-  { id: "researchgate", name: "ResearchGate", label: "Research network", icon: "/assets/icons/rg.png", href: "https://www.researchgate.net/profile/Nghiem-Pham" },
+  { id: "researchgate", name: "RG", label: "Research network", icon: "/assets/icons/rg.png", href: "https://www.researchgate.net/profile/Nghiem-Pham" },
   { id: "facebook", name: "Facebook", label: "Life & updates", icon: "/assets/icons/facebook.png", href: "https://www.facebook.com/nianpham.me" },
   { id: "email", name: "Email", label: "Direct line", icon: "/assets/icons/gmail.png", href: `mailto:${OWNER.email}` },
 ];
@@ -60,7 +76,6 @@ export type StageItem = {
   title: string;
   description: string;
   href?: string;
-  cta?: string;
   /** What the copy buttons copy, and how the toast names it. */
   copyValue: string;
   copyLabel: string;
@@ -81,7 +96,6 @@ export const WINDOWS: StageItem[] = [
     description:
       "Stop searching for me on every social network — everything is on this desk. Browse my projects, papers, toolbox and milestones on the left, or reach me on any channel below.",
     href: `mailto:${OWNER.email}`,
-    cta: "Say hello",
     copyValue: OWNER.email,
     copyLabel: "Email address",
   },
@@ -91,7 +105,7 @@ export const WINDOWS: StageItem[] = [
     name: "Projects",
     accent: "#6d28d9",
     display: "nianpham.my/projects",
-    eyebrow: "",
+    eyebrow: "Showcase",
     title: "Projects",
     description: "",
     copyValue: `${SITE_URL}/#projects`,
@@ -116,8 +130,8 @@ export const WINDOWS: StageItem[] = [
     accent: "#0369a1",
     display: "nianpham.my/stack",
     eyebrow: "Toolbox",
-    title: "Tech stack",
-    description: "Languages, models, frameworks and services I've built and shipped with.",
+    title: "Tech Stack",
+    description: "",
     copyValue: `${SITE_URL}/#stack`,
     copyLabel: "Link",
   },
@@ -129,7 +143,7 @@ export const WINDOWS: StageItem[] = [
     display: "nianpham.my/achievements",
     eyebrow: "Milestones",
     title: "Achievements",
-    description: "Awards, certifications, contests and events — year by year.",
+    description: "",
     copyValue: `${SITE_URL}/#achievements`,
     copyLabel: "Link",
   },

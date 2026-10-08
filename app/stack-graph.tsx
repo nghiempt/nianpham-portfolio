@@ -29,6 +29,10 @@ type Edge = { a: number; b: number; kind: "hub" | "co"; w: number };
 
 const TOOLS_PER_AREA = 4;
 const MAX_CO_EDGES = 90;
+/** Even gap (px) between the outermost nodes and the panel edge. */
+const PANEL_PAD = 28;
+/** Cap on how far one axis may be stretched, so the web never looks pulled apart. */
+const MAX_STRETCH = 2.6;
 
 function buildGraph() {
   // How often each tool appears across projects, and which pairs appear together.
@@ -250,6 +254,13 @@ export function StackGraph({ onPick }: { onPick: (areaId: string) => void }) {
       py: (i * 2.3) % (Math.PI * 2),
     }));
     const pos = nodes.map((n) => ({ x: n.x, y: n.y }));
+    // Resting positions for the current panel: the layout is stretched on each
+    // axis to cover the panel, so a wide graph doesn't sit in a band mid-panel.
+    const home = nodes.map((n) => ({ x: n.x, y: n.y }));
+    const cx = nodes.reduce((a, n) => a + n.x, 0) / nodes.length;
+    const cy = nodes.reduce((a, n) => a + n.y, 0) / nodes.length;
+    const reachX = Math.max(...nodes.map((n) => Math.abs(n.x - cx))) || 1;
+    const reachY = Math.max(...nodes.map((n) => Math.abs(n.y - cy))) || 1;
 
     let pal = readPalette(wrap);
     let w = 0, h = 0, scale = 1, ox = 0, oy = 0;
@@ -268,8 +279,17 @@ export function StackGraph({ onPick }: { onPick: (areaId: string) => void }) {
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       scale = Math.min(w / box[2], h / box[3]);
-      ox = (w - box[2] * scale) / 2 - box[0] * scale;
-      oy = (h - box[3] * scale) / 2 - box[1] * scale;
+      // Room for node centres once the even edge padding, the biggest node and
+      // the tool labels underneath are kept clear (all in graph units).
+      const edge = PANEL_PAD / scale + 34;
+      const kx = Math.min(MAX_STRETCH, Math.max(1, (w / scale / 2 - edge) / reachX));
+      const ky = Math.min(MAX_STRETCH, Math.max(1, (h / scale / 2 - edge - 18) / reachY));
+      for (let i = 0; i < nodes.length; i++) {
+        home[i].x = cx + (nodes[i].x - cx) * kx;
+        home[i].y = cy + (nodes[i].y - cy) * ky;
+      }
+      ox = w / 2 - cx * scale;
+      oy = h / 2 - cy * scale;
       if (reduce) draw(performance.now());
     };
 
@@ -277,9 +297,10 @@ export function StackGraph({ onPick }: { onPick: (areaId: string) => void }) {
       if (!t0) t0 = t;
       const age = reduce ? 1e9 : t - t0;
       for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i], m = motion[i];
-        pos[i].x = reduce ? n.x : n.x + Math.sin(t * m.fx + m.px) * m.amp;
-        pos[i].y = reduce ? n.y : n.y + Math.cos(t * m.fy + m.py) * m.amp;
+        const m = motion[i];
+        const o = home[i];
+        pos[i].x = reduce ? o.x : o.x + Math.sin(t * m.fx + m.px) * m.amp;
+        pos[i].y = reduce ? o.y : o.y + Math.cos(t * m.fy + m.py) * m.amp;
       }
       const lit = (i: number) => hover === null || i === hover || neighbours[hover].has(i);
       const fadeIn = (i: number) => Math.min(1, Math.max(0, (age - (i % 40) * 18) / 520));
@@ -459,13 +480,6 @@ export function StackGraph({ onPick }: { onPick: (areaId: string) => void }) {
 
   return (
     <div className="kg">
-      <header className="kg-head">
-        <h3>How it all connects</h3>
-        <small>
-          Each area links to its most-used tools; tools link when they shipped together in a project. Hover a
-          node to trace its connections, click to open the area.
-        </small>
-      </header>
       <div className="kg-canvas" ref={wrapRef}>
         <canvas
           ref={canvasRef}

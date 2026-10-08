@@ -35,7 +35,7 @@
   {
     "id": "genai-math-education",
     "title": "Evaluating the Impact of Generative AI in Mathematics Education: A Comparative Study in Vietnamese High Schools",
-    "venue": "HBET 2025",
+    "venue": "Human Behavior and Emerging Technologies 2025",
     "venueFull": "Human Behavior and Emerging Technologies",
     "year": 2025,
     "rank": "Q1",
@@ -78,19 +78,6 @@
       "Pham Thanh Nghiem"
     ],
     "doi": "10.48550/arXiv.2510.14708"
-  },
-  {
-    "id": "android-data-safety-llm",
-    "title": "Unveiling Discrepancies in Android App Data Safety Declarations and Privacy Policies: An In-depth Analysis using Large Language Models",
-    "venue": "IJIS",
-    "venueFull": "",
-    "year": 2024,
-    "rank": "Q1",
-    "topic": "privacy",
-    "kind": "Under review",
-    "firstAuthor": false,
-    "authors": [],
-    "doi": ""
   },
   {
     "id": "gdpr-business-social-apps",

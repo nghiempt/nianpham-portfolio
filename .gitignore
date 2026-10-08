@@ -7,3 +7,7 @@ coverage
 
 # Raw source notes (contain private contact details)
 /data/
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+.DS_Store

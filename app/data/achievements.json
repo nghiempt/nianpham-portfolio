@@ -1,18 +1,202 @@
 [
-  {"id": "conviction-2026", "name": "Conviction 2026", "year": 2026, "kind": "community", "detail": "", "logo": ""},
-  {"id": "aws-genai-builder-2026", "name": "AWS GenAI Builder Club 2026", "year": 2026, "kind": "community", "detail": "", "logo": "/assets/logos/aws.png"},
-  {"id": "zalo-ai-2025", "name": "Zalo AI Challenge 2025", "year": 2025, "kind": "contest", "detail": "", "logo": "/assets/logos/zalo.svg"},
-  {"id": "aws-cloud-day-2025", "name": "AWS Cloud Day 2025", "year": 2025, "kind": "community", "detail": "", "logo": "/assets/logos/aws.png"},
-  {"id": "conviction-2025", "name": "Conviction 2025", "year": 2025, "kind": "community", "detail": "", "logo": ""},
-  {"id": "oci-ai", "name": "OCI AI Foundations", "year": 2024, "kind": "certificate", "detail": "Oracle", "logo": "/assets/logos/oracle.png"},
-  {"id": "aws-ccp", "name": "AWS Cloud Practitioner", "year": 2024, "kind": "certificate", "detail": "Amazon Web Services", "logo": "/assets/logos/aws.png"},
-  {"id": "gcp-cdl", "name": "Cloud Digital Leader", "year": 2024, "kind": "certificate", "detail": "Google Cloud", "logo": "/assets/logos/google-cloud.png"},
-  {"id": "gecon-2024", "name": "GECON 2024 Conference", "year": 2024, "kind": "conference", "detail": "", "logo": ""},
-  {"id": "iccsa-2024", "name": "ICCSA 2024 Conference", "year": 2024, "kind": "conference", "detail": "", "logo": "/assets/logos/iccsa.png"},
-  {"id": "cloud-2023", "name": "CLOUD 2023", "year": 2023, "kind": "conference", "detail": "Shenzhen, China", "logo": "/assets/logos/ieee.png"},
-  {"id": "business-challenge-2022", "name": "Business Challenge 2022", "year": 2022, "kind": "contest", "detail": "", "logo": ""},
-  {"id": "tech-fest-mekong-2022", "name": "Tech Fest Mekong 2022", "year": 2022, "kind": "community", "detail": "", "logo": ""},
-  {"id": "fpt-autonomous-car-2021", "name": "FPT Autonomous Car 2021", "year": 2021, "kind": "contest", "detail": "", "logo": "/assets/logos/fptu.png"},
-  {"id": "intel-expert-challenge-2020", "name": "Intel Expert Challenge 2020", "year": 2020, "kind": "contest", "detail": "", "logo": "/assets/logos/intel.svg"},
-  {"id": "fptu-scholarship", "name": "FPT University Scholarship — 70%", "year": 2020, "kind": "award", "detail": "FPT University", "logo": "/assets/logos/fptu.png"}
+  {
+    "id": "conviction-2026",
+    "name": "Conviction 2026",
+    "year": 2026,
+    "kind": "community",
+    "detail": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbjZMx23oUz3nTGyExZ3VPSX9IFvB_i8s7F_ZGYwXd8mX6rlg83j9WbVo&s=10"
+  },
+  {
+    "id": "aws-genai-builder-2026",
+    "name": "GenAI Builder Club 2026",
+    "year": 2026,
+    "kind": "community",
+    "detail": "AWS",
+    "logo": "/assets/logos/aws.png"
+  },
+  {
+    "id": "goal-google-tunix-hack",
+    "name": "Google Tunix Hack",
+    "year": 2025,
+    "kind": "contest",
+    "detail": "Google & Kaggle",
+    "logo": "https://storage.googleapis.com/gweb-developer-goog-blog-assets/images/download.original.png"
+  },
+  {
+    "id": "goal-vesuvius-surface-detection",
+    "name": "Vesuvius Challenge",
+    "year": 2025,
+    "kind": "contest",
+    "detail": "Kaggle",
+    "logo": "https://images.icon-icons.com/2699/PNG/512/kaggle_logo_icon_168473.png"
+  },
+  {
+    "id": "goal-vietnam-ai-summit",
+    "name": "AI Summit 2026",
+    "year": 2026,
+    "kind": "community",
+    "detail": "aisummitvn.com",
+    "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472135/nianpham-portfolio/d361539a-ada2-4828-96e7-3d644fc05bd1.png"
+  },
+  {
+    "id": "goal-ai4vn",
+    "name": "AI4VN",
+    "year": 2026,
+    "kind": "conference",
+    "detail": "Vietnam's AI",
+    "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472537/nianpham-portfolio/cvkqxitf27c8uomk2qor.png"
+  },
+  {
+    "id": "innovation-submit",
+    "name": "Innovation Summit",
+    "year": 2025,
+    "kind": "community",
+    "detail": "InnoLab",
+    "logo": "https://static.ladipage.net/671213f016710b00121c25ff/vis-2025-20250526151904-y9ef8.jpg"
+  },
+  {
+    "id": "goal-gdg-devfest-hcmc",
+    "name": "GDG DevFest HCM City",
+    "year": 2026,
+    "kind": "community",
+    "detail": "Google",
+    "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472027/nianpham-portfolio/ec22dd19-8897-4caf-9697-dd3ddf16ecf1.png"
+  },
+  {
+    "id": "goal-aws-community-builders",
+    "name": "AWS Community Builders",
+    "year": 2026,
+    "kind": "community",
+    "detail": "AWS",
+    "logo": "/assets/logos/aws.png"
+  },
+  {
+    "id": "goal-aws-ai-practitioner",
+    "name": "Certified AI Practitioner",
+    "year": 2026,
+    "kind": "certificate",
+    "detail": "AWS",
+    "logo": "/assets/logos/aws.png"
+  },
+  {
+    "id": "goal-gcp-genai-leader",
+    "name": "Generative AI Leader",
+    "year": 2026,
+    "kind": "certificate",
+    "detail": "Google Cloud",
+    "logo": "/assets/logos/google-cloud.png"
+  },
+  {
+    "id": "zalo-ai-2025",
+    "name": "Zalo AI Challenge 2025",
+    "year": 2025,
+    "kind": "contest",
+    "detail": "",
+    "logo": "/assets/logos/zalo.svg"
+  },
+  {
+    "id": "aws-cloud-day-2025",
+    "name": "AWS Cloud Day 2025",
+    "year": 2025,
+    "kind": "community",
+    "detail": "",
+    "logo": "/assets/logos/aws.png"
+  },
+  {
+    "id": "conviction-2025",
+    "name": "Conviction 2025",
+    "year": 2025,
+    "kind": "community",
+    "detail": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbjZMx23oUz3nTGyExZ3VPSX9IFvB_i8s7F_ZGYwXd8mX6rlg83j9WbVo&s=10"
+  },
+  {
+    "id": "oci-ai",
+    "name": "OCI AI Foundations",
+    "year": 2024,
+    "kind": "certificate",
+    "detail": "Oracle",
+    "logo": "/assets/logos/oracle.png"
+  },
+  {
+    "id": "aws-ccp",
+    "name": "AWS Cloud Practitioner",
+    "year": 2024,
+    "kind": "certificate",
+    "detail": "AWS",
+    "logo": "/assets/logos/aws.png"
+  },
+  {
+    "id": "gcp-cdl",
+    "name": "Cloud Digital Leader",
+    "year": 2024,
+    "kind": "certificate",
+    "detail": "Google Cloud",
+    "logo": "/assets/logos/google-cloud.png"
+  },
+  {
+    "id": "gecon-2024",
+    "name": "GECON 2024 Conference",
+    "year": 2024,
+    "kind": "conference",
+    "detail": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTesY1bqJ5YPGJJEXMu6o3r1dHAnEkhaevoPmTpghX&s"
+  },
+  {
+    "id": "iccsa-2024",
+    "name": "ICCSA 2024 Conference",
+    "year": 2024,
+    "kind": "conference",
+    "detail": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFfxmikdcoCZYgTt3yx2fRYSOu3htyUZCVTTSIYoi9LeM3GqD9zouRLZeQ&s=10"
+  },
+  {
+    "id": "cloud-2023",
+    "name": "CLOUD 2023",
+    "year": 2023,
+    "kind": "conference",
+    "detail": "Shenzhen, China",
+    "logo": "/assets/logos/ieee.png"
+  },
+  {
+    "id": "business-challenge-2022",
+    "name": "Business Challenge 2022",
+    "year": 2022,
+    "kind": "contest",
+    "detail": "",
+    "logo": "https://vbic.vn/assets/images/footer.png"
+  },
+  {
+    "id": "tech-fest-mekong-2022",
+    "name": "Tech Fest Mekong 2022",
+    "year": 2022,
+    "kind": "community",
+    "detail": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZX79-5Y4mjcohnlxkh4ULyZ1s2YAdUXqA5xeIJamCj5jb2qEJCaJ9g0E&s=10"
+  },
+  {
+    "id": "fpt-autonomous-car-2021",
+    "name": "FPT Autonomous Car 2021",
+    "year": 2021,
+    "kind": "contest",
+    "detail": "FPT University",
+    "logo": "https://thumb.wikimedia.org/wikipedia/vi/thumb/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg/1280px-Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg.png?utm_source=vi.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+  },
+  {
+    "id": "intel-expert-challenge-2020",
+    "name": "Expert Challenge 2020",
+    "year": 2020,
+    "kind": "contest",
+    "detail": "Intel",
+    "logo": "/assets/logos/intel.svg"
+  },
+  {
+    "id": "fptu-scholarship",
+    "name": "FPTU Scholarship 70%",
+    "year": 2020,
+    "kind": "award",
+    "detail": "FPT University",
+    "logo": "https://thumb.wikimedia.org/wikipedia/vi/thumb/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg/1280px-Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg.png?utm_source=vi.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+  }
 ]

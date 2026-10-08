@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
+import { Hammersmith_One, Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
@@ -11,9 +11,8 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 // Display face, used only for the name on the About window.
-const display = Instrument_Serif({
+const display = Hammersmith_One({
   weight: "400",
-  style: ["normal", "italic"],
   subsets: ["latin", "latin-ext"],
   variable: "--font-display",
   display: "swap",

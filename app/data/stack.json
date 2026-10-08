@@ -91,7 +91,7 @@
         "detail": "Gemma 3, local LLMs"
       },
       {
-        "name": "Open models",
+        "name": "Open Models",
         "detail": "Hugging Face SLMs under 7B"
       },
       {
@@ -116,7 +116,7 @@
         "name": "Fireworks / Together AI"
       },
       {
-        "name": "Embedding models",
+        "name": "Embedding Models",
         "detail": "OpenAI, Cohere, Jina, BGE-M3"
       },
       {
@@ -131,7 +131,7 @@
   },
   {
     "id": "agents",
-    "label": "Agents & orchestration",
+    "label": "Agents & Orchestration",
     "blurb": "Tool calling, memory and multi-agent systems",
     "color": "#7c3aed",
     "tools": [
@@ -167,13 +167,13 @@
         "name": "FastMCP"
       },
       {
-        "name": "Tool / function calling"
+        "name": "Tool / Function Calling"
       },
       {
         "name": "OpenAI Actions"
       },
       {
-        "name": "Multi-agent orchestration"
+        "name": "Multi-Agent Orchestration"
       },
       {
         "name": "Hermes Agent"
@@ -185,7 +185,7 @@
         "name": "Langflow"
       },
       {
-        "name": "Agent memory",
+        "name": "Agent Memory",
         "detail": "skills, short/long-term, spaced repetition"
       },
       {
@@ -193,7 +193,7 @@
         "detail": "agent memory"
       },
       {
-        "name": "Human-in-the-loop approval"
+        "name": "Human-in-the-Loop Approval"
       },
       {
         "name": "Tavily / SerpAPI / Serper",
@@ -211,7 +211,7 @@
   },
   {
     "id": "rag",
-    "label": "RAG & document AI",
+    "label": "RAG & Document AI",
     "blurb": "Retrieval, parsing and grounded answers",
     "color": "#0f766e",
     "tools": [
@@ -224,7 +224,7 @@
         "detail": "document RAG"
       },
       {
-        "name": "Hybrid search",
+        "name": "Hybrid Search",
         "detail": "vector + BM25"
       },
       {
@@ -232,7 +232,7 @@
         "detail": "FlashRank, RAGatouille"
       },
       {
-        "name": "Chunking & embedding pipelines"
+        "name": "Chunking & Embedding Pipelines"
       },
       {
         "name": "MinerU / DocLayout-YOLO",
@@ -251,23 +251,23 @@
         "name": "pdf-parse / mammoth"
       },
       {
-        "name": "Text-to-SQL agents"
+        "name": "Text-to-SQL Agents"
       },
       {
-        "name": "Citation verification"
+        "name": "Citation Verification"
       },
       {
-        "name": "Multi-tenant RAG isolation"
+        "name": "Multi-Tenant RAG Isolation"
       },
       {
-        "name": "Semantic caching",
+        "name": "Semantic Caching",
         "detail": "embedding caches"
       }
     ]
   },
   {
     "id": "vector",
-    "label": "Vector, search & graph stores",
+    "label": "Vector - Search - Graph",
     "blurb": "Embeddings, hybrid search and knowledge graphs",
     "color": "#0e7490",
     "tools": [
@@ -314,43 +314,43 @@
   },
   {
     "id": "llm-engineering",
-    "label": "LLM engineering",
+    "label": "LLM Engineering",
     "blurb": "How I make LLM features reliable and affordable",
     "color": "#4338ca",
     "tools": [
       {
-        "name": "Prompt engineering"
+        "name": "Prompt Engineering"
       },
       {
-        "name": "Context engineering"
+        "name": "Context Engineering"
       },
       {
-        "name": "Structured outputs",
+        "name": "Structured Outputs",
         "detail": "JSON schema / Zod"
       },
       {
-        "name": "Prompt caching"
+        "name": "Prompt Caching"
       },
       {
-        "name": "Intent routing & classification"
+        "name": "Intent Routing & Classification"
       },
       {
-        "name": "Provider routing & fallback",
+        "name": "Provider Routing & Fallback",
         "detail": "LLM gateway"
       },
       {
-        "name": "Token & cost accounting",
+        "name": "Token & Cost Accounting",
         "detail": "quotas"
       },
       {
-        "name": "Hallucination guardrails",
+        "name": "Hallucination Guardrails",
         "detail": "refusal policies"
       }
     ]
   },
   {
     "id": "llmops",
-    "label": "LLMOps & evaluation",
+    "label": "LLMOps & Evaluation",
     "blurb": "Tracing, evals and feedback loops",
     "color": "#047857",
     "tools": [
@@ -367,18 +367,18 @@
         "name": "OpenTelemetry"
       },
       {
-        "name": "Agent evaluation",
+        "name": "Agent Evaluation",
         "detail": "harnesses, eval suites, golden datasets"
       },
       {
-        "name": "A/B prompt versioning"
+        "name": "A/B Prompt Versioning"
       },
       {
-        "name": "Human feedback loops",
+        "name": "Human Feedback Loops",
         "detail": "RLHF-style labeling"
       },
       {
-        "name": "Reproducible AI run records",
+        "name": "Reproducible AI Run Records",
         "detail": "model, prompt, inputs, cost"
       },
       {
@@ -389,7 +389,7 @@
   },
   {
     "id": "ml",
-    "label": "ML & research",
+    "label": "ML & Research",
     "blurb": "Training, benchmarking and data science",
     "color": "#9d174d",
     "tools": [
@@ -424,32 +424,32 @@
         "detail": "recommender SVD"
       },
       {
-        "name": "Fine-tuning dataset curation",
+        "name": "Fine-Tuning Dataset Curation",
         "detail": "JSONL"
       },
       {
-        "name": "Teacher–student fine-tuning"
+        "name": "Teacher–Student Fine-Tuning"
       },
       {
         "name": "LoRA",
         "detail": "basic"
       },
       {
-        "name": "Model benchmarking",
+        "name": "Model Benchmarking",
         "detail": "accuracy, latency, energy, CO₂"
       },
       {
-        "name": "Experimental design"
+        "name": "Experimental Design"
       },
       {
-        "name": "Reproducible pipelines",
+        "name": "Reproducible Pipelines",
         "detail": "Docker, Hugging Face"
       }
     ]
   },
   {
     "id": "vision",
-    "label": "Computer vision & robotics",
+    "label": "Computer Vision & Robotics",
     "blurb": "Detection, OCR and identity",
     "color": "#be123c",
     "tools": [
@@ -479,18 +479,18 @@
         "name": "CLIP"
       },
       {
-        "name": "Face recognition & liveness",
+        "name": "Face Recognition & Liveness",
         "detail": "eKYC"
       },
       {
-        "name": "Scene detection"
+        "name": "Scene Detection"
       },
       {
-        "name": "Smart 9:16 reframing",
+        "name": "Smart 9:16 Reframing",
         "detail": "face & pose tracking"
       },
       {
-        "name": "NFC chip-ID (CCCD)",
+        "name": "NFC Chip-ID (CCCD)",
         "detail": "reading & cryptographic verification"
       },
       {
@@ -501,7 +501,7 @@
   },
   {
     "id": "voice",
-    "label": "Speech & realtime voice",
+    "label": "Speech & Realtime Voice",
     "blurb": "ASR, TTS and voice agents",
     "color": "#c2410c",
     "tools": [
@@ -554,21 +554,21 @@
         "name": "Daily"
       },
       {
-        "name": "SIP.js / WebRTC softphone"
+        "name": "SIP.js / WebRTC Softphone"
       },
       {
-        "name": "Barge-in voice pipelines",
+        "name": "Barge-In Voice Pipelines",
         "detail": "interruptible"
       },
       {
-        "name": "Audio segmentation",
+        "name": "Audio Segmentation",
         "detail": "audio-energy & silence-based"
       }
     ]
   },
   {
     "id": "media",
-    "label": "Generative media & video",
+    "label": "Generative Media & Video",
     "blurb": "Image, video and avatar generation",
     "color": "#a21caf",
     "tools": [
@@ -659,7 +659,7 @@
         "detail": "basic"
       },
       {
-        "name": "SSE streaming"
+        "name": "SSE Streaming"
       },
       {
         "name": "WebSocket / Socket.io"
@@ -703,7 +703,7 @@
   },
   {
     "id": "data",
-    "label": "Databases, queues & storage",
+    "label": "Databases & Storage",
     "blurb": "Where the state goes",
     "color": "#b45309",
     "tools": [
@@ -759,10 +759,10 @@
         "name": "GCP Pub/Sub"
       },
       {
-        "name": "Postgres job queue"
+        "name": "Postgres Job Queue"
       },
       {
-        "name": "Job queues",
+        "name": "Job Queues",
         "detail": "cron, retry/backoff, idempotency"
       },
       {
@@ -791,7 +791,7 @@
   },
   {
     "id": "crawling",
-    "label": "Crawling & data pipelines",
+    "label": "Crawling & Data Pipelines",
     "blurb": "Scraping, ETL and migrations",
     "color": "#854d0e",
     "tools": [
@@ -828,16 +828,16 @@
         "name": "newspaper3k"
       },
       {
-        "name": "asyncio pipelines"
+        "name": "asyncio Pipelines"
       },
       {
-        "name": "ETL pipelines"
+        "name": "ETL Pipelines"
       },
       {
-        "name": "LLM data labelling"
+        "name": "LLM Data Labelling"
       },
       {
-        "name": "Data migration & reconciliation"
+        "name": "Data Migration & Reconciliation"
       },
       {
         "name": "Excel / openpyxl",
@@ -847,7 +847,7 @@
   },
   {
     "id": "integrations",
-    "label": "Payments & integrations",
+    "label": "Payments & Integrations",
     "blurb": "Messaging, payments and third-party platforms",
     "color": "#be185d",
     "tools": [
@@ -887,7 +887,7 @@
         "detail": "Baileys"
       },
       {
-        "name": "Slack / Discord bots"
+        "name": "Slack / Discord Bots"
       },
       {
         "name": "SendGrid / Brevo / Resend"
@@ -928,7 +928,7 @@
   },
   {
     "id": "frontend",
-    "label": "Frontend & web",
+    "label": "Frontend & Web",
     "blurb": "Interfaces for the people using it",
     "color": "#0369a1",
     "tools": [
@@ -1016,7 +1016,7 @@
         "detail": "monorepos"
       },
       {
-        "name": "Embeddable widgets",
+        "name": "Embeddable Widgets",
         "detail": "web components"
       },
       {
@@ -1027,7 +1027,7 @@
   },
   {
     "id": "cms",
-    "label": "CMS, SEO & performance",
+    "label": "CMS, SEO & Performance",
     "blurb": "Content sites that load fast and rank",
     "color": "#3f6212",
     "tools": [
@@ -1058,7 +1058,7 @@
   },
   {
     "id": "mobile",
-    "label": "Mobile & desktop",
+    "label": "Mobile & Desktop",
     "blurb": "Apps on phones, kiosks and desktops",
     "color": "#7c2d12",
     "tools": [
@@ -1089,10 +1089,10 @@
         "name": "Firebase Cloud Messaging"
       },
       {
-        "name": "Clean Architecture for mobile"
+        "name": "Clean Architecture for Mobile"
       },
       {
-        "name": "Biometric login",
+        "name": "Biometric Login",
         "detail": "local_auth"
       }
     ]
@@ -1141,7 +1141,7 @@
   },
   {
     "id": "cloud",
-    "label": "Cloud platforms",
+    "label": "Cloud Platforms",
     "blurb": "Where it runs",
     "color": "#b91c1c",
     "tools": [
@@ -1197,7 +1197,7 @@
   },
   {
     "id": "devops",
-    "label": "DevOps & observability",
+    "label": "DevOps & Observability",
     "blurb": "Shipping, running and watching it",
     "color": "#374151",
     "tools": [
@@ -1212,7 +1212,7 @@
         "detail": "basic"
       },
       {
-        "name": "Helm charts"
+        "name": "Helm Charts"
       },
       {
         "name": "GitHub Actions",
@@ -1240,13 +1240,13 @@
         "name": "PM2"
       },
       {
-        "name": "Linux VPS administration"
+        "name": "Linux VPS Administration"
       },
       {
         "name": "cPanel / DirectAdmin / LiteSpeed"
       },
       {
-        "name": "Zero-downtime deploys"
+        "name": "Zero-Downtime Deploys"
       },
       {
         "name": "Prometheus",
@@ -1272,7 +1272,7 @@
   },
   {
     "id": "security",
-    "label": "Security & identity",
+    "label": "Security & Identity",
     "blurb": "Auth, access control and hardening",
     "color": "#991b1b",
     "tools": [
@@ -1295,17 +1295,17 @@
         "detail": "permission matrices, multi-tenant isolation"
       },
       {
-        "name": "API keys",
+        "name": "API Keys",
         "detail": "tiered rate limits"
       },
       {
-        "name": "HMAC per-request tickets"
+        "name": "HMAC Per-Request Tickets"
       },
       {
-        "name": "AES-256 encryption"
+        "name": "AES-256 Encryption"
       },
       {
-        "name": "Audit logs",
+        "name": "Audit Logs",
         "detail": "append-only, DB triggers"
       },
       {
@@ -1317,11 +1317,11 @@
         "detail": "NFC CCCD, VNeID, face liveness"
       },
       {
-        "name": "Security audits & incident response",
+        "name": "Security Audits & Incident Response",
         "detail": "CVE remediation"
       },
       {
-        "name": "OWASP hardening",
+        "name": "OWASP Hardening",
         "detail": "rate limiting, IP whitelisting"
       },
       {
@@ -1334,7 +1334,7 @@
         "name": "DOMPurify"
       },
       {
-        "name": "Secrets management",
+        "name": "Secrets Management",
         "detail": "key rotation"
       }
     ]
@@ -1361,14 +1361,14 @@
         "name": "Supertest"
       },
       {
-        "name": "Visual regression QA",
+        "name": "Visual Regression QA",
         "detail": "pixel-perfect, pixel-diff"
       }
     ]
   },
   {
     "id": "automation",
-    "label": "Automation & AI dev tools",
+    "label": "Automation & AI Dev-tools",
     "blurb": "Workflows I automate and tools I build with",
     "color": "#6b21a8",
     "tools": [
@@ -1407,7 +1407,7 @@
   },
   {
     "id": "architecture",
-    "label": "Architecture & domains",
+    "label": "Architecture & Domains",
     "blurb": "How I structure systems",
     "color": "#1e40af",
     "tools": [
@@ -1416,25 +1416,25 @@
         "detail": "and modular monolith"
       },
       {
-        "name": "Event-driven architecture"
+        "name": "Event-Driven Architecture"
       },
       {
-        "name": "Multi-tenancy",
+        "name": "Multi-Tenancy",
         "detail": "row-level & schema isolation"
       },
       {
-        "name": "Domain-driven design",
+        "name": "Domain-Driven Design",
         "detail": "ERP, CRM, LMS, POS, Payroll"
       },
       {
-        "name": "Database design & migrations"
+        "name": "Database Design & Migrations"
       },
       {
-        "name": "Omnichannel messaging",
+        "name": "Omnichannel Messaging",
         "detail": "Zalo, Messenger, Telegram, Email, VoIP"
       },
       {
-        "name": "Internal collaboration suite",
+        "name": "Internal Collaboration Suite",
         "detail": "chat, meeting, webmail, drive, calendar"
       }
     ]

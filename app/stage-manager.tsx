@@ -170,9 +170,6 @@ type WindowProps = {
 function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
   const isAbout = item.kind === "about";
   const isCollection = COLLECTIONS.includes(item.kind);
-  const isMail = item.href?.startsWith("mailto:") ?? false;
-  const linkProps = isMail ? {} : { target: "_blank", rel: "noopener noreferrer" };
-  const copyLabel = item.copyLabel.toLowerCase();
   // Title-bar actions always point at the page shown in the address bar; on
   // About that is the site itself, not the email the body's buttons use.
   const chromeCopy = isAbout ? SITE_URL : item.copyValue;
@@ -255,63 +252,38 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
               {isAbout && <p className="role">{OWNER.role}</p>}
             </div>
 
-            {isAbout && <blockquote className="tagline">{OWNER.tagline}</blockquote>}
             {!isAbout && <p className="desc">{item.description}</p>}
 
             {isAbout ? (
               <>
-                <div className="about-info">
-                  <section className="info-card">
-                    <h3>
-                      <Icon name="cap" size={15} />
-                      Education
-                    </h3>
-                    <p className="edu-degree">{EDUCATION.degree}</p>
-                    <p className="edu-school">
-                      {EDUCATION.school} · Graduated {EDUCATION.graduated}
-                    </p>
-                    <dl className="edu-facts">
-                      {EDUCATION.facts.map((f) => (
-                        <div key={f.label}>
-                          <dt>{f.label}</dt>
-                          <dd>{f.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </section>
-                  <section className="info-card">
-                    <h3>
-                      <Icon name="mail" size={15} />
-                      Contact
-                    </h3>
-                    <ul className="contact-list">
-                      <li>
-                        <Icon name="mail" size={16} />
-                        <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a>
-                        <button
-                          type="button"
-                          className="icon-btn is-small"
-                          onClick={() => onCopy(OWNER.email, "Email address")}
-                          aria-label="Copy email address"
-                          title="Copy email address"
-                        >
-                          <Icon name="copy" size={14} />
-                        </button>
-                      </li>
-                      <li>
-                        <Icon name="pin" size={16} />
-                        <span>{OWNER.location}</span>
-                      </li>
-                      <li>
-                        <Icon name="globe" size={16} />
-                        <span>{OWNER.website}</span>
-                      </li>
-                    </ul>
-                  </section>
-                </div>
-                <div className="find-me">
-                  <h3>Find me on</h3>
-                  <ul>
+                <section className="info-card connect">
+                  <h3>
+                    <Icon name="mail" size={15} />
+                    Contact
+                  </h3>
+                  <div className="connect-mail">
+                    <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a>
+                    <button
+                      type="button"
+                      className="icon-btn is-small"
+                      onClick={() => onCopy(OWNER.email, "Email address")}
+                      aria-label="Copy email address"
+                      title="Copy email address"
+                    >
+                      <Icon name="copy" size={14} />
+                    </button>
+                  </div>
+                  <p className="connect-meta">
+                    <span>
+                      <Icon name="pin" size={14} />
+                      {OWNER.location}
+                    </span>
+                    <span>
+                      <Icon name="globe" size={14} />
+                      {OWNER.website}
+                    </span>
+                  </p>
+                  <ul className="connect-channels" aria-label="Find me on">
                     {CHANNELS.map((c) => (
                       <li key={c.id}>
                         <a
@@ -320,32 +292,41 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
                           aria-label={`${c.name} — ${c.label}`}
                           title={c.label}
                         >
-                          <AppIcon src={c.icon} size={28} />
-                          <strong>{c.name}</strong>
+                          <AppIcon src={c.icon} size={26} />
+                          <span>{c.name}</span>
                         </a>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </section>
+                <section className="info-card">
+                  <h3>
+                    <Icon name="cap" size={15} />
+                    Education
+                  </h3>
+                  <p className="edu-degree">{EDUCATION.degree}</p>
+                  <p className="edu-school">
+                    {EDUCATION.school} · Graduated {EDUCATION.graduated}
+                  </p>
+                  <dl className="edu-facts">
+                    {EDUCATION.facts.map((f) => (
+                      <div key={f.label}>
+                        <dt>{f.label}</dt>
+                        <dd>{f.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <ul className="edu-subjects" aria-label="Coursework">
+                    {EDUCATION.coursework.map((c, i) => (
+                      // Hues step around the wheel so every subject gets its own colour
+                      <li key={c} style={{ "--h": (i * 360) / EDUCATION.coursework.length } as CSSProperties}>
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               </>
             ) : null}
-
-            {item.href && (
-              <div className="actions">
-                <a className="btn btn-primary" href={item.href} {...linkProps}>
-                  {item.cta}
-                  <Icon name="arrow" size={16} />
-                </a>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => onCopy(item.copyValue, item.copyLabel)}
-                >
-                  <Icon name="copy" size={16} />
-                  Copy {copyLabel}
-                </button>
-              </div>
-            )}
           </div>
         </div>
       )}
