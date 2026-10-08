@@ -49,7 +49,7 @@
   },
   {
     "id": "innovation-submit",
-    "name": "Innovation Summit",
+    "name": "Vietnam Innovation Summit",
     "year": 2025,
     "kind": "community",
     "detail": "InnoLab",
@@ -57,10 +57,10 @@
   },
   {
     "id": "goal-gdg-devfest-hcmc",
-    "name": "GDG DevFest HCM City",
+    "name": "DevFest HCM City",
     "year": 2026,
     "kind": "community",
-    "detail": "Google",
+    "detail": "Google Developer Group",
     "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472027/nianpham-portfolio/ec22dd19-8897-4caf-9697-dd3ddf16ecf1.png"
   },
   {
@@ -134,6 +134,30 @@
     "kind": "certificate",
     "detail": "Google Cloud",
     "logo": "/assets/logos/google-cloud.png"
+  },
+  {
+    "id": "certNexus",
+    "name": "Ethical Emerging Technologist",
+    "year": 2024,
+    "kind": "certificate",
+    "detail": "CertNexus Certified",
+    "logo": "https://beyondcompany.sa/wp-content/uploads/2025/06/certnexus.png"
+  },
+  {
+    "id": "coursera",
+    "name": "Software Development Lifecycle",
+    "year": 2024,
+    "kind": "certificate",
+    "detail": "Coursera",
+    "logo": "https://images.ctfassets.net/00atxywtfxvd/2QeS5ysKMhZ3ZjiU2rGRJA/e15df94b265053ce8ded4f5e630241c8/cropped-android-chrome-512x512-1.png"
+  },
+  {
+    "id": "cloud2023",
+    "name": "Cloud Computing",
+    "year": 2023,
+    "kind": "certificate",
+    "detail": "Springer",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREph7ztfYAznsnNcUgEN1dCY_sQmbnpC-rjEm-h_eZAJDJQ_56QBky9KM&s=10"
   },
   {
     "id": "gecon-2024",
