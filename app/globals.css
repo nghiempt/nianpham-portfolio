@@ -2693,7 +2693,8 @@ html.intro-on body {
 
 /* The title stays blank until the intro lays the name onto it. */
 html.intro-on .window.is-about .heading h2 {
-  visibility: hidden;
+  /* Opacity, not visibility, so the heading stays in the accessibility tree. */
+  opacity: 0;
 }
 
 .intro {

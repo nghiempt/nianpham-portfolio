@@ -15,6 +15,10 @@ export default function NotFound() {
             <img
                 src={IMAGE_URL}
                 alt="404"
+                // Lazy, so React never preloads this 6 MB GIF on every page
+                // (the not-found fallback ships with each route's payload).
+                loading="lazy"
+                decoding="async"
                 className="w-72 object-contain"
             />
             <h1 className="text-2xl font-bold tracking-tight" style={{ color: "#1a1a1a" }}>

@@ -181,7 +181,8 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
   const chromeIsMail = chromeHref?.startsWith("mailto:") ?? false;
 
   return (
-    <article
+    // A section rather than an article: tabpanel is not an allowed role on <article>.
+    <section
       ref={windowRef}
       className={`window is-${item.kind}${leaving ? " is-leaving" : ""}`}
       style={{ "--p-accent": item.accent } as CSSProperties}
@@ -239,6 +240,7 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
                 alt={isAbout ? `Portrait of ${OWNER.name}` : ""}
                 fill
                 priority={index === 0}
+                fetchPriority={index === 0 ? "high" : undefined}
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 style={{ objectPosition: item.coverPosition ?? "center" }}
               />
@@ -351,7 +353,7 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
           <kbd>↓</kbd> switch window
         </span>
       </footer>
-    </article>
+    </section>
   );
 }
 
@@ -571,7 +573,7 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
               >
                 {/* A real miniature of the window, as Stage Manager shows it */}
                 <span className="thumb-window" aria-hidden="true">
-                  <Image src={`/assets/thumbs/${p.id}-v4.webp`} alt="" fill sizes="240px" priority={i < 4} />
+                  <Image src={`/assets/thumbs/${p.id}-v4.webp`} alt="" fill sizes="240px" loading="eager" />
                 </span>
                 <span className="thumb-label">
                   <ItemIcon item={p} size={22} />
