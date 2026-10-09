@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { WINDOWS } from "./profiles";
+
+export const metadata: Metadata = {
+    title: "Page not found",
+    robots: { index: false, follow: true },
+};
 
 const IMAGE_URL = "https://octodex.github.com/images/NUX_Octodex.gif";
 
@@ -20,6 +27,13 @@ export default function NotFound() {
             >
                 Go back home
             </Link>
+            <nav aria-label="Pages" className="flex flex-wrap justify-center gap-4 text-sm" style={{ color: "#555" }}>
+                {WINDOWS.filter((w) => w.path !== "/").map((w) => (
+                    <Link key={w.id} href={w.path} className="underline-offset-4 hover:underline">
+                        {w.name}
+                    </Link>
+                ))}
+            </nav>
         </div>
     );
 }

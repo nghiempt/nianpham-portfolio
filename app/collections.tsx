@@ -216,7 +216,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <Image
               className="p-shot"
               src={coverSrc(project.thumbnail)}
-              alt=""
+              alt={`${project.name} — ${CATEGORY_BY_ID[project.category].label} project`}
               fill
               sizes="(min-width: 1024px) 320px, 100vw"
               unoptimized={isRemote(project.thumbnail)}

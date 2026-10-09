@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -10,6 +11,7 @@ import {
   useSyncExternalStore,
   type CSSProperties,
   type KeyboardEvent,
+  type MouseEvent,
   type Ref,
 } from "react";
 import { AchievementsView, ProjectsView, PublicationsView, StackView } from "./collections";
@@ -353,8 +355,9 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
   );
 }
 
-export default function StageManager() {
-  const [activeId, setActiveId] = useState(WINDOWS[0].id);
+export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?: string }) {
+  const router = useRouter();
+  const [activeId, setActiveId] = useState(initialId);
   const [leavingId, setLeavingId] = useState<string | null>(null);
   const wallpaper = useSyncExternalStore(subscribeWallpaper, readWallpaper, () => DEFAULT_WALLPAPER);
   const [toast, setToast] = useState<{ text: string; key: number } | null>(null);
@@ -362,7 +365,7 @@ export default function StageManager() {
   const desktopRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef<HTMLElement>(null);
   const leavingRef = useRef<HTMLElement>(null);
-  const thumbRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const thumbRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const activeIdRef = useRef(activeId);
   const leavingIdRef = useRef<string | null>(null);
   const animations = useRef<Animation[]>([]);
@@ -381,8 +384,15 @@ export default function StageManager() {
     leavingIdRef.current = outgoing;
     setLeavingId(outgoing);
     setActiveId(id);
-    history.replaceState(null, "", `#${id}`);
+    // Every window has its own page, so the address bar always shows a URL
+    // that reloads (and gets indexed) as this very window.
+    history.replaceState(null, "", WINDOWS.find((p) => p.id === id)!.path);
   }, []);
+
+  // The tab title follows the window on stage, as if its page had loaded.
+  useEffect(() => {
+    document.title = active.pageTitle;
+  }, [active]);
 
   const changeWallpaper = useCallback((id: string) => {
     // The view transition needs the new wallpaper painted synchronously inside
@@ -396,16 +406,17 @@ export default function StageManager() {
     else apply();
   }, []);
 
-  // Deep links: open the window named in the URL hash.
+  // Old #hash deep links still open their window (and move to its page URL).
   useEffect(() => {
     const fromHash = () => {
-      const id = window.location.hash.slice(1);
-      if (WINDOWS.some((p) => p.id === id)) select(id);
+      const target = WINDOWS.find((p) => p.id === window.location.hash.slice(1));
+      // Navigating (rather than switching in place) gives the page its own title and metadata.
+      if (target) router.replace(target.path);
     };
     fromHash();
     window.addEventListener("hashchange", fromHash);
     return () => window.removeEventListener("hashchange", fromHash);
-  }, [select]);
+  }, [router]);
 
   // Stage Manager motion: the new window flies out of its thumbnail while the
   // previous one shrinks back into its own. In-flight animations are cancelled
@@ -509,7 +520,9 @@ export default function StageManager() {
         <i className="wp-sheen" />
       </div>
       <h1 className="sr-only">
-        {OWNER.name} ({OWNER.nickname}) — {OWNER.role}
+        {active.kind === "about"
+          ? `${OWNER.name} (${OWNER.nickname}) — ${OWNER.role}`
+          : `${active.title} — ${OWNER.name} (${OWNER.nickname})`}
       </h1>
 
       <header className="menubar">
@@ -535,20 +548,26 @@ export default function StageManager() {
           {WINDOWS.map((p, i) => {
             const selected = p.id === activeId;
             return (
-              <button
+              // Real links so crawlers can follow them to each window's page;
+              // a plain click switches in place instead of reloading.
+              <a
                 key={p.id}
+                href={p.path}
                 ref={(el) => {
                   thumbRefs.current[p.id] = el;
                 }}
                 id={`tab-${p.id}`}
-                type="button"
                 role="tab"
                 aria-selected={selected}
                 aria-controls="stage-window"
                 tabIndex={selected ? 0 : -1}
                 className={`thumb${selected ? " is-active" : ""}`}
                 style={{ "--i": i, "--p-accent": p.accent } as CSSProperties}
-                onClick={() => select(p.id)}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                  e.preventDefault();
+                  select(p.id);
+                }}
               >
                 {/* A real miniature of the window, as Stage Manager shows it */}
                 <span className="thumb-window" aria-hidden="true">
@@ -558,7 +577,7 @@ export default function StageManager() {
                   <ItemIcon item={p} size={22} />
                   {p.name}
                 </span>
-              </button>
+              </a>
             );
           })}
         </div>

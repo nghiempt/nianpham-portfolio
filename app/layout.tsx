@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Hammersmith_One, Plus_Jakarta_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
+import Analytics from "./analytics";
 import Intro from "./intro";
+import { OWNER, SITE_URL } from "./profiles";
+import { DESCRIPTIONS } from "./seo";
 
 // Body and UI text.
 const jakarta = Plus_Jakarta_Sans({
@@ -27,25 +30,43 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.nianpham.my/"),
-  title: "Nghiem Thanh Pham",
-  description:
-    "The shortest path from impossible to production goes through my code",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${OWNER.name} (${OWNER.nickname}) — Senior AI Engineer & Researcher`,
+    template: `%s | ${OWNER.name}`,
+  },
+  description: DESCRIPTIONS.about,
+  applicationName: OWNER.name,
+  authors: [{ name: OWNER.name, url: `${SITE_URL}/` }],
+  creator: OWNER.name,
+  publisher: OWNER.name,
+  keywords: [
+    OWNER.name,
+    OWNER.nickname,
+    OWNER.nativeName,
+    "Nghiem Pham",
+    "AI Engineer",
+    "Scientific Researcher",
+    "LLM",
+    "Agentic AI",
+    "Portfolio",
+    "Ho Chi Minh City",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  // Search Console's "HTML tag" method; set the token in the hosting env.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
-    title: "Nghiem Thanh Pham",
-    description:
-      "The shortest path from impossible to production goes through my code",
-    url: "https://www.nianpham.my/",
-    siteName: "Nghiem Thanh Pham",
-    locale: "vi_VN",
     type: "website",
+    siteName: OWNER.name,
+    locale: "en_US",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Nghiem Thanh Pham",
-    description:
-      "The shortest path from impossible to production goes through my code",
-  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -58,6 +79,7 @@ export default function RootLayout({
       <body>
         <Intro />
         {children}
+        <Analytics />
       </body>
     </html>
   );

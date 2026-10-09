@@ -3,6 +3,8 @@ export const SITE_URL = "https://www.nianpham.my";
 export const OWNER = {
   name: "Nghiem Thanh Pham",
   nickname: "Nian Pham",
+  /** Vietnamese order (family name first), for searches in Vietnamese. */
+  nativeName: "Pham Thanh Nghiem",
   role: "Senior AI Engineer & Scientific Researcher",
   email: "nianpham.reed@gmail.com",
   location: "Ho Chi Minh City, Vietnam",
@@ -72,6 +74,10 @@ export type StageItem = {
   coverPosition?: string;
   /** Short URL shown in the window's address bar. */
   display: string;
+  /** The window's own page; About lives at the site root. */
+  path: string;
+  /** Browser-tab / search-result title of that page. */
+  pageTitle: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -91,6 +97,8 @@ export const WINDOWS: StageItem[] = [
     cover: OWNER.photo,
     coverPosition: "center 22%",
     display: "nianpham.my",
+    path: "/",
+    pageTitle: `${OWNER.name} (${OWNER.nickname}) — Senior AI Engineer & Researcher`,
     eyebrow: "Hello, I'm",
     title: OWNER.name,
     description:
@@ -105,10 +113,12 @@ export const WINDOWS: StageItem[] = [
     name: "Projects",
     accent: "#6d28d9",
     display: "nianpham.my/projects",
+    path: "/projects",
+    pageTitle: `Projects | ${OWNER.name}`,
     eyebrow: "Showcase",
     title: "Projects",
     description: "",
-    copyValue: `${SITE_URL}/#projects`,
+    copyValue: `${SITE_URL}/projects`,
     copyLabel: "Link",
   },
   {
@@ -117,10 +127,12 @@ export const WINDOWS: StageItem[] = [
     name: "Publications",
     accent: "#0f766e",
     display: "nianpham.my/publications",
+    path: "/publications",
+    pageTitle: `Publications & Research Papers | ${OWNER.name}`,
     eyebrow: "Research",
     title: "Publications",
     description: "",
-    copyValue: `${SITE_URL}/#publications`,
+    copyValue: `${SITE_URL}/publications`,
     copyLabel: "Link",
   },
   {
@@ -129,10 +141,12 @@ export const WINDOWS: StageItem[] = [
     name: "Tech Stack",
     accent: "#0369a1",
     display: "nianpham.my/stack",
+    path: "/stack",
+    pageTitle: `Tech Stack & AI Tools | ${OWNER.name}`,
     eyebrow: "Toolbox",
     title: "Tech Stack",
     description: "",
-    copyValue: `${SITE_URL}/#stack`,
+    copyValue: `${SITE_URL}/stack`,
     copyLabel: "Link",
   },
   {
@@ -141,10 +155,12 @@ export const WINDOWS: StageItem[] = [
     name: "Achievements",
     accent: "#b45309",
     display: "nianpham.my/achievements",
+    path: "/achievements",
+    pageTitle: `Achievements & Awards | ${OWNER.name}`,
     eyebrow: "Milestones",
     title: "Achievements",
     description: "",
-    copyValue: `${SITE_URL}/#achievements`,
+    copyValue: `${SITE_URL}/achievements`,
     copyLabel: "Link",
   },
 ];
