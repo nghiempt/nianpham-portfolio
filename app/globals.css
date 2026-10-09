@@ -2700,7 +2700,7 @@ kbd {
   width: 1.4em;
   height: 1.4em;
   margin: -0.4em -0.07em -0.3em -0.04em;
-  vertical-align: -0.032em;
+  vertical-align: -0.043em;
   user-select: none;
   /* Same function list everywhere so the intro can tween between them. */
   filter: invert(0) hue-rotate(0deg) drop-shadow(0 0 0 rgba(34, 211, 238, 0));
@@ -2791,8 +2791,20 @@ html.intro-on .window.is-about .heading h2 {
   transform: translateX(4.4em) scale(2.5);
   transform-origin: 50% 55%;
   filter: invert(0) hue-rotate(0deg) drop-shadow(0 0 18px rgba(74, 222, 128, 0.35));
-  animation: intro-logo-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+  transition: transform 1100ms cubic-bezier(0.65, 0, 0.35, 1), opacity 250ms ease;
+}
+/* While the pixel reveal runs, the canvas stands in for the logo. */
+.intro.is-revealing .intro-line .logo-mark {
+  opacity: 0;
+}
+.intro-pixels {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 18px rgba(74, 222, 128, 0.35));
+  transition: opacity 250ms ease;
+}
+.intro-pixels.is-done {
+  opacity: 0;
 }
 /* Step 2: the logo shrinks and slides into place as the N of the name. */
 .intro:not([data-phase="logo"]) .intro-line .logo-mark {
@@ -2809,11 +2821,6 @@ html.intro-on .window.is-about .heading h2 {
   animation: intro-join 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes intro-logo-in {
-  from {
-    opacity: 0;
-  }
-}
 @keyframes intro-join {
   from {
     opacity: 0;
