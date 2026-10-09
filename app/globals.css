@@ -143,12 +143,13 @@ body {
 }
 
 /* ---------- Living wallpaper ----------
-   Four soft colour blobs, each on its own orbit and period so the mix never
-   repeats the same way twice, plus a slow iridescent sheen.
+   Four soft colour blobs plus an iridescent sheen, all static: the glass
+   above re-samples whatever is behind it, so a moving wallpaper costs a full
+   backdrop blur every frame.
    Performance: everything here is a blur-soft gradient, so it is drawn on a
    quarter-size layer and scaled ×4 — visually identical, ~16× fewer pixels
    for the glass above to re-sample each frame. Sizes use container units so
-   the layout is resolution-independent; only transform animates. */
+   the layout is resolution-independent. */
 .wp-motion {
   position: fixed;
   left: 0;
@@ -169,34 +170,24 @@ body {
   height: 70cqmax;
   border-radius: 50%;
   opacity: 0.85;
-  will-change: transform;
-  animation: var(--orbit) var(--dur) ease-in-out infinite;
 }
 
 .b-a {
-  --orbit: orbit-a;
-  --dur: 22s;
   left: -20cqmax;
   top: -25cqmax;
   background: radial-gradient(circle, var(--wp-a) 0%, transparent 62%);
 }
 .b-b {
-  --orbit: orbit-b;
-  --dur: 27s;
   right: -25cqmax;
   bottom: -30cqmax;
   background: radial-gradient(circle, var(--wp-b) 0%, transparent 62%);
 }
 .b-c {
-  --orbit: orbit-c;
-  --dur: 31s;
   right: -15cqmax;
   top: -30cqmax;
   background: radial-gradient(circle, var(--wp-c) 0%, transparent 62%);
 }
 .b-d {
-  --orbit: orbit-d;
-  --dur: 19s;
   left: 5cqmax;
   bottom: -35cqmax;
   width: 55cqmax;
@@ -204,33 +195,12 @@ body {
   background: radial-gradient(circle, var(--wp-d) 0%, transparent 62%);
 }
 
-@keyframes orbit-a {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  33% { transform: translate3d(28cqw, 18cqh, 0) scale(1.15); }
-  66% { transform: translate3d(10cqw, 42cqh, 0) scale(0.9); }
-}
-@keyframes orbit-b {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  30% { transform: translate3d(-34cqw, -12cqh, 0) scale(1.1); }
-  65% { transform: translate3d(-14cqw, -40cqh, 0) scale(0.92); }
-}
-@keyframes orbit-c {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
-  40% { transform: translate3d(-40cqw, 30cqh, 0) scale(1.2); }
-  75% { transform: translate3d(-8cqw, 50cqh, 0) scale(1); }
-}
-@keyframes orbit-d {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(40cqw, -30cqh, 0) scale(1.25); }
-}
-
-/* Iridescent sheen sweeping diagonally, like light across a hologram.
+/* Iridescent sheen laid diagonally, like light across a hologram.
    Plain opacity instead of a blend mode, which would force an extra pass. */
 .wp-sheen {
   position: absolute;
   inset: -50%;
   opacity: 0.14;
-  will-change: transform;
   background: linear-gradient(
     115deg,
     transparent 30%,
@@ -240,12 +210,6 @@ body {
     #fff3a6 58%,
     transparent 68%
   );
-  animation: sheen 14s linear infinite;
-}
-
-@keyframes sheen {
-  from { transform: translate3d(-30%, -10%, 0); }
-  to { transform: translate3d(30%, 10%, 0); }
 }
 
 /* Soft Ventura-style ribbon of light across the wallpaper */
@@ -633,6 +597,10 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  /* It sits behind the incoming window and fades out; re-blurring the
+     backdrop of a scaling layer every frame is the costliest part of the swap. */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* ---- Title bar ---- */

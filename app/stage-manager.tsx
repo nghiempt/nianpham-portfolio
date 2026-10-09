@@ -564,9 +564,11 @@ export default function StageManager() {
         </div>
 
         <div className="viewport">
+          {/* Keyed by id alone so the outgoing window is the same instance that was
+              just on stage — no remount of its content mid-flight. */}
           {leaving && (
             <StageWindow
-              key={`leaving-${leaving.id}`}
+              key={leaving.id}
               item={leaving}
               index={WINDOWS.indexOf(leaving)}
               leaving

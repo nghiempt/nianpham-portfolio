@@ -16,7 +16,7 @@
       "AWS S3"
     ],
     "url": "https://apps.apple.com/vn/app/linh/id6796389336",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435726/nianpham-portfolio/ouofe5ozarnsuh6qw3dr.png"
+    "thumbnail": "/assets/covers/linh.webp"
   },
   {
     "id": "agibot",
@@ -32,7 +32,7 @@
       "OpenAI"
     ],
     "url": "https://www.agibot.com/",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433285/nianpham-portfolio/4621b471-9431-4e59-83c1-07cf9131364d.png"
+    "thumbnail": "/assets/covers/agibot.webp"
   },
   {
     "id": "nhachung",
@@ -53,7 +53,7 @@
       "Telegram Bot"
     ],
     "url": "https://nhachung.vn",
-    "thumbnail": "https://webico-s3.project.webico.ai/assets/nhachung/thumbnail.jpg"
+    "thumbnail": "/assets/covers/nhachung.jpg"
   },
   {
     "id": "hepza",
@@ -73,7 +73,7 @@
       "Docker Compose"
     ],
     "url": "https://hepza.lumidemo.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791396831/nianpham-portfolio/f1544b9e-fde6-4b0b-a68f-493d8f36449a.png"
+    "thumbnail": "/assets/covers/hepza.webp"
   },
   {
     "id": "thongtinland",
@@ -93,7 +93,7 @@
       "GeoJSON / GeoTIFF / MBTiles / Shapefile"
     ],
     "url": "https://app.thongtin.land",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791396521/nianpham-portfolio/be649878-8978-449d-9ea5-192442a19162.png"
+    "thumbnail": "/assets/covers/thongtinland.webp"
   },
   {
     "id": "aivin-vn",
@@ -114,7 +114,7 @@
       "MCP"
     ],
     "url": "https://aivin.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433367/nianpham-portfolio/ktyfr1c3jvhx337lk3ak.png"
+    "thumbnail": "/assets/covers/aivin-vn.webp"
   },
   {
     "id": "ai-meeting",
@@ -130,7 +130,7 @@
       "Next.js"
     ],
     "url": "https://meet.lumination.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791396438/nianpham-portfolio/a5b636e5-e1e9-4ad9-b1ed-e6ed2ff53e07.png"
+    "thumbnail": "/assets/covers/ai-meeting.webp"
   },
   {
     "id": "vnps",
@@ -146,7 +146,7 @@
       "OAuth 2.0"
     ],
     "url": "https://vnps.ai",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791396886/nianpham-portfolio/ccd4f068-4dd9-4ac6-b3cd-259253543e26.png"
+    "thumbnail": "/assets/covers/vnps.webp"
   },
   {
     "id": "travel-app",
@@ -163,7 +163,7 @@
       "Anthropic Claude"
     ],
     "url": "https://apps.apple.com/vn/app/lumi-buddy/id6754752737",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433463/nianpham-portfolio/xgizkx8goxs8cqmwz1sb.png"
+    "thumbnail": "/assets/covers/travel-app.webp"
   },
   {
     "id": "onland",
@@ -181,7 +181,7 @@
       "Firebase"
     ],
     "url": "https://onland.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433428/nianpham-portfolio/149904e6-756d-4bd0-8a27-50931592a698.png"
+    "thumbnail": "/assets/covers/onland.webp"
   },
   {
     "id": "do-nghe-tu-chon",
@@ -196,7 +196,7 @@
       "Technical SEO"
     ],
     "url": "https://donghetuchon.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791397055/nianpham-portfolio/f7c9e65f-445f-4797-bd97-c89bfe60d7ae.png"
+    "thumbnail": "/assets/covers/do-nghe-tu-chon.webp"
   },
   {
     "id": "nu-cuoi-me-kong",
@@ -211,7 +211,7 @@
       "VNPay"
     ],
     "url": "https://nucuoimekong.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433631/nianpham-portfolio/4ff0594b-7847-4e22-8b95-8602bf3e5436.png"
+    "thumbnail": "/assets/covers/nu-cuoi-me-kong.webp"
   },
   {
     "id": "e-payroll-singapore",
@@ -232,7 +232,7 @@
       "GitHub Actions"
     ],
     "url": "https://www.iras.gov.sg/",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791442009/nianpham-portfolio/bd0d61e9-ddc1-43e4-adab-74084a310f30.png"
+    "thumbnail": "/assets/covers/e-payroll-singapore.webp"
   },
   {
     "id": "sale-ai-for-real-estate",
@@ -249,7 +249,7 @@
       "OpenCV"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791442025/nianpham-portfolio/6180eab3-0136-4ce2-a3b5-06d64b33c7ab.png"
+    "thumbnail": "/assets/covers/sale-ai-for-real-estate.webp"
   },
   {
     "id": "medipay-nfc-vneid-kiosk",
@@ -269,7 +269,7 @@
       "Redis"
     ],
     "url": "https://medipay.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433702/nianpham-portfolio/sxnz2idsoxnpt1dz75sa.png"
+    "thumbnail": "/assets/covers/medipay-nfc-vneid-kiosk.webp"
   },
   {
     "id": "edupay",
@@ -285,7 +285,7 @@
       "OpenAI"
     ],
     "url": "https://edupay.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433723/nianpham-portfolio/djw8c9m9zjtgjefkzryb.png"
+    "thumbnail": "/assets/covers/edupay.webp"
   },
   {
     "id": "gotrust-detector",
@@ -300,7 +300,7 @@
       "NFC Chip-ID (CCCD)"
     ],
     "url": "https://gotrust.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435701/nianpham-portfolio/uhmvcpw4njh4rppiheij.png"
+    "thumbnail": "/assets/covers/gotrust-detector.webp"
   },
   {
     "id": "hsu-crm",
@@ -321,7 +321,7 @@
       "PostgreSQL"
     ],
     "url": "https://www.hoasen.edu.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433743/nianpham-portfolio/4348ef54-56e6-4f4e-b1ce-2a41aa849791.png"
+    "thumbnail": "/assets/covers/hsu-crm.webp"
   },
   {
     "id": "benh-vien-nhi-trung-uong",
@@ -342,7 +342,7 @@
       "PostgreSQL"
     ],
     "url": "https://bhyt.nch.gov.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433748/nianpham-portfolio/656f2440-5afe-4db0-9399-de8035184127.png"
+    "thumbnail": "/assets/covers/benh-vien-nhi-trung-uong.webp"
   },
   {
     "id": "az-plus-innext",
@@ -360,7 +360,7 @@
       "AWS S3"
     ],
     "url": "https://innext.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435704/nianpham-portfolio/eqn4odfufrv9l0feuvrg.png"
+    "thumbnail": "/assets/covers/az-plus-innext.webp"
   },
   {
     "id": "apollo",
@@ -376,7 +376,7 @@
       "MediaPipe"
     ],
     "url": "https://apollo.lumidemo.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791447346/nianpham-portfolio/kiuvioetvp60kghpbn46.png"
+    "thumbnail": "/assets/covers/apollo.webp"
   },
   {
     "id": "creative-adapt",
@@ -391,7 +391,7 @@
       "gpt-image"
     ],
     "url": "https://creative.lumination.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791396669/nianpham-portfolio/396442e0-b116-4e55-9b85-ba42f42a6fb5.png"
+    "thumbnail": "/assets/covers/creative-adapt.webp"
   },
   {
     "id": "vpshop",
@@ -407,7 +407,7 @@
       "Vision LLMs"
     ],
     "url": "https://apps.apple.com/vn/app/shop-thịnh-vượng-pro/id6760748618",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433869/nianpham-portfolio/77ebfc71-9ddc-46dd-b52f-706f4e27d7d8.png"
+    "thumbnail": "/assets/covers/vpshop.webp"
   },
   {
     "id": "lumirag",
@@ -428,7 +428,7 @@
       "pgvector"
     ],
     "url": "https://lumirag.lumination.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433888/nianpham-portfolio/wygzl7ulz2nylqrcvh0q.png"
+    "thumbnail": "/assets/covers/lumirag.webp"
   },
   {
     "id": "lumistu",
@@ -443,7 +443,7 @@
       "Google Veo"
     ],
     "url": "https://lumistu.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791396707/nianpham-portfolio/047da6f3-430a-414c-921b-8965f372f7ca.png"
+    "thumbnail": "/assets/covers/lumistu.webp"
   },
   {
     "id": "pnj-lab",
@@ -458,7 +458,7 @@
       "Technical SEO"
     ],
     "url": "https://pnjlab.com.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433913/nianpham-portfolio/ebcba9cf-009a-4e9f-9e5a-b0cbd74fa8df.png"
+    "thumbnail": "/assets/covers/pnj-lab.webp"
   },
   {
     "id": "tam-duong-ip",
@@ -475,7 +475,7 @@
       "cPanel / DirectAdmin / LiteSpeed"
     ],
     "url": "https://tamduongip.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433978/nianpham-portfolio/091ca8c7-2bea-4fe1-befa-6817709bcf6e.png"
+    "thumbnail": "/assets/covers/tam-duong-ip.webp"
   },
   {
     "id": "kim-phu-thanh-powdercoatings",
@@ -490,7 +490,7 @@
       "Puppeteer"
     ],
     "url": "https://powdercoatings.project.webico.ai/",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791442313/nianpham-portfolio/fz6kkusacijzqlkyf2ze.png"
+    "thumbnail": "/assets/covers/kim-phu-thanh-powdercoatings.webp"
   },
   {
     "id": "erp-for-cable-reel",
@@ -511,7 +511,7 @@
       "Coolify"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791433980/nianpham-portfolio/z11ndcschmpnaovd6vds.png"
+    "thumbnail": "/assets/covers/erp-for-cable-reel.webp"
   },
   {
     "id": "smart-gis",
@@ -529,7 +529,7 @@
       "Redux Toolkit"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435570/nianpham-portfolio/ac1acc38-501e-4c96-bda0-49b464db1d83.png"
+    "thumbnail": "/assets/covers/smart-gis.webp"
   },
   {
     "id": "smart-pos",
@@ -544,7 +544,7 @@
       "React Native"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791397044/nianpham-portfolio/l5hludjnvdfuxdpkt73e.png"
+    "thumbnail": "/assets/covers/smart-pos.webp"
   },
   {
     "id": "smart-call-center",
@@ -563,7 +563,7 @@
       "OpenAI Whisper"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435577/nianpham-portfolio/bdb652af-f7ba-4342-be8a-41382a86e1c2.png"
+    "thumbnail": "/assets/covers/smart-call-center.webp"
   },
   {
     "id": "smart-e-commerce",
@@ -578,7 +578,7 @@
       "FastAPI"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435575/nianpham-portfolio/a65ceda3-f9fd-4771-8742-c169409ad2a1.png"
+    "thumbnail": "/assets/covers/smart-e-commerce.webp"
   },
   {
     "id": "alovax-app",
@@ -593,7 +593,7 @@
       "Firebase"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435757/nianpham-portfolio/25dd1c41-4d5b-49b9-b0db-e5c75a25a9cb.png"
+    "thumbnail": "/assets/covers/alovax-app.webp"
   },
   {
     "id": "smart-boarding-house-app",
@@ -608,7 +608,7 @@
       "Google Maps SDK"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435788/nianpham-portfolio/da3cc4cb-db3b-42da-8f9e-b977c256e038.png"
+    "thumbnail": "/assets/covers/smart-boarding-house-app.webp"
   },
   {
     "id": "material-management",
@@ -623,7 +623,7 @@
       "PostgreSQL"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791397083/nianpham-portfolio/ac3380c2-370b-46cd-a65e-ab4fff496507.png"
+    "thumbnail": "/assets/covers/material-management.webp"
   },
   {
     "id": "restaurant-pos",
@@ -638,7 +638,7 @@
       "Node.js"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791442389/nianpham-portfolio/4eecd605-7da5-4559-b0e1-8f2c959ce5ce.png"
+    "thumbnail": "/assets/covers/restaurant-pos.webp"
   },
   {
     "id": "ielts-viet-center",
@@ -656,7 +656,7 @@
       "AWS S3"
     ],
     "url": "https://ieltsviet.edu.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1757921558/ielts-viet/dlxioy5u0t5llawohucw.jpg"
+    "thumbnail": "/assets/covers/ielts-viet-center.webp"
   },
   {
     "id": "ielts-viet-test-platform",
@@ -671,7 +671,7 @@
       "LangChain"
     ],
     "url": "https://quizzes.ieltsviet.edu.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791446871/nianpham-portfolio/jeu9iwuouebbjobkcvpl.png"
+    "thumbnail": "/assets/covers/ielts-viet-test-platform.webp"
   },
   {
     "id": "in-anh-ha-thu",
@@ -690,7 +690,7 @@
       "MongoDB"
     ],
     "url": "https://www.inanhhathu.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434025/nianpham-portfolio/e40c721d-cdd9-4bea-bfdb-47e6148a3bbe.png"
+    "thumbnail": "/assets/covers/in-anh-ha-thu.webp"
   },
   {
     "id": "ecoka-handicraft",
@@ -706,7 +706,7 @@
       "Google Maps SDK"
     ],
     "url": "https://ecoka.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791435915/nianpham-portfolio/cc820a93-ef7b-4485-8ecf-417bff3145a9.png"
+    "thumbnail": "/assets/covers/ecoka-handicraft.webp"
   },
   {
     "id": "anh-mau-tuan-anh",
@@ -723,7 +723,7 @@
       "Cloudinary"
     ],
     "url": "https://www.anhmautuananh.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434069/nianpham-portfolio/3bcdcd32-9ef4-4614-8e5e-45082c00a10d.png"
+    "thumbnail": "/assets/covers/anh-mau-tuan-anh.webp"
   },
   {
     "id": "anh-mau-tuan-anh-erp",
@@ -738,7 +738,7 @@
       "Next.js"
     ],
     "url": "https://donhang.anhmautuananh.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791443303/nianpham-portfolio/xopbb7bme7qr1tqoolxd.png"
+    "thumbnail": "/assets/covers/anh-mau-tuan-anh-erp.webp"
   },
   {
     "id": "k-gallery-short-url-multi-tenant-domains",
@@ -756,7 +756,7 @@
       "MongoDB"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791443875/nianpham-portfolio/guelejepeanwycblqkww.png"
+    "thumbnail": "/assets/covers/k-gallery-short-url-multi-tenant-domains.webp"
   },
   {
     "id": "i-pledge-cam-do",
@@ -771,7 +771,7 @@
       "Google Workspace APIs"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791443405/nianpham-portfolio/3b3d11b1-3b7f-4a3c-8841-93f0aa177a96.png"
+    "thumbnail": "/assets/covers/i-pledge-cam-do.webp"
   },
   {
     "id": "secure-qr",
@@ -787,7 +787,7 @@
       "shadcn/ui"
     ],
     "url": "https://secureqr.imutably.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791443880/nianpham-portfolio/e10920c2-4b18-4fc5-ae38-1ebfe3523d13.png"
+    "thumbnail": "/assets/covers/secure-qr.webp"
   },
   {
     "id": "ghost-for-website",
@@ -803,7 +803,7 @@
       "OpenAI"
     ],
     "url": "https://ghost.org",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434124/nianpham-portfolio/5d3336e7-5049-4ffb-b016-548d62694759.png"
+    "thumbnail": "/assets/covers/ghost-for-website.webp"
   },
   {
     "id": "ivita",
@@ -822,7 +822,7 @@
       "Next.js"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791444090/nianpham-portfolio/uasu6ew2i1vmqu2nbguj.png"
+    "thumbnail": "/assets/covers/ivita.webp"
   },
   {
     "id": "zeedata",
@@ -838,7 +838,7 @@
       "OpenAI"
     ],
     "url": "https://zeedata.io",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434148/nianpham-portfolio/38cdaf3c-d5fb-45bc-8ef3-c64fa54d1d02.png"
+    "thumbnail": "/assets/covers/zeedata.webp"
   },
   {
     "id": "kafi-lms",
@@ -855,7 +855,7 @@
       "RBAC / ABAC"
     ],
     "url": "https://kafilms.lumidemo.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434173/nianpham-portfolio/e34a0f4c-522d-43da-9738-9467448e29f1.png"
+    "thumbnail": "/assets/covers/kafi-lms.webp"
   },
   {
     "id": "shbf",
@@ -871,7 +871,7 @@
       "Qdrant"
     ],
     "url": "https://shbf.zeedata.io",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434213/nianpham-portfolio/50786f3d-b797-478e-873a-6f1014161eea.png"
+    "thumbnail": "/assets/covers/shbf.webp"
   },
   {
     "id": "vieon",
@@ -889,7 +889,7 @@
       "Shopee Open Platform"
     ],
     "url": "https://vieon.lumination.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434261/nianpham-portfolio/cae0570b-d6d1-49d1-b235-17b20c2caa3a.png"
+    "thumbnail": "/assets/covers/vieon.webp"
   },
   {
     "id": "vtvlive",
@@ -904,7 +904,7 @@
       "OpenAI"
     ],
     "url": "https://vtvlive.lumination.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434281/nianpham-portfolio/983847ad-12ce-4bac-8ee4-00194fcf920f.png"
+    "thumbnail": "/assets/covers/vtvlive.webp"
   },
   {
     "id": "mega-market",
@@ -920,7 +920,7 @@
       "Vision LLMs"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791436128/nianpham-portfolio/0fbd940e-16d7-479b-82f3-8a3ebc124bb6.png"
+    "thumbnail": "/assets/covers/mega-market.webp"
   },
   {
     "id": "camera-monitor",
@@ -941,7 +941,7 @@
       "React"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791444386/nianpham-portfolio/d94cd634-6543-4191-a3c3-26beae407a60.png"
+    "thumbnail": "/assets/covers/camera-monitor.webp"
   },
   {
     "id": "customer-care",
@@ -958,7 +958,7 @@
       "OpenAI Whisper"
     ],
     "url": "https://omni-staging.zeedata.io",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791436369/nianpham-portfolio/gahohcwqeoan1fjxgrbq.png"
+    "thumbnail": "/assets/covers/customer-care.webp"
   },
   {
     "id": "elasticv",
@@ -973,7 +973,7 @@
       "OpenAI Whisper"
     ],
     "url": "https://elasticv.io",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791444389/nianpham-portfolio/cdqjzkxitgobxwfiwsoq.png"
+    "thumbnail": "/assets/covers/elasticv.webp"
   },
   {
     "id": "lumination-vn",
@@ -991,7 +991,7 @@
       "PostgreSQL"
     ],
     "url": "https://lumination.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434355/nianpham-portfolio/9109adb8-2eb8-4498-8d74-a574023545f6.png"
+    "thumbnail": "/assets/covers/lumination-vn.webp"
   },
   {
     "id": "knowledge-graph-for-stock-program",
@@ -1009,7 +1009,7 @@
       "Anthropic Claude"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791444486/nianpham-portfolio/twki3vzbhvkq3xqksxcv.png"
+    "thumbnail": "/assets/covers/knowledge-graph-for-stock-program.webp"
   },
   {
     "id": "lazuresort",
@@ -1024,7 +1024,7 @@
       "WordPress"
     ],
     "url": "https://lazureresort.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434375/nianpham-portfolio/a8798397-3f3e-4800-ac8a-01c5ecf25bca.png"
+    "thumbnail": "/assets/covers/lazuresort.webp"
   },
   {
     "id": "royacha",
@@ -1039,7 +1039,7 @@
       "Rank Math SEO"
     ],
     "url": "https://royacha.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791444599/nianpham-portfolio/nlekbtzqdcdtjmbpbmhy.png"
+    "thumbnail": "/assets/covers/royacha.webp"
   },
   {
     "id": "vinachaki",
@@ -1054,7 +1054,7 @@
       "Google Workspace APIs"
     ],
     "url": "https://vinachaki.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434389/nianpham-portfolio/d7d56f36-7d03-478c-8e2f-76ca495c9df4.png"
+    "thumbnail": "/assets/covers/vinachaki.webp"
   },
   {
     "id": "sala-hotel-group",
@@ -1075,7 +1075,7 @@
       "Traefik"
     ],
     "url": "https://salahotelgroup.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434401/nianpham-portfolio/3b00724b-d46f-40e4-9d59-1898732de85c.png"
+    "thumbnail": "/assets/covers/sala-hotel-group.webp"
   },
   {
     "id": "pallet-go-mien-tay",
@@ -1090,7 +1090,7 @@
       "i18next"
     ],
     "url": "https://palletgomientay.vn",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791434441/nianpham-portfolio/a7af22cd-b703-4f9e-b624-2d6f33e6eb72.png"
+    "thumbnail": "/assets/covers/pallet-go-mien-tay.webp"
   },
   {
     "id": "son-ha-nghe-an",
@@ -1105,7 +1105,7 @@
       "Visual Regression QA"
     ],
     "url": "https://sonhanghean.project.webico.ai",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791445646/nianpham-portfolio/kyv3ufm7e6o1nqwydkwc.png"
+    "thumbnail": "/assets/covers/son-ha-nghe-an.webp"
   },
   {
     "id": "danmotion-lms",
@@ -1126,7 +1126,7 @@
       "Bunny Stream"
     ],
     "url": "https://lms.project.webico.ai",
-    "thumbnail": "https://lms.project.webico.ai/assets/943cee1eb3.jpg"
+    "thumbnail": "/assets/covers/danmotion-lms.jpg"
   },
   {
     "id": "luatvietnam-legal-api",
@@ -1147,7 +1147,7 @@
       "Docker Compose"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791445674/nianpham-portfolio/4855493a-c41d-4846-b14c-5170328ad3d2.png"
+    "thumbnail": "/assets/covers/luatvietnam-legal-api.webp"
   },
   {
     "id": "lumi-api-portal",
@@ -1168,7 +1168,7 @@
       "OpenAPI / Swagger"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791446758/nianpham-portfolio/jhx3omcmuvfnon8wffqa.png"
+    "thumbnail": "/assets/covers/lumi-api-portal.webp"
   },
   {
     "id": "webico-garage-console",
@@ -1183,7 +1183,7 @@
       "Garage"
     ],
     "url": "https://www.nianpham.my",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791446761/nianpham-portfolio/df66dc24-bb59-445e-aa34-20b072dd1935.png"
+    "thumbnail": "/assets/covers/webico-garage-console.webp"
   },
   {
     "id": "shop-toan-my",
@@ -1203,6 +1203,6 @@
       "cPanel"
     ],
     "url": "https://shop.toanmy.com",
-    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791467234/nianpham-portfolio/ftbpupbndicwztqhjchk.png"
+    "thumbnail": "/assets/covers/shop-toan-my.webp"
   }
 ]

@@ -5,7 +5,7 @@
     "year": 2026,
     "kind": "community",
     "detail": "",
-    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbjZMx23oUz3nTGyExZ3VPSX9IFvB_i8s7F_ZGYwXd8mX6rlg83j9WbVo&s=10"
+    "logo": "/assets/achievements/dbb053ad92.jpg"
   },
   {
     "id": "aws-genai-builder-2026",
@@ -21,7 +21,7 @@
     "year": 2025,
     "kind": "contest",
     "detail": "Google & Kaggle",
-    "logo": "https://storage.googleapis.com/gweb-developer-goog-blog-assets/images/download.original.png"
+    "logo": "/assets/achievements/5ad051312f.png"
   },
   {
     "id": "goal-vesuvius-surface-detection",
@@ -29,7 +29,7 @@
     "year": 2025,
     "kind": "contest",
     "detail": "Kaggle",
-    "logo": "https://images.icon-icons.com/2699/PNG/512/kaggle_logo_icon_168473.png"
+    "logo": "/assets/achievements/62a75f006a.png"
   },
   {
     "id": "goal-vietnam-ai-summit",
@@ -37,7 +37,7 @@
     "year": 2026,
     "kind": "community",
     "detail": "aisummitvn.com",
-    "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472135/nianpham-portfolio/d361539a-ada2-4828-96e7-3d644fc05bd1.png"
+    "logo": "/assets/achievements/480a4d95db.webp"
   },
   {
     "id": "goal-ai4vn",
@@ -45,7 +45,7 @@
     "year": 2026,
     "kind": "conference",
     "detail": "Vietnam's AI",
-    "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472537/nianpham-portfolio/cvkqxitf27c8uomk2qor.png"
+    "logo": "/assets/achievements/845a941a65.webp"
   },
   {
     "id": "innovation-submit",
@@ -53,7 +53,7 @@
     "year": 2025,
     "kind": "community",
     "detail": "InnoLab",
-    "logo": "https://static.ladipage.net/671213f016710b00121c25ff/vis-2025-20250526151904-y9ef8.jpg"
+    "logo": "/assets/achievements/7b79cea5a1.jpg"
   },
   {
     "id": "goal-gdg-devfest-hcmc",
@@ -61,7 +61,7 @@
     "year": 2026,
     "kind": "community",
     "detail": "Google Developer Group",
-    "logo": "https://res.cloudinary.com/farmcode/image/upload/v1791472027/nianpham-portfolio/ec22dd19-8897-4caf-9697-dd3ddf16ecf1.png"
+    "logo": "/assets/achievements/43def874e1.webp"
   },
   {
     "id": "goal-aws-community-builders",
@@ -109,7 +109,7 @@
     "year": 2025,
     "kind": "community",
     "detail": "",
-    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbjZMx23oUz3nTGyExZ3VPSX9IFvB_i8s7F_ZGYwXd8mX6rlg83j9WbVo&s=10"
+    "logo": "/assets/achievements/dbb053ad92.jpg"
   },
   {
     "id": "oci-ai",
@@ -141,7 +141,7 @@
     "year": 2024,
     "kind": "certificate",
     "detail": "CertNexus Certified",
-    "logo": "https://beyondcompany.sa/wp-content/uploads/2025/06/certnexus.png"
+    "logo": "/assets/achievements/078df0190f.png"
   },
   {
     "id": "coursera",
@@ -149,7 +149,7 @@
     "year": 2024,
     "kind": "certificate",
     "detail": "Coursera",
-    "logo": "https://images.ctfassets.net/00atxywtfxvd/2QeS5ysKMhZ3ZjiU2rGRJA/e15df94b265053ce8ded4f5e630241c8/cropped-android-chrome-512x512-1.png"
+    "logo": "/assets/achievements/f8ef749819.png"
   },
   {
     "id": "cloud2023",
@@ -157,7 +157,7 @@
     "year": 2023,
     "kind": "certificate",
     "detail": "Springer",
-    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREph7ztfYAznsnNcUgEN1dCY_sQmbnpC-rjEm-h_eZAJDJQ_56QBky9KM&s=10"
+    "logo": "/assets/achievements/af766d3542.jpg"
   },
   {
     "id": "gecon-2024",
@@ -165,7 +165,7 @@
     "year": 2024,
     "kind": "conference",
     "detail": "",
-    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTesY1bqJ5YPGJJEXMu6o3r1dHAnEkhaevoPmTpghX&s"
+    "logo": "/assets/achievements/05a7d9e15a.png"
   },
   {
     "id": "iccsa-2024",
@@ -173,7 +173,7 @@
     "year": 2024,
     "kind": "conference",
     "detail": "",
-    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFfxmikdcoCZYgTt3yx2fRYSOu3htyUZCVTTSIYoi9LeM3GqD9zouRLZeQ&s=10"
+    "logo": "/assets/achievements/f86ad8a4d0.jpg"
   },
   {
     "id": "cloud-2023",
@@ -189,7 +189,7 @@
     "year": 2022,
     "kind": "contest",
     "detail": "",
-    "logo": "https://vbic.vn/assets/images/footer.png"
+    "logo": "/assets/achievements/vbic.png"
   },
   {
     "id": "tech-fest-mekong-2022",
@@ -197,7 +197,7 @@
     "year": 2022,
     "kind": "community",
     "detail": "",
-    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZX79-5Y4mjcohnlxkh4ULyZ1s2YAdUXqA5xeIJamCj5jb2qEJCaJ9g0E&s=10"
+    "logo": "/assets/achievements/42092ddb11.png"
   },
   {
     "id": "fpt-autonomous-car-2021",
@@ -205,7 +205,7 @@
     "year": 2021,
     "kind": "contest",
     "detail": "FPT University",
-    "logo": "https://thumb.wikimedia.org/wikipedia/vi/thumb/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg/1280px-Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg.png?utm_source=vi.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+    "logo": "/assets/achievements/1c2a7f7a49.png"
   },
   {
     "id": "intel-expert-challenge-2020",
@@ -221,6 +221,6 @@
     "year": 2020,
     "kind": "award",
     "detail": "FPT University",
-    "logo": "https://thumb.wikimedia.org/wikipedia/vi/thumb/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg/1280px-Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg.png?utm_source=vi.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+    "logo": "/assets/achievements/1c2a7f7a49.png"
   }
 ]
