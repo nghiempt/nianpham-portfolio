@@ -1,0 +1,12 @@
+[
+  {
+    "id": "don-chicken",
+    "name": "Don Chicken",
+    "category": "Gà Rán",
+    "address": "222 Phan Xích Long, Quận Phú Nhuận, TP. Hồ Chí Minh",
+    "price": 400000,
+    "mapUrl": "https://maps.app.goo.gl/AFoF1qDUCSpMjkMN9",
+    "thumbnail": "https://res.cloudinary.com/farmcode/image/upload/v1791609118/food/xglodxmw6ryzfskcdurt.png",
+    "images": []
+  }
+]

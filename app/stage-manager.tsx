@@ -33,7 +33,7 @@ const WALLPAPERS = [
   { id: "aurora", name: "Aurora", swatch: "linear-gradient(140deg, #020617, #0891b2 55%, #7c3aed)" },
 ];
 const WALLPAPER_KEY = "nianpham:wallpaper";
-const DEFAULT_WALLPAPER = "aurora";
+export const DEFAULT_WALLPAPER = "aurora";
 
 // Tiny external store for the viewer's wallpaper. localStorage can throw
 // (private mode, blocked storage), so it is only a best-effort backing for
@@ -41,7 +41,7 @@ const DEFAULT_WALLPAPER = "aurora";
 let wallpaperCache: string | null = null;
 const wallpaperListeners = new Set<() => void>();
 
-function readWallpaper() {
+export function readWallpaper() {
   if (wallpaperCache === null) {
     wallpaperCache = DEFAULT_WALLPAPER;
     try {
@@ -52,7 +52,7 @@ function readWallpaper() {
   return wallpaperCache;
 }
 
-function writeWallpaper(id: string) {
+export function writeWallpaper(id: string) {
   wallpaperCache = id;
   try {
     localStorage.setItem(WALLPAPER_KEY, id);
@@ -60,7 +60,7 @@ function writeWallpaper(id: string) {
   wallpaperListeners.forEach((notify) => notify());
 }
 
-function subscribeWallpaper(notify: () => void) {
+export function subscribeWallpaper(notify: () => void) {
   wallpaperListeners.add(notify);
   return () => {
     wallpaperListeners.delete(notify);
@@ -102,7 +102,7 @@ function isCompact() {
   return window.matchMedia("(max-width: 1023px)").matches;
 }
 
-function Clock() {
+export function Clock() {
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
     const tick = () => setNow(new Date());
@@ -122,7 +122,7 @@ function Clock() {
   );
 }
 
-function WallpaperPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
+export function WallpaperPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
     const step =
