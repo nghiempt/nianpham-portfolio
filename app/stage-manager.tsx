@@ -16,7 +16,6 @@ import {
 } from "react";
 import { AchievementsView, ProjectsView, PublicationsView, StackView } from "./collections";
 import { CHANNELS, EDUCATION, OWNER, SITE_URL, WINDOWS, type StageItem, type WindowKind } from "./profiles";
-import LogoMark from "./logo-mark";
 import { AppIcon, Icon, type IconName } from "./ui";
 
 // Motion tokens: arrive with deceleration, leave with acceleration,
@@ -253,15 +252,7 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
               {item.eyebrow}
             </p>
             <div className="heading">
-              {isAbout ? (
-                // The logo mark stands in for the N; the intro lands on it.
-                <h2 aria-label={item.title}>
-                  <LogoMark />
-                  <span aria-hidden="true">{item.title.slice(1)}</span>
-                </h2>
-              ) : (
-                <h2>{item.title}</h2>
-              )}
+              <h2>{item.title}</h2>
               {isAbout && <p className="role">{OWNER.role}</p>}
             </div>
 
@@ -529,9 +520,7 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
 
       <header className="menubar">
         <div className="mb-left">
-          <span className="mb-logo" aria-hidden="true">
-            N
-          </span>
+          <Image className="mb-logo" src="/assets/new-logo-v2.png" alt="" aria-hidden="true" width={20} height={20} />
           <strong>{OWNER.nickname}</strong>
           <span className="mb-role">{OWNER.role}</span>
         </div>

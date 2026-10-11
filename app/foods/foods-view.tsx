@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   useCallback,
   useEffect,
@@ -503,9 +504,7 @@ export default function FoodsView() {
 
       <header className="menubar">
         <div className="mb-left">
-          <span className="mb-logo" aria-hidden="true">
-            N
-          </span>
+          <Image className="mb-logo" src="/assets/new-logo-v2.png" alt="" aria-hidden="true" width={20} height={20} />
           <strong>{OWNER.nickname}</strong>
           <span className="mb-role">{OWNER.role}</span>
         </div>

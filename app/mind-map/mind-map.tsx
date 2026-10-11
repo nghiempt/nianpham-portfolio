@@ -3,7 +3,7 @@
 // Six fixed big branches around a petal "flower", two tones (01–03, 04–06).
 // Each big branch holds sub-branches one level deep; a sub-branch opens a
 // free-form note. Plain React + mind-map.css, so it can move to the mini app.
-import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent } from "react";
 import "./mind-map.css";
 import NoteEditor from "./note-editor";
 import {
@@ -365,14 +365,6 @@ function SyncBadge() {
 
 /* -------------------------------------------------------------------- Page */
 
-function Sparkle({ style }: { style: CSSProperties }) {
-  return (
-    <svg className="mm-sparkle" style={style} width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 export default function MindMap() {
   const data = useSyncExternalStore(subscribeMap, getMap, getServerMap);
   const [open, setOpen] = useState<{ branch: Branch; childId: string } | null>(null);
@@ -403,9 +395,6 @@ export default function MindMap() {
   return (
     <main className="mm">
       <div className="mm-band" aria-hidden="true" />
-      <Sparkle style={{ left: "16%", top: 120 }} />
-      <Sparkle style={{ left: "4%", bottom: 40 }} />
-      <Sparkle style={{ left: "42%", bottom: 60 }} />
 
       <SyncBadge />
       <header className="mm-head">

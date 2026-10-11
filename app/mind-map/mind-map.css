@@ -2,11 +2,11 @@
    site's styles on the web and be copied into the mini app as-is. */
 
 .mm {
-  /* Tone 01 (left): deep coral. Tone 02 (right): soft coral. */
+  /* Tone 01 (left): deep coral. Tone 02 (right): teal, coral's complement. */
   --mm-t1-face: #ff6f61;
   --mm-t1-side: #e2483d;
-  --mm-t2-face: #ffaea4;
-  --mm-t2-side: #f2867a;
+  --mm-t2-face: #1fb5a8;
+  --mm-t2-side: #128a80;
   --mm-accent: #ff5a4e;
   --mm-fg: #111827;
   --mm-muted: #6b7280;
@@ -16,6 +16,9 @@
   color-scheme: light;
   position: relative;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   padding: 36px 24px 48px;
   color: var(--mm-fg);
@@ -28,12 +31,6 @@
   position: absolute;
   inset: 52% 0 0;
   background: #ececec;
-}
-
-.mm-sparkle {
-  position: absolute;
-  color: var(--mm-accent);
-  opacity: 0.85;
 }
 
 .mm-head {
@@ -261,6 +258,14 @@
   fill: var(--mm-accent);
 }
 
+.mm-link.is-t2 path {
+  stroke: var(--mm-t2-face);
+}
+
+.mm-link.is-t2 circle {
+  fill: var(--mm-t2-face);
+}
+
 .mm-link.is-active path {
   opacity: 1;
   stroke-width: 2;
@@ -302,6 +307,10 @@
 .mm-node.is-active .mm-pill {
   box-shadow: inset 0 0 0 2px var(--mm-accent), 0 14px 28px -16px rgba(255, 90, 78, 0.6);
   transform: translateY(-1px);
+}
+
+.mm-node.is-t2.is-active .mm-pill {
+  box-shadow: inset 0 0 0 2px var(--mm-t2-face), 0 14px 28px -16px rgba(31, 181, 168, 0.6);
 }
 
 .mm-num {
@@ -368,8 +377,8 @@
 }
 
 .mm-chips.is-t2 .mm-chip {
-  background: color-mix(in srgb, var(--mm-t2-face) 26%, #fff);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mm-t2-side) 45%, transparent);
+  background: color-mix(in srgb, var(--mm-t2-face) 16%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mm-t2-face) 45%, transparent);
 }
 
 /* A dot marks sub-branches that already have notes */
@@ -414,6 +423,7 @@
 
 .mm-mobile {
   position: relative;
+  width: 100%;
   max-width: 720px;
   margin: 0 auto;
 }
