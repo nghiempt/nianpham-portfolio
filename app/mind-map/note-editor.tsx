@@ -77,6 +77,110 @@ const ICONS = {
   padding: <path d="M3 3h18v18H3zM9 3v18M15 3v18" />,
 };
 
+// 64 swatches, 8×8: a grey ramp, then eight hues from vivid through light
+// tints to dark shades (the familiar Google Docs palette).
+const PALETTE = [
+  ["#000000", "#434343", "#666666", "#999999", "#b7b7b7", "#cccccc", "#efefef", "#ffffff"],
+  ["#ff0000", "#ff9900", "#ffff00", "#00ff00", "#00ffff", "#4a86e8", "#9900ff", "#ff00ff"],
+  ["#f4cccc", "#fce5cd", "#fff2cc", "#d9ead3", "#d0e0e3", "#c9daf8", "#d9d2e9", "#ead1dc"],
+  ["#ea9999", "#f9cb9c", "#ffe599", "#b6d7a8", "#a2c4c9", "#a4c2f4", "#b4a7d6", "#d5a6bd"],
+  ["#e06666", "#f6b26b", "#ffd966", "#93c47d", "#76a5af", "#6d9eeb", "#8e7cc3", "#c27ba0"],
+  ["#cc0000", "#e69138", "#f1c232", "#6aa84f", "#45818e", "#3c78d8", "#674ea7", "#a64d79"],
+  ["#990000", "#b45f06", "#bf9000", "#38761d", "#134f5c", "#1155cc", "#351c75", "#741b47"],
+  ["#660000", "#783f04", "#7f6000", "#274e13", "#0c343d", "#1c4587", "#20124d", "#4c1130"],
+].flat();
+
+/**
+ * Open state for a toolbar popover. It is fixed to the viewport under its
+ * trigger and kept on screen: the toolbar scrolls sideways on phones, so CSS
+ * alone would put it off-screen. Clicking elsewhere closes it.
+ */
+function usePopover(width: number) {
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState({ top: 0, left: 0 });
+  const ref = useRef<HTMLDivElement>(null);
+  const toggle = () => {
+    const r = ref.current?.getBoundingClientRect();
+    if (r) setPos({ top: r.bottom + 6, left: Math.max(8, Math.min(r.left, window.innerWidth - width - 8)) });
+    setOpen((v) => !v);
+  };
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
+  return { open, setOpen, pos, ref, toggle };
+}
+
+/** Text or highlight colour: a swatch grid instead of the OS colour picker. */
+function ColorMenu({
+  label,
+  icon,
+  value,
+  resetLabel,
+  onPick,
+}: {
+  label: string;
+  icon: ReactNode;
+  value: string;
+  resetLabel: string;
+  /** null = back to the default (no colour). */
+  onPick: (color: string | null) => void;
+}) {
+  const { open, setOpen, pos, ref, toggle } = usePopover(232);
+  const pick = (color: string | null) => {
+    onPick(color);
+    setOpen(false);
+  };
+  return (
+    <div className="mm-menu" ref={ref}>
+      <button
+        type="button"
+        className="mm-tb-btn mm-tb-color"
+        title={label}
+        aria-label={label}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={toggle}
+      >
+        {icon}
+        <i style={{ background: value }} />
+      </button>
+      {open && (
+        <div className="mm-menu-list mm-swatches" role="dialog" aria-label={label} style={pos}>
+          <button
+            type="button"
+            className="mm-swatch-reset"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => pick(null)}
+          >
+            {resetLabel}
+          </button>
+          <div className="mm-swatch-grid">
+            {PALETTE.map((c) => (
+              <button
+                key={c}
+                type="button"
+                className="mm-swatch"
+                style={{ background: c }}
+                title={c}
+                aria-label={c}
+                aria-pressed={c === value}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => pick(c)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /** Dropdown whose items keep the editor's selection (mousedown is cancelled). */
 function Menu({
   label,
@@ -89,24 +193,7 @@ function Menu({
   items: { label: string; onPick: () => void; danger?: boolean }[];
   wide?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
-  // Fixed to the viewport, placed under the trigger and kept on screen: the
-  // toolbar scrolls sideways on phones, so CSS alone would put it off-screen.
-  const [pos, setPos] = useState({ top: 0, left: 0 });
-  const ref = useRef<HTMLDivElement>(null);
-  const toggle = () => {
-    const r = ref.current?.getBoundingClientRect();
-    if (r) setPos({ top: r.bottom + 6, left: Math.max(8, Math.min(r.left, window.innerWidth - 220)) });
-    setOpen((v) => !v);
-  };
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: MouseEvent) => {
-      if (!ref.current?.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
-  }, [open]);
+  const { open, setOpen, pos, ref, toggle } = usePopover(212);
   return (
     <div className="mm-menu" ref={ref}>
       <button
@@ -224,6 +311,11 @@ export default function NoteEditor({
   useEffect(() => {
     const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape") close();
+      // Cmd/Ctrl+S saves the note right away instead of downloading the page.
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        flush();
+      }
     };
     document.addEventListener("keydown", onKey);
     const overflow = document.body.style.overflow;
@@ -232,7 +324,7 @@ export default function NoteEditor({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = overflow;
     };
-  }, [close]);
+  }, [close, flush]);
 
   /* ---- selection + toolbar state ---- */
   const columnOf = (n: Node | null) => (n ? editors.current.findIndex((el) => el?.contains(n)) : -1);
@@ -483,32 +575,26 @@ export default function NoteEditor({
             >
               <I d={ICONS.link} />
             </button>
-            <label className="mm-tb-btn mm-tb-color" title="Text color" onMouseDown={() => refresh()}>
-              <I d={ICONS.color} />
-              <i style={{ background: colors.fore }} />
-              <input
-                type="color"
-                value={colors.fore}
-                onChange={(e) => {
-                  setColors((c) => ({ ...c, fore: e.target.value }));
-                  exec("foreColor", e.target.value);
-                }}
-                aria-label="Text color"
-              />
-            </label>
-            <label className="mm-tb-btn mm-tb-color" title="Highlight" onMouseDown={() => refresh()}>
-              <I d={ICONS.highlight} />
-              <i style={{ background: colors.hilite }} />
-              <input
-                type="color"
-                value={colors.hilite}
-                onChange={(e) => {
-                  setColors((c) => ({ ...c, hilite: e.target.value }));
-                  exec("hiliteColor", e.target.value);
-                }}
-                aria-label="Highlight color"
-              />
-            </label>
+            <ColorMenu
+              label="Text color"
+              icon={<I d={ICONS.color} />}
+              value={colors.fore}
+              resetLabel="Default color"
+              onPick={(c) => {
+                setColors((v) => ({ ...v, fore: c ?? "#111827" }));
+                exec("foreColor", c ?? "#111827");
+              }}
+            />
+            <ColorMenu
+              label="Highlight color"
+              icon={<I d={ICONS.highlight} />}
+              value={colors.hilite}
+              resetLabel="No highlight"
+              onPick={(c) => {
+                if (c) setColors((v) => ({ ...v, hilite: c }));
+                exec("hiliteColor", c ?? "transparent");
+              }}
+            />
             <Menu
               label="Aa"
               items={[

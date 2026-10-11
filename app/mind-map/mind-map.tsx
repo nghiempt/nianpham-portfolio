@@ -334,6 +334,16 @@ export default function MindMap() {
   // Fetch the server copy once the page is up (the local copy shows meanwhile).
   useEffect(() => startSync(), []);
 
+  // Everything saves on its own; Cmd/Ctrl+S out of habit shouldn't download
+  // the page. (Inside a note it also saves immediately; see note-editor.)
+  useEffect(() => {
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") e.preventDefault();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   const update = (branchId: string, fn: (list: Child[]) => Child[]) => {
     const current = getMap();
     setMap({ ...current, [branchId]: fn(current[branchId] ?? []) });
