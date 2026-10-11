@@ -1,0 +1,28 @@
+{
+  "name": "smart-insight-space-miniapp",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Zalo Mini App: Smart Insight Space (UI previewed on the website at /miniapp)",
+  "type": "module",
+  "scripts": {
+    "start": "zmp start",
+    "deploy": "vite build && zmp deploy --existing --outputDir www",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "deploy:testing": "vite build && zmp deploy --existing --testing --outputDir www"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zmp-sdk": "^2.53.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.21",
+    "zmp-cli": "^4.0.3",
+    "zmp-vite-plugin": "^1.1.6"
+  }
+}

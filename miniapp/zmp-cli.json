@@ -1,0 +1,10 @@
+{
+  "name": "Smart Insight Space",
+  "framework": "react-typescript",
+  "cssPreProcessor": "css",
+  "includeTailwind": false,
+  "package": "zmp-ui",
+  "stateManagement": "none",
+  "newProject": false,
+  "template": "single-view"
+}

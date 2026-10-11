@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "Smart Insight Space",
+    "textColor": "black",
+    "statusBar": "normal",
+    "actionBarHidden": false,
+    "hideAndroidBottomNavigationBar": false,
+    "hideIOSSafeAreaBottom": false,
+    "selfControlLoading": false,
+    "headerColor": "#ffffff",
+    "leftButton": "none"
+  },
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": []
+}

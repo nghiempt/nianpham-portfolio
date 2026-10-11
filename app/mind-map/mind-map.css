@@ -1,0 +1,979 @@
+/* Mind map. Every class is prefixed .mm- so this file can sit next to the
+   site's styles on the web and be copied into the mini app as-is. */
+
+.mm {
+  /* Tone 01 (left): deep coral. Tone 02 (right): soft coral. */
+  --mm-t1-face: #ff6f61;
+  --mm-t1-side: #e2483d;
+  --mm-t2-face: #ffaea4;
+  --mm-t2-side: #f2867a;
+  --mm-accent: #ff5a4e;
+  --mm-fg: #111827;
+  --mm-muted: #6b7280;
+  --mm-line: rgba(17, 24, 39, 0.1);
+  --mm-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: 36px 24px 48px;
+  color: var(--mm-fg);
+  background: #fff;
+  font-family: var(--font-sans, -apple-system), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Grey lower band, as in the reference */
+.mm-band {
+  position: absolute;
+  inset: 52% 0 0;
+  background: #ececec;
+}
+
+.mm-sparkle {
+  position: absolute;
+  color: var(--mm-accent);
+  opacity: 0.85;
+}
+
+.mm-head {
+  position: relative;
+  text-align: center;
+}
+
+.mm-head h1 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.mm-head h1 span {
+  color: var(--mm-accent);
+}
+
+/* Sync status, top-right */
+.mm-sync {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 6px 0 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--mm-muted);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--mm-line), 0 6px 16px -10px rgba(17, 24, 39, 0.35);
+}
+
+.mm-sync > i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+}
+
+.mm-sync.is-synced > i {
+  background: #16a34a;
+}
+
+.mm-sync.is-syncing > i {
+  background: #f59e0b;
+}
+
+.mm-sync.is-offline > i,
+.mm-sync.is-denied > i {
+  background: #dc2626;
+}
+
+.mm-sync > span {
+  padding-right: 6px;
+}
+
+.mm-sync form {
+  display: flex;
+  gap: 4px;
+}
+
+.mm-sync input {
+  width: 120px;
+  height: 26px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12.5px;
+  background: #f3f4f6;
+  outline: none;
+}
+
+.mm-sync button {
+  height: 26px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--mm-accent);
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .mm-sync {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* ---------------------------------------------------------------- Flower */
+
+.mm-flower {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Opaque paths in a translucent group, so overlaps don't darken */
+.mm-ground {
+  opacity: 0.55;
+}
+
+.mm-ground path {
+  fill: #d4d4d8;
+  stroke: #d4d4d8;
+  stroke-width: 12;
+  stroke-linejoin: round;
+}
+
+.mm-ring {
+  fill: none;
+  stroke-width: 14;
+}
+
+.mm-petal {
+  cursor: pointer;
+}
+
+.mm-petal path {
+  stroke-width: 12;
+  stroke-linejoin: round;
+  transition: fill 200ms ease-out, stroke 200ms ease-out;
+}
+
+.mm-petal.is-t1 .mm-petal-face {
+  fill: var(--mm-t1-face);
+  stroke: var(--mm-t1-face);
+}
+.mm-petal.is-t1 .mm-petal-side {
+  fill: var(--mm-t1-side);
+  stroke: var(--mm-t1-side);
+}
+.mm-petal.is-t2 .mm-petal-face {
+  fill: var(--mm-t2-face);
+  stroke: var(--mm-t2-face);
+}
+.mm-petal.is-t2 .mm-petal-side {
+  fill: var(--mm-t2-side);
+  stroke: var(--mm-t2-side);
+}
+
+.mm-petal:hover .mm-petal-face,
+.mm-petal.is-active .mm-petal-face {
+  filter: brightness(1.06) saturate(1.1);
+}
+
+.mm-petal text {
+  fill: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.mm-petal-dot {
+  fill: var(--mm-accent);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+/* ------------------------------------------------------- Desktop scene */
+
+.mm-scene {
+  position: relative;
+  display: none;
+  margin: 8px auto 0;
+}
+
+.mm-flower-wrap {
+  position: absolute;
+  animation: mm-in 700ms var(--mm-ease) backwards;
+}
+
+.mm-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mm-link path {
+  fill: none;
+  stroke: var(--mm-accent);
+  stroke-width: 1.5;
+  opacity: 0.55;
+  transition: opacity 200ms ease-out, stroke-width 200ms ease-out;
+}
+
+.mm-link circle {
+  fill: var(--mm-accent);
+}
+
+.mm-link.is-active path {
+  opacity: 1;
+  stroke-width: 2;
+}
+
+/* A big branch: label pill, sub-branch chips below it */
+.mm-node {
+  position: absolute;
+  width: 330px;
+  margin-top: -27px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: mm-in 600ms var(--mm-ease) 150ms backwards;
+}
+
+.mm-node.is-left {
+  align-items: flex-end;
+}
+
+.mm-node.is-right {
+  align-items: flex-start;
+}
+
+.mm-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 54px;
+  margin: 0;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--mm-accent) 55%, transparent), 0 8px 20px -14px rgba(17, 24, 39, 0.35);
+  transition: box-shadow 200ms ease-out, transform 200ms ease-out;
+}
+
+.mm-node.is-active .mm-pill {
+  box-shadow: inset 0 0 0 2px var(--mm-accent), 0 14px 28px -16px rgba(255, 90, 78, 0.6);
+  transform: translateY(-1px);
+}
+
+.mm-num {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--mm-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A circle for one digit, a pill for more. The line box is set explicitly
+   (not inherited from the large title) and a pixel shorter than the badge:
+   Plus Jakarta's digits sit low, so this lifts them to the optical centre. */
+.mm-count {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  background: var(--mm-accent);
+}
+
+/* ------------------------------------------------------------- Chips */
+
+.mm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 104px;
+  margin: 0;
+  padding: 2px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.mm-chips.is-end {
+  justify-content: flex-end;
+}
+
+.mm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mm-fg);
+  cursor: pointer;
+  transition: transform 160ms ease-out, background-color 160ms ease-out;
+}
+
+.mm-chips.is-t1 .mm-chip {
+  background: color-mix(in srgb, var(--mm-t1-face) 18%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mm-t1-face) 45%, transparent);
+}
+
+.mm-chips.is-t2 .mm-chip {
+  background: color-mix(in srgb, var(--mm-t2-face) 26%, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mm-t2-side) 45%, transparent);
+}
+
+/* A dot marks sub-branches that already have notes */
+.mm-chip.has-note::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mm-accent);
+}
+
+.mm-chip:hover {
+  transform: translateY(-1px);
+}
+
+.mm-chips .mm-chip.is-add {
+  color: var(--mm-muted);
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgba(17, 24, 39, 0.18);
+  border: 0;
+}
+
+.mm-chips .mm-chip.is-add:hover {
+  color: var(--mm-accent);
+  box-shadow: inset 0 0 0 1.5px var(--mm-accent);
+}
+
+.mm-chip-input {
+  width: 160px;
+  height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--mm-accent);
+  outline: none;
+}
+
+/* ------------------------------------------------------------- Mobile */
+
+.mm-mobile {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.mm-flower-mobile {
+  width: min(300px, 78vw);
+  margin: 12px auto 20px;
+  animation: mm-in 700ms var(--mm-ease) backwards;
+}
+
+.mm-cards {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .mm-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.mm-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--mm-line), 0 12px 26px -20px rgba(17, 24, 39, 0.45);
+  scroll-margin: 16px;
+}
+
+.mm-card header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mm-card h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.mm-num-badge {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.mm-card.is-t1 .mm-num-badge {
+  background: var(--mm-t1-face);
+}
+
+.mm-card.is-t2 .mm-num-badge {
+  background: var(--mm-t2-side);
+}
+
+.mm-card .mm-chips {
+  max-height: none;
+}
+
+/* Wide screens get the full diagram; everything narrower gets cards */
+@media (min-width: 1220px) {
+  .mm-scene {
+    display: block;
+  }
+  .mm-mobile {
+    display: none;
+  }
+}
+
+@keyframes mm-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+/* ------------------------------------------------------------ Note popup */
+
+.mm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(17, 24, 39, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: mm-fade 180ms ease-out;
+}
+
+@keyframes mm-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.mm-note {
+  display: flex;
+  flex-direction: column;
+  width: min(1100px, 100%);
+  height: min(860px, 100%);
+  overflow: hidden;
+  border-radius: 18px;
+  color: var(--mm-fg);
+  background: #fff;
+  box-shadow: 0 40px 80px -30px rgba(17, 24, 39, 0.55);
+  animation: mm-pop 240ms var(--mm-ease);
+}
+
+@keyframes mm-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+.mm-note-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px 12px 20px;
+  border-bottom: 1px solid var(--mm-line);
+}
+
+.mm-note-branch {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.mm-note.is-t1 .mm-note-branch {
+  background: var(--mm-t1-face);
+}
+
+.mm-note.is-t2 .mm-note-branch {
+  background: var(--mm-t2-side);
+}
+
+.mm-note-title {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--mm-fg);
+  background: transparent;
+  outline: none;
+}
+
+.mm-note-title:hover,
+.mm-note-title:focus {
+  background: #f3f4f6;
+}
+
+.mm-note-status {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--mm-muted);
+}
+
+.mm-icon-btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mm-muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+.mm-icon-btn:hover {
+  color: var(--mm-fg);
+  background: #f3f4f6;
+}
+
+.mm-icon-btn.is-danger {
+  color: #fff;
+  background: #dc2626;
+}
+
+/* Toolbar: one row, scrolls sideways on phones */
+.mm-toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--mm-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mm-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Room for everything on wider screens: wrap instead of scrolling */
+@media (min-width: 900px) {
+  .mm-toolbar {
+    flex-wrap: wrap;
+    row-gap: 4px;
+    overflow: visible;
+  }
+}
+
+.mm-tb-sep {
+  flex-shrink: 0;
+  width: 1px;
+  height: 24px;
+  margin: 0 6px;
+  background: var(--mm-line);
+}
+
+.mm-tb-btn {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f2937;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mm-tb-btn:hover,
+.mm-tb-select:hover {
+  background: #f3f4f6;
+}
+
+.mm-tb-btn[aria-pressed="true"] {
+  color: var(--mm-accent);
+  background: color-mix(in srgb, var(--mm-accent) 12%, #fff);
+}
+
+.mm-tb-btn.is-text {
+  padding: 0 10px;
+}
+
+.mm-tb-btn.is-wide {
+  min-width: 150px;
+  justify-content: space-between;
+}
+
+.mm-tb-size {
+  flex-shrink: 0;
+  min-width: 28px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.mm-tb-select {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 4px 0 10px;
+  border-radius: 8px;
+  color: #1f2937;
+}
+
+.mm-tb-select select {
+  height: 100%;
+  padding: 0 6px;
+  border: 0;
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.mm-tb-select.is-font select {
+  width: 128px;
+}
+
+.mm-tb-select.is-block select {
+  width: 112px;
+}
+
+/* Colour buttons: the swatch bar under the icon, a hidden native picker on top */
+.mm-tb-color {
+  flex-direction: column;
+  gap: 1px;
+}
+
+.mm-tb-color i {
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.mm-tb-color input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mm-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mm-menu-list {
+  position: fixed;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-width: calc(100vw - 16px);
+  padding: 6px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--mm-line), 0 18px 40px -16px rgba(17, 24, 39, 0.4);
+}
+
+.mm-menu-list button {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  color: var(--mm-fg);
+  background: transparent;
+  cursor: pointer;
+}
+
+.mm-menu-list button:hover {
+  background: #f3f4f6;
+}
+
+.mm-menu-list button.is-danger {
+  color: #dc2626;
+}
+
+.mm-linkbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--mm-line);
+  background: #fafafa;
+}
+
+.mm-linkbar input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--mm-line);
+  outline: none;
+}
+
+.mm-linkbar button {
+  height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mm-fg);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--mm-line);
+  cursor: pointer;
+}
+
+.mm-linkbar button[type="submit"] {
+  color: #fff;
+  background: var(--mm-accent);
+  box-shadow: none;
+}
+
+/* The writing area */
+.mm-editor-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Two writing columns side by side, split by a hairline; stacked on phones.
+   --mm-pad is the side padding picked in the toolbar. */
+.mm-columns {
+  --mm-pad: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 100%;
+}
+
+.mm-columns > .mm-editor + .mm-editor {
+  border-left: 1px solid var(--mm-line);
+}
+
+.mm-editor {
+  position: relative;
+  min-height: 100%;
+  padding: 24px var(--mm-pad) 80px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--mm-fg);
+  outline: none;
+  overflow-wrap: anywhere;
+}
+
+.mm-editor.is-empty::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.mm-editor h1 {
+  margin: 0.6em 0 0.3em;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.mm-editor h2 {
+  margin: 0.6em 0 0.3em;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.mm-editor h3 {
+  margin: 0.6em 0 0.3em;
+  font-size: 19px;
+}
+
+.mm-editor p,
+.mm-editor div {
+  margin: 0;
+}
+
+.mm-editor blockquote {
+  margin: 0.6em 0;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--mm-accent);
+  color: #374151;
+}
+
+.mm-editor code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: #f3f4f6;
+}
+
+.mm-editor pre {
+  margin: 0.6em 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  background: #f3f4f6;
+}
+
+.mm-editor ul,
+.mm-editor ol {
+  margin: 0.4em 0;
+  padding-left: 1.5em;
+}
+
+.mm-editor hr {
+  margin: 1.2em 0;
+  border: 0;
+  border-top: 1px solid var(--mm-line);
+}
+
+.mm-editor a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .mm {
+    padding: 24px 16px 40px;
+  }
+
+  .mm-overlay {
+    padding: 0;
+  }
+
+  .mm-note {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .mm-note-head {
+    flex-wrap: wrap;
+    padding: 10px 8px 10px 14px;
+  }
+
+  .mm-note-title {
+    order: 3;
+    flex-basis: 100%;
+    font-size: 18px;
+  }
+
+  .mm-note-status {
+    margin-left: auto;
+  }
+
+  .mm-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mm-columns > .mm-editor {
+    min-height: 50vh;
+    padding: 18px var(--mm-pad) 32px;
+  }
+
+  .mm-columns > .mm-editor + .mm-editor {
+    border-left: 0;
+    border-top: 1px solid var(--mm-line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-flower-wrap,
+  .mm-node,
+  .mm-flower-mobile,
+  .mm-overlay,
+  .mm-note {
+    animation: none;
+  }
+}

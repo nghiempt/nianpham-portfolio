@@ -1,0 +1,173 @@
+/* Smart Insight Space hub. Every class is prefixed .sis- so this file can sit
+   next to the site's styles on the web and be copied into the mini app. */
+
+.sis {
+  --sis-bg: #fbfaf7;
+  --sis-tile: #ffffff;
+  --sis-edge: rgba(15, 23, 42, 0.07);
+  --sis-flow: #86c98f;
+  --sis-ray: rgba(15, 23, 42, 0.05);
+  --sis-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 50% 50%, #ffffff 0%, transparent 70%),
+    var(--sis-bg);
+}
+
+.sis-scene {
+  position: relative;
+  width: min(1120px, 100%);
+}
+
+/* One layout per screen shape: side by side when wide, stacked on phones */
+/* Scaled to the screen height too, so the whole hub fits with no scrolling */
+.sis-scene.is-tall {
+  display: none;
+  width: min(420px, 100%, calc((100vh - 32px) * 400 / 830));
+  width: min(420px, 100%, calc((100dvh - 32px) * 400 / 830));
+}
+
+@media (max-width: 719px) {
+  .sis {
+    padding: 16px;
+  }
+  .sis-scene.is-wide {
+    display: none;
+  }
+  .sis-scene.is-tall {
+    display: block;
+  }
+}
+
+.sis-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sis-rays line {
+  stroke: var(--sis-ray);
+  stroke-width: 1;
+}
+
+/* Dashes drift towards the logo, like data flowing in */
+.sis-flow {
+  fill: none;
+  stroke: var(--sis-flow);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 14 12;
+  animation: sis-flow 1.4s linear infinite;
+}
+
+@keyframes sis-flow {
+  to {
+    stroke-dashoffset: -26;
+  }
+}
+
+.sis-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Icon tiles: white squircles, positioned by their centre */
+.sis-tile {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: 26%;
+  background: var(--sis-tile);
+  box-shadow: 0 0 0 1px var(--sis-edge), 0 10px 22px -12px rgba(15, 23, 42, 0.28), 0 2px 4px rgba(15, 23, 42, 0.04);
+  transform: translate(-50%, -50%);
+  transition: transform 260ms var(--sis-ease), box-shadow 260ms var(--sis-ease);
+  animation: sis-pop 520ms var(--sis-ease) calc(120ms + var(--i, 0) * 45ms) backwards;
+}
+
+.sis-tile:hover {
+  transform: translate(-50%, -50%) translateY(-4px) scale(1.04);
+  box-shadow: 0 0 0 1px var(--sis-edge), 0 18px 30px -14px rgba(15, 23, 42, 0.35);
+}
+
+.sis-tile img {
+  width: 44%;
+  height: 44%;
+  object-fit: contain;
+  user-select: none;
+}
+
+@keyframes sis-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+.sis-more {
+  display: flex;
+  gap: 12%;
+  width: 44%;
+  justify-content: center;
+}
+
+.sis-more i {
+  width: 18%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #8a8f98;
+}
+
+/* Centre logo: white tile inside a soft green → pink gradient rim */
+.sis-logo {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 24%;
+  background: linear-gradient(135deg, #d9f99d 0%, #a7f3d0 40%, #fbcfe8 100%);
+  box-shadow: 0 30px 60px -24px rgba(15, 23, 42, 0.45), 0 0 0 6px rgba(255, 255, 255, 0.6);
+  transform: translate(-50%, -50%);
+  animation: sis-logo-in 700ms var(--sis-ease) backwards;
+}
+
+/* Inset by a share of the logo's own size, so the rim scales with it */
+.sis-logo > span {
+  position: absolute;
+  inset: 3.5%;
+  display: block;
+  overflow: hidden;
+  border-radius: 22%;
+  background: #fff;
+}
+
+.sis-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+@keyframes sis-logo-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sis-flow,
+  .sis-tile,
+  .sis-logo {
+    animation: none;
+  }
+}
