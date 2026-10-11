@@ -192,23 +192,37 @@ function DesktopMap({ data, onOpen, onAdd }: ViewProps) {
   useEffect(() => {
     const el = scene.current;
     if (!el) return;
-    const measure = () => {
-      const box = el.getBoundingClientRect();
-      if (!box.height) return; // hidden (narrow screens use the cards)
-      const ends = BRANCHES.map((b, i) => {
-        const r = pills.current[i]?.getBoundingClientRect();
-        if (!r) return { x: 0, y: 0 };
-        return {
-          x: Math.round((b.tone === 1 ? r.right : r.left) - box.left),
-          y: Math.round(r.top + r.height / 2 - box.top),
-        };
-      });
-      setGeo({ h: Math.round(box.height), ends });
+    // Layout offsets, not getBoundingClientRect: the pills animate in (scale)
+    // and lift on hover, and a mid-transform rect left links pointing beside
+    // them. Offsets ignore transforms. They are summed up the offsetParent
+    // chain to the scene, because which ancestor counts as the offsetParent
+    // changes while one is animating.
+    const offsetIn = (node: HTMLElement) => {
+      let x = 0;
+      let y = 0;
+      for (let n: HTMLElement | null = node; n && n !== el; n = n.offsetParent as HTMLElement | null) {
+        x += n.offsetLeft;
+        y += n.offsetTop;
+      }
+      return { x, y };
     };
-    // Fires once on observe, then whenever a column grows or shrinks.
+    const measure = () => {
+      if (!el.offsetHeight) return; // hidden (narrow screens use the cards)
+      const ends = BRANCHES.map((b, i) => {
+        const pill = pills.current[i];
+        if (!pill) return { x: 0, y: 0 };
+        const o = offsetIn(pill);
+        return { x: o.x + (b.tone === 1 ? pill.offsetWidth : 0), y: o.y + pill.offsetHeight / 2 };
+      });
+      setGeo({ h: el.offsetHeight, ends });
+    };
+    // Fires once on observe, then whenever the scene, a column or a pill
+    // (count badge, web font) changes size.
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     el.querySelectorAll(".mm-col").forEach((col) => ro.observe(col));
+    pills.current.forEach((pill) => pill && ro.observe(pill));
+    document.fonts?.ready.then(measure);
     return () => ro.disconnect();
   }, []);
 
