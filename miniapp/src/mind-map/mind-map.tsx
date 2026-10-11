@@ -2,7 +2,7 @@
 // Six fixed big branches around a petal "flower", two tones (01–03, 04–06).
 // Each big branch holds sub-branches one level deep; a sub-branch opens a
 // free-form note. Plain React + mind-map.css, so it can move to the mini app.
-import { useEffect, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
 import "./mind-map.css";
 import NoteEditor from "./note-editor";
 import {
@@ -159,20 +159,20 @@ function ChildChips({
 
 /* ---------------------------------------------------------------- Layouts */
 
-// Desktop scene, in px. The flower sits in the middle; pills line up in rows.
-const W = 1180;
-const H = 660;
-const C = { x: W / 2, y: 300 };
+// Desktop scene: pill columns either side of the flower. Each column grows
+// with its sub-branches, so the links are drawn from the pills' measured
+// positions rather than fixed rows.
+const W = 1180; // scene width; the flower sits in the middle
 const FLOWER = 430; // rendered size of the flower's 430-unit viewBox (1:1)
-const ROWS = [130, 300, 470];
-const PILL_EDGE = 300; // distance from the centre to each pill column's inner edge
-const ELBOW = 180;
+const ELBOW = 180; // distance from the centre to each link's vertical run
 
-function elbow(a: { x: number; y: number }, xm: number, b: { x: number; y: number }) {
+type Point = { x: number; y: number };
+
+function elbow(a: Point, xm: number, b: Point) {
   if (Math.abs(a.y - b.y) < 1) return `M${a.x} ${a.y} H${b.x}`;
   const dir = Math.sign(b.x - a.x);
   const vy = Math.sign(b.y - a.y);
-  const r = 14;
+  const r = Math.min(14, Math.abs(b.y - a.y) / 2);
   return `M${a.x} ${a.y} H${xm - dir * r} Q${xm} ${a.y} ${xm} ${a.y + vy * r} V${b.y - vy * r} Q${xm} ${b.y} ${xm + dir * r} ${b.y} H${b.x}`;
 }
 
@@ -184,57 +184,89 @@ type ViewProps = {
 
 function DesktopMap({ data, onOpen, onAdd }: ViewProps) {
   const [active, setActive] = useState<string | null>(null);
-  return (
-    <div className="mm-scene" style={{ width: W, height: H }}>
-      <svg className="mm-links" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
-        {BRANCHES.map((b, i) => {
-          const a = ANGLES[i];
-          const left = b.tone === 1;
-          const dot = polar(a, 98, C);
-          const end = { x: C.x + (left ? -PILL_EDGE : PILL_EDGE), y: ROWS[i % 3] };
-          const xm = C.x + (left ? -ELBOW : ELBOW);
-          return (
-            <g key={b.id} className={`mm-link is-t${b.tone}${active === b.id ? " is-active" : ""}`}>
-              <path d={elbow(dot, xm, end)} />
-              <circle cx={end.x} cy={end.y} r="4" />
-            </g>
-          );
-        })}
-      </svg>
+  const scene = useRef<HTMLDivElement>(null);
+  const pills = useRef<(HTMLElement | null)[]>([]);
+  // Scene height and each pill's inner-edge midpoint, in scene px.
+  const [geo, setGeo] = useState<{ h: number; ends: Point[] } | null>(null);
 
-      <div className="mm-flower-wrap" style={{ left: C.x - FLOWER / 2, top: C.y - FLOWER / 2, width: FLOWER }}>
+  useEffect(() => {
+    const el = scene.current;
+    if (!el) return;
+    const measure = () => {
+      const box = el.getBoundingClientRect();
+      if (!box.height) return; // hidden (narrow screens use the cards)
+      const ends = BRANCHES.map((b, i) => {
+        const r = pills.current[i]?.getBoundingClientRect();
+        if (!r) return { x: 0, y: 0 };
+        return {
+          x: Math.round((b.tone === 1 ? r.right : r.left) - box.left),
+          y: Math.round(r.top + r.height / 2 - box.top),
+        };
+      });
+      setGeo({ h: Math.round(box.height), ends });
+    };
+    // Fires once on observe, then whenever a column grows or shrinks.
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    el.querySelectorAll(".mm-col").forEach((col) => ro.observe(col));
+    return () => ro.disconnect();
+  }, []);
+
+  const node = (b: Branch, i: number) => {
+    const left = b.tone === 1;
+    const items = data[b.id] ?? [];
+    return (
+      <section
+        key={b.id}
+        className={`mm-node is-t${b.tone} is-${left ? "left" : "right"}${active === b.id ? " is-active" : ""}`}
+        onMouseEnter={() => setActive(b.id)}
+        onMouseLeave={() => setActive(null)}
+      >
+        <h2
+          className="mm-pill"
+          ref={(el) => {
+            pills.current[i] = el;
+          }}
+        >
+          <span className="mm-num">{num(i)}</span>
+          {b.title}
+          {items.length > 0 && <span className="mm-count">{items.length}</span>}
+        </h2>
+        <ChildChips
+          branch={b}
+          items={items}
+          align={left ? "end" : "start"}
+          onOpen={(c) => onOpen(b, c)}
+          onAdd={(t) => onAdd(b, t)}
+        />
+      </section>
+    );
+  };
+
+  const c = geo ? { x: W / 2, y: geo.h / 2 } : null;
+
+  return (
+    <div className="mm-scene" ref={scene} style={{ width: W }}>
+      {geo && c && (
+        <svg className="mm-links" viewBox={`0 0 ${W} ${geo.h}`} aria-hidden="true">
+          {BRANCHES.map((b, i) => {
+            const left = b.tone === 1;
+            const end = geo.ends[i];
+            return (
+              <g key={b.id} className={`mm-link is-t${b.tone}${active === b.id ? " is-active" : ""}`}>
+                <path d={elbow(polar(ANGLES[i], 98, c), c.x + (left ? -ELBOW : ELBOW), end)} />
+                <circle cx={end.x} cy={end.y} r="4" />
+              </g>
+            );
+          })}
+        </svg>
+      )}
+
+      <div className="mm-col is-left">{BRANCHES.map((b, i) => (b.tone === 1 ? node(b, i) : null))}</div>
+      <div className="mm-flower-wrap" style={{ width: FLOWER }}>
         <Flower active={active} onPick={(id) => setActive((v) => (v === id ? null : id))} />
       </div>
-
-      {BRANCHES.map((b, i) => {
-        const left = b.tone === 1;
-        const pos: CSSProperties = left
-          ? { right: W - (C.x - PILL_EDGE), top: ROWS[i % 3] }
-          : { left: C.x + PILL_EDGE, top: ROWS[i % 3] };
-        const items = data[b.id] ?? [];
-        return (
-          <section
-            key={b.id}
-            className={`mm-node is-t${b.tone} is-${left ? "left" : "right"}${active === b.id ? " is-active" : ""}`}
-            style={pos}
-            onMouseEnter={() => setActive(b.id)}
-            onMouseLeave={() => setActive(null)}
-          >
-            <h2 className="mm-pill">
-              <span className="mm-num">{num(i)}</span>
-              {b.title}
-              {items.length > 0 && <span className="mm-count">{items.length}</span>}
-            </h2>
-            <ChildChips
-              branch={b}
-              items={items}
-              align={left ? "end" : "start"}
-              onOpen={(c) => onOpen(b, c)}
-              onAdd={(t) => onAdd(b, t)}
-            />
-          </section>
-        );
-      })}
+      <div className="mm-col is-right">{BRANCHES.map((b, i) => (b.tone === 2 ? node(b, i) : null))}</div>
     </div>
   );
 }
