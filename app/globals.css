@@ -309,7 +309,9 @@ body {
 }
 
 .mb-left strong {
+  flex: none;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .mb-role {
