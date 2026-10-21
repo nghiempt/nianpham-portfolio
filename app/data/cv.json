@@ -1,0 +1,82 @@
+{
+  "experience": [
+    {
+      "role": "AI Engineer",
+      "type": "",
+      "company": "Lumination.vn",
+      "period": "10/2024 – Present",
+      "location": "Ho Chi Minh City",
+      "bullets": [
+        "Architected a 67-skill agentic assistant on web, mobile and desktop with tool-calling loops, OAuth integrations, MCP-scoped APIs and long-term memory, backed by 3,400+ automated tests.",
+        "Built a multi-tenant AI API hub serving 5 enterprise tenants through 70+ endpoints, including text-to-SQL agents over POS data, vision OCR for IDs and licenses, and vector RAG streamed over SSE.",
+        "Engineered hallucination-resistant RAG for healthcare, legal and banking with GraphRAG, clause-level citations and evidence-based refusal, at sub-2 s first token for 100+ concurrent users.",
+        "Bridged LLM agents with ROS 2 perception and motion planning for humanoid robots, turning natural-language instructions into autonomous multi-step tasks.",
+        "Shipped realtime voice and vision AI: LiveKit voice agents, NFC chip-ID eKYC with face liveness verifying identity in 5–15 s, and multimodal engines cutting 60-minute shows into ranked 9:16 shorts.",
+        "Cut LLM processing cost by ~80% with batch inference and prompt caching, distilling 2,300 pages into a 3,887-node knowledge graph; delivered an omnichannel AI CRM managing 150,000+ leads."
+      ]
+    },
+    {
+      "role": "Fullstack Developer",
+      "type": "Part-time",
+      "company": "Tino Group",
+      "period": "05/2025 – 06/2026",
+      "location": "Ho Chi Minh City",
+      "bullets": [
+        "Built an AI-native ERP with an LLM copilot across sales, purchasing, warehouse, finance and payroll, reconciling 12,000+ stock transactions (57.7B VND) with 100% accuracy.",
+        "Delivered an apartment-management SaaS with 316 API endpoints, VietQR billing and bank reconciliation, and an AI agent running on a 16-tool MCP server secured by HMAC per-request tickets.",
+        "Shipped a 24/7 agentic RAG concierge for a four-hotel chain on LangGraph and Qdrant, with intent routing, human takeover, PMS integration and an agent evaluation suite.",
+        "Built a DRM-protected LMS with signed video streams, dynamic watermarks and webhook-driven enrollment, and lifted a five-language portal from Lighthouse 71 to 98."
+      ]
+    },
+    {
+      "role": "Fullstack Developer",
+      "type": "",
+      "company": "APG Technology",
+      "period": "05/2022 – 05/2024",
+      "location": "Can Tho City",
+      "bullets": [
+        "Built a nationwide land-intelligence app on React Native, Mapbox GL and GeoServer, fusing parcel lookup with 100+ zoning and planning layers so buyers can validate land legality in seconds.",
+        "Developed an end-to-end real-estate auction platform with realtime bidding, eKYC, e-signed contracts and MoMo/VNPay payments across 26 feature modules, published on the App Store.",
+        "Trained a YOLO pipeline that reads Vietnamese land certificates, cutting manual data entry by ~80%.",
+        "Shipped a multi-branch hotel and restaurant POS with 20 modules and over-the-air CodePush releases."
+      ]
+    }
+  ],
+  "coreSkills": [
+    { "name": "Agentic AI & MCP", "items": "LangGraph, PydanticAI, MCP Servers & Clients (OAuth), Multi-Agent, Context Engineering, HITL" },
+    { "name": "RAG & Knowledge Graphs", "items": "GraphRAG (LightRAG, Neo4j), Qdrant, Hybrid Search, Reranking, Text-to-SQL, Citation Verification" },
+    { "name": "LLMOps & Responsible AI", "items": "Langfuse, Promptfoo, Golden-Set Evals, LLM Gateway & Fallback, Semantic Caching, Guardrails" },
+    { "name": "Vision & Speech AI", "items": "YOLOv8, VLM OCR, NFC eKYC, Face Liveness, OpenAI Realtime, LiveKit, Barge-In Voice Agents" },
+    { "name": "ML & Research", "items": "PyTorch, Hugging Face, ONNX, Teacher–Student Distillation, SLM Benchmarking (Energy, CO₂)" },
+    { "name": "AI Robotics & AIoT", "items": "ROS 2 Task & Motion Planning, Edge Inference (ONNX, Ollama, Gemma 3), 3-SoC Hardware, AI Kiosks" },
+    { "name": "Backend & Architecture", "items": "Python, FastAPI, NestJS, Microservices, Event-Driven, Multi-Tenancy, gRPC, SSE Streaming" },
+    { "name": "Fullstack & Mobile", "items": "Next.js (App Router, SSR), React, TanStack Query, Flutter, React Native, Real-Time Streaming UI" },
+    { "name": "Cloud, DevOps & Security", "items": "AWS, GCP Cloud Run, Docker, Helm, CI/CD, Prometheus, Sentry, RBAC, AES-256, Audit Logs, OWASP" }
+  ],
+  "projects": [
+    { "name": "Linh AI", "category": "Agentic AI", "link": "App Store" },
+    { "name": "Agibot Robot", "category": "Agentic AI", "link": "agibot.com" },
+    { "name": "e-Payroll Singapore (IRAS)", "category": "Enterprise Systems", "link": "iras.gov.sg" },
+    { "name": "Nhachung.vn", "category": "Agentic AI", "link": "nhachung.vn" },
+    { "name": "Hepza Legal", "category": "Agentic AI", "link": "hepza.lumidemo.com" },
+    { "name": "Thongtinland", "category": "Map & GIS", "link": "app.thongtin.land" },
+    { "name": "AIVIN.vn", "category": "Agentic AI", "link": "aivin.vn" },
+    { "name": "AI Meeting", "category": "Vision & Media", "link": "meet.lumination.vn" },
+    { "name": "VNPS Hành Chính Công", "category": "Agentic AI", "link": "vnps.ai" },
+    { "name": "Travel App", "category": "Agentic AI", "link": "App Store" },
+    { "name": "Onland", "category": "Map & GIS", "link": "onland.vn" },
+    { "name": "Medipay Healthcare", "category": "Vision & Media", "link": "medipay.vn" },
+    { "name": "Edupay", "category": "RAG & Knowledge", "link": "edupay.vn" },
+    { "name": "Gotrust Detector", "category": "Vision & Media", "link": "gotrust.vn" },
+    { "name": "Hoa Sen University CRM", "category": "Agentic AI", "link": "hoasen.edu.vn" },
+    { "name": "Bệnh viện Nhi Trung Ương", "category": "RAG & Knowledge", "link": "bhyt.nch.gov.vn" },
+    { "name": "Apollo Highlight Detector", "category": "Vision & Media", "link": "apollo.lumidemo.com" },
+    { "name": "Creative Adapt", "category": "Vision & Media", "link": "creative.lumination.vn" },
+    { "name": "VPBank Shop Thịnh Vượng", "category": "Agentic AI", "link": "App Store" },
+    { "name": "LumiRAG", "category": "RAG & Knowledge", "link": "lumirag.lumination.vn" },
+    { "name": "Lumistu", "category": "Vision & Media", "link": "lumistu.com" },
+    { "name": "IELTS VIET Test Platform", "category": "RAG & Knowledge", "link": "quizzes.ieltsviet.edu.vn" },
+    { "name": "ElasticV", "category": "Vision & Media", "link": "elasticv.io" },
+    { "name": "Danmotion LMS", "category": "Enterprise Systems", "link": "lms.project.webico.ai" }
+  ]
+}

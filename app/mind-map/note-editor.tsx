@@ -5,15 +5,15 @@
 // toolbar modelled on Google Docs-style editors. Saves as you type.
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-const FONTS = ["Arial", "Georgia", "Times New Roman", "Courier New", "Verdana", "Trebuchet MS"];
-const BLOCKS = [
+export const FONTS = ["Arial", "Georgia", "Times New Roman", "Courier New", "Verdana", "Trebuchet MS"];
+export const BLOCKS = [
   { value: "p", label: "Normal" },
   { value: "h1", label: "Heading 1" },
   { value: "h2", label: "Heading 2" },
   { value: "h3", label: "Heading 3" },
   { value: "blockquote", label: "Quote" },
 ];
-const ALIGNS = [
+export const ALIGNS = [
   { cmd: "justifyLeft", label: "Start Align" },
   { cmd: "justifyCenter", label: "Center Align" },
   { cmd: "justifyRight", label: "End Align" },
@@ -36,11 +36,11 @@ const readPad = () => {
   return 24;
 };
 
-const escapeHtml = (s: string) =>
+export const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
 
 /* Line icons for the toolbar */
-const I = ({ d, size = 18 }: { d: ReactNode; size?: number }) => (
+export const I = ({ d, size = 18 }: { d: ReactNode; size?: number }) => (
   <svg
     width={size}
     height={size}
@@ -55,7 +55,7 @@ const I = ({ d, size = 18 }: { d: ReactNode; size?: number }) => (
     {d}
   </svg>
 );
-const ICONS = {
+export const ICONS = {
   undo: <path d="M3 7v6h6M3 13a9 9 0 1 0 3-7.7L3 8" />,
   redo: <path d="M21 7v6h-6M21 13a9 9 0 1 1-3-7.7L21 8" />,
   font: <path d="M4 7V4h16v3M9 20h6M12 4v16" />,
@@ -116,7 +116,7 @@ function usePopover(width: number) {
 }
 
 /** Text or highlight colour: a swatch grid instead of the OS colour picker. */
-function ColorMenu({
+export function ColorMenu({
   label,
   icon,
   value,
@@ -182,7 +182,7 @@ function ColorMenu({
 }
 
 /** Dropdown whose items keep the editor's selection (mousedown is cancelled). */
-function Menu({
+export function Menu({
   label,
   icon,
   items,
