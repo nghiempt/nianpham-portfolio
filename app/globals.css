@@ -43,12 +43,13 @@
   --dur-fast: 160ms;
   --dur-base: 260ms;
 
-  /* Wallpaper — vibrant enough for the glass blur to read, like macOS Ventura */
-  --wp-base: linear-gradient(140deg, #1e40af 0%, #3b82f6 22%, #f97316 58%, #fbbf24 100%);
-  --wp-a: #1d4ed8;
-  --wp-b: #fb923c;
-  --wp-c: #f59e0b;
-  --wp-d: #ec4899;
+  /* Wallpaper — "Midnight Copper": a deep navy night lit by the copper of
+     the logo, with indigo and violet glows so the glass has colour to read. */
+  --wp-base: linear-gradient(160deg, #060912 0%, #0d1424 45%, #141b2e 75%, #1b1410 100%);
+  --wp-a: #b5652e;
+  --wp-b: #1e3a8a;
+  --wp-c: #7c3aed;
+  --wp-d: #d08a4a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,11 +75,12 @@
     --shadow-window: 0 50px 100px -30px rgba(0, 0, 0, 0.75), 0 18px 36px -18px rgba(0, 0, 0, 0.5),
       0 0 0 0.5px rgba(255, 255, 255, 0.12);
 
-    --wp-base: linear-gradient(140deg, #0b1437 0%, #1e3a8a 30%, #9a3412 70%, #b45309 100%);
-    --wp-a: #1e3a8a;
-    --wp-b: #c2410c;
-    --wp-c: #b45309;
-    --wp-d: #9d174d;
+    /* Darker night, same copper: the logo's glow is the point of this one. */
+    --wp-base: linear-gradient(160deg, #03050b 0%, #080d19 45%, #0d1222 75%, #120d0a 100%);
+    --wp-a: #b5652e;
+    --wp-b: #172c6b;
+    --wp-c: #5b21b6;
+    --wp-d: #d08a4a;
   }
 }
 
@@ -132,6 +134,11 @@ body {
   isolation: isolate;
   overflow-x: clip;
   background: var(--wp-base);
+}
+
+/* The home page has no menu bar: the stage (and toasts) take its height back. */
+.desktop.no-menubar {
+  --menubar-h: 0px;
 }
 
 .desktop::after {
@@ -195,7 +202,7 @@ body {
   background: radial-gradient(circle, var(--wp-d) 0%, transparent 62%);
 }
 
-/* Iridescent sheen laid diagonally, like light across a hologram.
+/* Copper-and-ice sheen laid diagonally, like light across a hologram.
    Plain opacity instead of a blend mode, which would force an extra pass. */
 .wp-sheen {
   position: absolute;
@@ -204,10 +211,10 @@ body {
   background: linear-gradient(
     115deg,
     transparent 30%,
-    #ff9ad5 40%,
+    #f3b98a 40%,
     #9ae6ff 46%,
     #b9a2ff 52%,
-    #fff3a6 58%,
+    #ffd9a8 58%,
     transparent 68%
   );
 }
@@ -219,9 +226,17 @@ body {
 }
 
 /* ---------- Wallpaper variants (switch via data-wallpaper) ----------
-   "ventura" uses the :root defaults above. Each variant keeps the same
+   "midnight" uses the :root defaults above. Each variant keeps the same
    structure — base gradient + four drifting colour blobs — so the glass
    always has enough colour behind it to read as glass. */
+
+.desktop[data-wallpaper="ventura"] {
+  --wp-base: linear-gradient(140deg, #1e40af 0%, #3b82f6 22%, #f97316 58%, #fbbf24 100%);
+  --wp-a: #1d4ed8;
+  --wp-b: #fb923c;
+  --wp-c: #f59e0b;
+  --wp-d: #ec4899;
+}
 
 .desktop[data-wallpaper="sonoma"] {
   --wp-base: linear-gradient(150deg, #064e3b 0%, #0f766e 28%, #4ade80 62%, #fde68a 100%);
@@ -229,14 +244,6 @@ body {
   --wp-b: #84cc16;
   --wp-c: #0ea5e9;
   --wp-d: #facc15;
-}
-
-.desktop[data-wallpaper="dusk"] {
-  --wp-base: linear-gradient(150deg, #1e1b4b 0%, #4338ca 26%, #a855f7 58%, #f9a8d4 100%);
-  --wp-a: #312e81;
-  --wp-b: #ec4899;
-  --wp-c: #8b5cf6;
-  --wp-d: #fb7185;
 }
 
 .desktop[data-wallpaper="aurora"] {
@@ -248,20 +255,20 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
+  .desktop[data-wallpaper="ventura"] {
+    --wp-base: linear-gradient(140deg, #0b1437 0%, #1e3a8a 30%, #9a3412 70%, #b45309 100%);
+    --wp-a: #1e3a8a;
+    --wp-b: #c2410c;
+    --wp-c: #b45309;
+    --wp-d: #9d174d;
+  }
+
   .desktop[data-wallpaper="sonoma"] {
     --wp-base: linear-gradient(150deg, #022c22 0%, #064e3b 35%, #166534 70%, #854d0e 100%);
     --wp-a: #064e3b;
     --wp-b: #3f6212;
     --wp-c: #0c4a6e;
     --wp-d: #a16207;
-  }
-
-  .desktop[data-wallpaper="dusk"] {
-    --wp-base: linear-gradient(150deg, #0f0a2e 0%, #312e81 35%, #6b21a8 70%, #9d174d 100%);
-    --wp-a: #1e1b4b;
-    --wp-b: #9d174d;
-    --wp-c: #5b21b6;
-    --wp-d: #be123c;
   }
 
   .desktop[data-wallpaper="aurora"] {
@@ -694,10 +701,21 @@ body {
   padding: clamp(20px, 2.4vw, 32px);
 }
 
+/* The figure is only the space; the square frame inside takes the shorter
+   side of it, so the portrait stays square at any window size. */
 .media {
   position: relative;
   margin: 0;
   min-height: 300px;
+  display: grid;
+  place-items: center;
+  container-type: size;
+}
+
+.media-frame {
+  position: relative;
+  width: min(100cqw, 100cqh);
+  aspect-ratio: 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--fill);
@@ -2418,7 +2436,7 @@ kbd {
   }
 
   .window.is-about .media {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1;
   }
 
   .viewport {

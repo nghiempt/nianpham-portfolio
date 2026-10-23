@@ -9,7 +9,7 @@ export const OWNER = {
   email: "nianpham.reed@gmail.com",
   location: "Ho Chi Minh City, Vietnam",
   website: "nghiemthanhpham.com",
-  photo: "/assets/profile.jpg",
+  photo: "/assets/profile-v2.jpg",
 };
 
 export const EDUCATION = {
@@ -95,10 +95,9 @@ export const WINDOWS: StageItem[] = [
     icon: OWNER.photo,
     accent: "#2563eb",
     cover: OWNER.photo,
-    coverPosition: "center 22%",
     display: "nghiemthanhpham.com",
     path: "/",
-    pageTitle: `${OWNER.name} (${OWNER.nickname}) — AI Engineer & Researcher`,
+    pageTitle: `${OWNER.name} — AI Engineer & Researcher`,
     eyebrow: "Hello, I'm",
     title: OWNER.name,
     description:

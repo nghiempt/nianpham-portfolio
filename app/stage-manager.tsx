@@ -26,13 +26,13 @@ const EASE_ENTER = "cubic-bezier(0.16, 1, 0.3, 1)";
 const EASE_EXIT = "cubic-bezier(0.55, 0, 0.75, 0.2)";
 
 const WALLPAPERS = [
+  { id: "midnight", name: "Midnight", swatch: "linear-gradient(140deg, #0d1424, #1e3a8a 50%, #b5652e)" },
   { id: "ventura", name: "Ventura", swatch: "linear-gradient(140deg, #1e40af, #f97316 60%, #fbbf24)" },
   { id: "sonoma", name: "Sonoma", swatch: "linear-gradient(140deg, #064e3b, #22c55e 55%, #fde68a)" },
-  { id: "dusk", name: "Dusk", swatch: "linear-gradient(140deg, #312e81, #a855f7 55%, #f9a8d4)" },
   { id: "aurora", name: "Aurora", swatch: "linear-gradient(140deg, #020617, #0891b2 55%, #7c3aed)" },
 ];
 const WALLPAPER_KEY = "nianpham:wallpaper";
-export const DEFAULT_WALLPAPER = "aurora";
+export const DEFAULT_WALLPAPER = "midnight";
 
 // Tiny external store for the viewer's wallpaper. localStorage can throw
 // (private mode, blocked storage), so it is only a best-effort backing for
@@ -234,15 +234,18 @@ function StageWindow({ item, index, leaving, windowRef, onCopy }: WindowProps) {
         <div className="window-body">
           <figure className="media">
             {item.cover && (
-              <Image
-                src={item.cover}
-                alt={isAbout ? `Portrait of ${OWNER.name}` : ""}
-                fill
-                priority={index === 0}
-                fetchPriority={index === 0 ? "high" : undefined}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                style={{ objectPosition: item.coverPosition ?? "center" }}
-              />
+              // A square frame, as large as the column allows either way.
+              <span className="media-frame">
+                <Image
+                  src={item.cover}
+                  alt={isAbout ? `Portrait of ${OWNER.name}` : ""}
+                  fill
+                  priority={index === 0}
+                  fetchPriority={index === 0 ? "high" : undefined}
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  style={{ objectPosition: item.coverPosition ?? "center" }}
+                />
+              </span>
             )}
           </figure>
 
@@ -355,7 +358,6 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
   const wallpaper = useSyncExternalStore(subscribeWallpaper, readWallpaper, () => DEFAULT_WALLPAPER);
   const [toast, setToast] = useState<{ text: string; key: number } | null>(null);
 
-  const desktopRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef<HTMLElement>(null);
   const leavingRef = useRef<HTMLElement>(null);
   const thumbRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
@@ -386,18 +388,6 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
   useEffect(() => {
     document.title = active.pageTitle;
   }, [active]);
-
-  const changeWallpaper = useCallback((id: string) => {
-    // The view transition needs the new wallpaper painted synchronously inside
-    // its callback, so set the attribute directly and let React catch up.
-    const apply = () => {
-      if (desktopRef.current) desktopRef.current.dataset.wallpaper = id;
-      writeWallpaper(id);
-    };
-    // Cross-fade between wallpapers where the browser supports it.
-    if (document.startViewTransition && !prefersReducedMotion()) document.startViewTransition(apply);
-    else apply();
-  }, []);
 
   // Old #hash deep links still open their window (and move to its page URL).
   useEffect(() => {
@@ -503,7 +493,7 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
   };
 
   return (
-    <div className="desktop" ref={desktopRef} data-wallpaper={wallpaper}>
+    <div className="desktop no-menubar" data-wallpaper={wallpaper}>
       {/* Living wallpaper: colour blobs on independent orbits plus an iridescent sheen */}
       <div className="wp-motion" aria-hidden="true">
         <i className="wp-blob b-a" />
@@ -517,22 +507,6 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
           ? `${OWNER.name} (${OWNER.nickname}) — ${OWNER.role}`
           : `${active.title} — ${OWNER.name} (${OWNER.nickname})`}
       </h1>
-
-      <header className="menubar">
-        <div className="mb-left">
-          <Image className="mb-logo" src="/assets/new-logo-v2.png" alt="" aria-hidden="true" width={20} height={20} />
-          <strong>{OWNER.nickname}</strong>
-          <span className="mb-role">{OWNER.role}</span>
-        </div>
-        <div className="mb-right">
-          <span className="mb-status">
-            <i aria-hidden="true" />
-            Open to collaboration
-          </span>
-          <WallpaperPicker value={wallpaper} onChange={changeWallpaper} />
-          <Clock />
-        </div>
-      </header>
 
       <main className="stage" style={{ "--count": WINDOWS.length } as CSSProperties}>
         <div className="strip" role="tablist" aria-label="Windows" aria-orientation="vertical" onKeyDown={onStripKey}>
@@ -562,7 +536,7 @@ export default function StageManager({ initialId = WINDOWS[0].id }: { initialId?
               >
                 {/* A real miniature of the window, as Stage Manager shows it */}
                 <span className="thumb-window" aria-hidden="true">
-                  <Image src={`/assets/thumbs/${p.id}-v4.webp`} alt="" fill sizes="240px" loading="eager" />
+                  <Image src={`/assets/thumbs/${p.id}-v7.webp`} alt="" fill sizes="240px" loading="eager" />
                 </span>
                 <span className="thumb-label">
                   <ItemIcon item={p} size={22} />
