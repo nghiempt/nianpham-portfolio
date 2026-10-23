@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.nianpham.my";
+export const SITE_URL = "https://www.nghiemthanhpham.com";
 
 export const OWNER = {
   name: "Nghiem Thanh Pham",
@@ -8,7 +8,7 @@ export const OWNER = {
   role: "Senior AI Engineer & Scientific Researcher",
   email: "nianpham.reed@gmail.com",
   location: "Ho Chi Minh City, Vietnam",
-  website: "nianpham.my",
+  website: "nghiemthanhpham.com",
   photo: "/assets/profile.jpg",
 };
 
@@ -96,7 +96,7 @@ export const WINDOWS: StageItem[] = [
     accent: "#2563eb",
     cover: OWNER.photo,
     coverPosition: "center 22%",
-    display: "nianpham.my",
+    display: "nghiemthanhpham.com",
     path: "/",
     pageTitle: `${OWNER.name} (${OWNER.nickname}) — Senior AI Engineer & Researcher`,
     eyebrow: "Hello, I'm",
@@ -112,7 +112,7 @@ export const WINDOWS: StageItem[] = [
     kind: "projects",
     name: "Projects",
     accent: "#6d28d9",
-    display: "nianpham.my/projects",
+    display: "nghiemthanhpham.com/projects",
     path: "/projects",
     pageTitle: `Projects | ${OWNER.name}`,
     eyebrow: "Showcase",
@@ -126,7 +126,7 @@ export const WINDOWS: StageItem[] = [
     kind: "publications",
     name: "Publications",
     accent: "#0f766e",
-    display: "nianpham.my/publications",
+    display: "nghiemthanhpham.com/publications",
     path: "/publications",
     pageTitle: `Publications & Research Papers | ${OWNER.name}`,
     eyebrow: "Research",
@@ -140,7 +140,7 @@ export const WINDOWS: StageItem[] = [
     kind: "stack",
     name: "Tech Stack",
     accent: "#0369a1",
-    display: "nianpham.my/stack",
+    display: "nghiemthanhpham.com/stack",
     path: "/stack",
     pageTitle: `Tech Stack & AI Tools | ${OWNER.name}`,
     eyebrow: "Toolbox",
@@ -154,7 +154,7 @@ export const WINDOWS: StageItem[] = [
     kind: "achievements",
     name: "Achievements",
     accent: "#b45309",
-    display: "nianpham.my/achievements",
+    display: "nghiemthanhpham.com/achievements",
     path: "/achievements",
     pageTitle: `Achievements & Awards | ${OWNER.name}`,
     eyebrow: "Milestones",

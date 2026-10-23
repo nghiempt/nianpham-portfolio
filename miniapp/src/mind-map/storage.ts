@@ -10,7 +10,7 @@ export * from "./model";
 export const READ_ONLY = true;
 
 const KEY = "nianpham:mind-map:v1";
-const API = "https://www.nianpham.my/api/mind-map";
+const API = "https://www.nghiemthanhpham.com/api/mind-map";
 // Set in miniapp/.env.local; must match MIND_MAP_READ_KEY on Vercel.
 const READ_KEY: string = import.meta.env.VITE_MIND_MAP_READ_KEY ?? "";
 

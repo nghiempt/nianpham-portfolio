@@ -525,7 +525,7 @@ export default function FoodsView() {
               </div>
               <div className="address">
                 <Icon name="lock" size={12} />
-                <span>nianpham.my/foods</span>
+                <span>nghiemthanhpham.com/foods</span>
               </div>
               <div className="tb-actions" />
             </header>

@@ -448,7 +448,7 @@ export default function UpdateStackView() {
               </div>
               <div className="address">
                 <Icon name="lock" size={12} />
-                <span>nianpham.my/update-stack</span>
+                <span>nghiemthanhpham.com/update-stack</span>
               </div>
               <div className="tb-actions" />
             </header>

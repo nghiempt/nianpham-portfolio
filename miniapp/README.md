@@ -10,7 +10,7 @@ Màn hình hiện tại là Mind Map. UI được làm và xem trước trên we
 Màn hình hub cũ (logo ở giữa) vẫn còn trên web tại `/miniapp`.
 
 Dữ liệu: mini app **chỉ xem**. Mỗi lần mở, nó đọc mind map từ
-`https://www.nianpham.my/api/mind-map` bằng key trong `.env.local`
+`https://www.nghiemthanhpham.com/api/mind-map` bằng key trong `.env.local`
 (`VITE_MIND_MAP_READ_KEY`, phải trùng `MIND_MAP_READ_KEY` trên Vercel) và lưu bản
 cuối vào `nativeStorage` để xem offline. Sửa note trên web, mở lại mini app là thấy.
 
