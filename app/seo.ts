@@ -17,13 +17,16 @@ const url = (path: string) => (path === "/" ? `${SITE_URL}/` : `${SITE_URL}${pat
 
 const published = PUBLICATIONS.filter(isPublished);
 const toolCount = STACK.reduce((n, g) => n + g.tools.length, 0);
+/** Rounds down to a round "70+" / "20+" so the copy does not go stale with every new item. */
+const atLeast = (n: number) => `${n >= 10 ? Math.floor(n / 10) * 10 : n}+`;
 
+// Kept under ~160 characters so Google shows them whole.
 export const DESCRIPTIONS: Record<string, string> = {
-  about: `${OWNER.name} (${OWNER.nickname}) is a ${OWNER.role} in ${OWNER.location}: ${PROJECTS.length}+ AI products shipped, ${published.length}+ published papers and ${toolCount}+ tools in daily use.`,
-  projects: `${PROJECTS.length}+ projects built by ${OWNER.name} (${OWNER.nickname}): agentic AI assistants, LLM and RAG systems, computer vision, robotics and full-stack web and mobile apps.`,
-  publications: `Research papers by ${OWNER.name} (${OWNER.nickname}) in AI, small language models and NLP — ${published.length} published at venues such as EMNLP, with Q1 journal articles and DOIs.`,
-  stack: `The ${toolCount}+ tools ${OWNER.name} (${OWNER.nickname}) works with across ${STACK.length} areas: LLMs and model APIs, agents, RAG, vector search, MLOps, cloud, backend and frontend.`,
-  achievements: `Certificates, awards, AI contests and community events of ${OWNER.name} (${OWNER.nickname}), ${OWNER.role}, in a year-by-year timeline.`,
+  about: `${OWNER.name} — AI Engineer & Researcher in Vietnam building agentic AI, LLM and RAG systems. ${atLeast(PROJECTS.length)} products shipped, ${atLeast(published.length)} papers published.`,
+  projects: `${PROJECTS.length}+ projects by ${OWNER.name}: agentic AI assistants, LLM & RAG platforms, computer vision, robotics, and web & mobile apps shipped to production.`,
+  publications: `${published.length} published papers by ${OWNER.name} (${OWNER.nickname}) on AI, small language models and NLP — including EMNLP and Q1 journals, with DOIs.`,
+  stack: `${toolCount}+ tools ${OWNER.name} uses across ${STACK.length} areas — LLM APIs, agent frameworks, RAG, vector search, MLOps, cloud, backend and frontend.`,
+  achievements: `Awards, certificates, AI competitions and community events of ${OWNER.name} (${OWNER.nickname}), AI Engineer & Researcher — year by year.`,
 };
 
 export const SECTIONS = WINDOWS.filter((w) => w.kind !== "about");

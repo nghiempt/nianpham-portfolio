@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${OWNER.name} (${OWNER.nickname}) — Senior AI Engineer & Researcher`,
+    default: `${OWNER.name} (${OWNER.nickname}) — AI Engineer & Researcher`,
     template: `%s | ${OWNER.name}`,
   },
   description: DESCRIPTIONS.about,

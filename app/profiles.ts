@@ -5,7 +5,7 @@ export const OWNER = {
   nickname: "Nian Pham",
   /** Vietnamese order (family name first), for searches in Vietnamese. */
   nativeName: "Pham Thanh Nghiem",
-  role: "Senior AI Engineer & Scientific Researcher",
+  role: "AI Engineer & Scientific Researcher",
   email: "nianpham.reed@gmail.com",
   location: "Ho Chi Minh City, Vietnam",
   website: "nghiemthanhpham.com",
@@ -98,7 +98,7 @@ export const WINDOWS: StageItem[] = [
     coverPosition: "center 22%",
     display: "nghiemthanhpham.com",
     path: "/",
-    pageTitle: `${OWNER.name} (${OWNER.nickname}) — Senior AI Engineer & Researcher`,
+    pageTitle: `${OWNER.name} (${OWNER.nickname}) — AI Engineer & Researcher`,
     eyebrow: "Hello, I'm",
     title: OWNER.name,
     description:
